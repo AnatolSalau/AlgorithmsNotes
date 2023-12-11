@@ -1,5 +1,5 @@
 ###Quick sorting
 Git link:   
-https://github.com/AnatolSalau/AlgorithmsNotes/tree/master/src/sortings/buble_sorting
+https://github.com/AnatolSalau/AlgorithmsNotes/tree/master/src/sortings/quick_sorting
 
-Algorithm complexity: O(n^2)
+Algorithm complexity: O(log(n))
