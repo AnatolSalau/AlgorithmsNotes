@@ -1,4 +1,7 @@
 package tinkof_tasks.contest2023.task3;
+
+import java.util.Arrays;
+
 /**
        У Кати насыщенный день на работе. Ей надо передать n разных договоров коллегам.
        Все встречи происходят на разных этажах, а между этажами можно перемещаться только по лестничным пролетам
@@ -68,7 +71,9 @@ package tinkof_tasks.contest2023.task3;
  */
 public class Task3 {
       public static void main(String[] args) {
-
+            Task3 task3 = new Task3();
+            task3.test6Employee();
+            //task3.test5Employee();
       }
 
       /*
@@ -84,7 +89,18 @@ public class Task3 {
             2.    Идем с низу в верх - 24 минуты.
        */
       private void test5Employee() {
+            int employeeQty = 5;
+            int shortestTime = 5;
+            int[] floorsWithEmployee = {1, 4, 9, 16,  25};
+            int numberEmployeeWithShortestTime = 2;
+            int minutes = getMinutes(employeeQty, shortestTime, floorsWithEmployee, numberEmployeeWithShortestTime);
 
+            System.out.println("EmployeeQty : " + employeeQty + ", shortestTime : " + shortestTime);
+            System.out.println("Floors with employee : " + Arrays.toString(floorsWithEmployee));
+            System.out.println("NumberEmployeeWithShortestTime : " + numberEmployeeWithShortestTime);
+            System.out.println("Time : " + minutes);
+            System.out.println("Expected result : " + 24);
+            System.out.println();
       }
       /*    Ожидаемое время 31 минуты
             Этажи       Номера сотрудников
@@ -104,6 +120,41 @@ public class Task3 {
             Ответ 7 минут + 24 минуты = 31 минута
        */
       private void test6Employee() {
+            int employeeQty = 6;
+            int shortestTime = 4;
+            int[] floorsWithEmployee = {1, 2, 3, 6, 8, 25};
+            int numberEmployeeWithShortestTime = 5;
+            int minutes = getMinutes(employeeQty, shortestTime, floorsWithEmployee, numberEmployeeWithShortestTime);
 
+            System.out.println("EmployeeQty : " + employeeQty + ", shortestTime : " + shortestTime);
+            System.out.println("Floors with employee : " + Arrays.toString(floorsWithEmployee));
+            System.out.println("NumberEmployeeWithShortestTime : " + numberEmployeeWithShortestTime);
+            System.out.println("Time : " + minutes);
+            System.out.println("Expected result : " + 31);
+            System.out.println();
+      }
+
+      private int getMinutes(int employeeQty, int shortestTime, int[] floorsWithEmployee, int numberWithShortestTimeEmployee) {
+            int minFloor = floorsWithEmployee[0];
+            int maxFloor = floorsWithEmployee[floorsWithEmployee.length - 1];
+            int floorWithShortestTimeEmployee = floorsWithEmployee[numberWithShortestTimeEmployee -1];
+
+            int minutesToTop = maxFloor - floorWithShortestTimeEmployee;
+            int minutesToBottom = floorWithShortestTimeEmployee - minFloor;
+            int allMinutes = maxFloor - 1;
+
+            if (shortestTime < minutesToBottom && shortestTime < minutesToTop) {
+                  // run through building from floor with employee with minimum time
+                  if (minutesToBottom <= minutesToTop) {
+                        // run through building from bottom
+                        return allMinutes + minutesToBottom;
+                  } {
+                        // run through building from top
+                        return allMinutes + minutesToTop;
+                  }
+            } else {
+                  // run through all building from bottom
+                  return allMinutes;
+            }
       }
 }
