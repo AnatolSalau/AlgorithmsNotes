@@ -1,6 +1,5 @@
-###Binary Search
+###Find employee by search in depth or width
 
 Git link:   
-https://github.com/AnatolSalau/AlgorithmsNotes/tree/master/src/searchs/binary_search
+https://github.com/AnatolSalau/AlgorithmsNotes/tree/master/src/searchs/search_in_depth_width/find_empoyee_in_tree
 
-Algorithm complexity: O(log(n))
