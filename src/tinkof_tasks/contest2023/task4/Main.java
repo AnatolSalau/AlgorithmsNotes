@@ -1,7 +1,7 @@
 package tinkof_tasks.contest2023.task4;
 
 public class Main {
-      public static long calculateMaxDifference(long number) {
+      public static long calculateMaxDifferenceByOneDigitChange(long number) {
             long divisor = 1;
             while (divisor <= number) {
                   divisor *= 10;
@@ -18,12 +18,12 @@ public class Main {
             return 0;
       }
 
-      public static long changeDigitWithMaxProfitAndCalculateProfit(long[] arr){
+      public static long changeOneElemWithMaxProfitAndCalculateProfit(long[] arr){
             int maxIndex = 0;
             long max = 0;
             for (int i = 0; i < arr.length; i++) {
                   long cur = arr[i];
-                  long tmp = calculateMaxDifference(cur);
+                  long tmp = calculateMaxDifferenceByOneDigitChange(cur);
                   if (tmp > max ){
                         max = tmp;
                         maxIndex = i;
@@ -43,7 +43,7 @@ public class Main {
             long[] arr = {97, 80, 85};
 
             for (int i = 0; i < k; i++) {
-                  long max = changeDigitWithMaxProfitAndCalculateProfit(arr);
+                  long max = changeOneElemWithMaxProfitAndCalculateProfit(arr);
                   sumDifference += max;
 
             }
