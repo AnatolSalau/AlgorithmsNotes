@@ -1,4 +1,8 @@
 package tinkof_tasks.contest2023.task4;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * У Кости есть бумажка, на которой написано n чисел.
@@ -48,11 +52,6 @@ package tinkof_tasks.contest2023.task4;
  *     }
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 /**
  *   Пример 3:
  *   Ввод:
@@ -62,6 +61,16 @@ import java.util.List;
  *   0
  *
  *   В третьем примере можно ничего не менять
+ */
+
+/**
+ *   Пример 4:
+ *   Ввод:
+      int k = 2;
+      long[] mas = {97, 80, 85}; сумма = 262
+ *   20
+ *
+ *   Меняем две цифры {97, 90, 95}; сумма = 282
  */
 public class Task4 {
       public static void main(String[] args) {
@@ -93,19 +102,6 @@ public class Task4 {
 
             меняем первую цифру в числе 85 на 95 - так как это даст максимальную выгоду
        */
-      /*
-            99 5 85
-                   *
-            i:0   99 5 85 -> sum = 189, countChanges = 1
-                  *
-                  99 5 85 -> sum = 189, countChanges = 1
-                     *
-            i:1   99 9 85 -> sum = 193, countChanges = 1
-                        *
-            i:2   99 5 89 -> sum = 193, countChanges = 1
-                       *
-            i:3   99 5 95 -> sum = 199, countChanges = 1
-       */
       private void testTwo() {
             List<Integer> nums = new ArrayList<>(Arrays.asList(99, 5, 85)); ;
             int changesQty = 1;
@@ -113,18 +109,50 @@ public class Task4 {
             int expectedSumDifference = 10;
             getSumDifference(nums,changesQty);
       }
-      
+      /*
+            97 80 85, k=2, -> 97, 90, 95 (максимально с двумя измененными числами)
+                  i
+            k:0   97 80 85
+                  97 -> 97 - 97 = 0
+                        7 - 9 = 2 -> profit = 2
+                     i
+            k:0   97 80 85
+                  80 -> 90 - 80 = 10-> profit = 10 (First Max profit) -> change values in arr - > 97 90 85
+                        9 - 0 = 9
+                        i
+            k:0   97 80 85
+                  85 -> 95 - 85 = 10-> profit = 10
+                        9 - 5 = 4
+                  i
+            k:1   97 90 85
+                  97 -> 97 - 97 = 0
+                        9 - 7 = 2 -> profit = 2
+                     i
+            k:1   97 90 85
+                  90 -> 90 - 90 = 0
+                        9 - 0 = 9 -> profit = 9
+
+                        i
+            k:1   97 90 85
+                  85 -> 95 - 85 = 10 -> profit = 10 (First Max profit) -> change values in arr - > 97 90 95
+                        9 - 5 = 4 ->
+       */
+
+      private void testFour() {
+            List<Integer> nums = new ArrayList<>(Arrays.asList(97, 80, 85)); ;
+            int changesQty = 2;
+            List<Integer> expectedNums = List.of(97, 90, 95);
+            int expectedSumDifference = 20;
+            getSumDifference(nums,changesQty);
+      }
+
+      /**
+       * Time complexity 0(n * k)
+       * n - arr length - 1
+       * k - count of changed nums
+       */
       private int getSumDifference(List<Integer> nums, int changesQty) {
-            //calculate sum
-            int sum = calculateSumOfList(nums);
 
-            //sort list in reverse order;
-            nums.sort(Collections.reverseOrder());
-
-            for (int i = 0; i < nums.size(); i++) {
-                  System.out.println(nums.get(i));
-
-            }
 
             return 0;
       }
@@ -137,6 +165,4 @@ public class Task4 {
             }
             return sum;
       }
-
-
 }
