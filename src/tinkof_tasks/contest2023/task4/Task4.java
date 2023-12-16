@@ -116,9 +116,10 @@ import java.util.List;
 public class Task4 {
       public static void main(String[] args) {
             Task4 task4 = new Task4();
-            //task4.testFour();
-            //task4.testOne();
+
+            task4.testOne();
             task4.testTwo();
+            task4.testFour();
 
       }
 
@@ -135,9 +136,10 @@ public class Task4 {
            i:0    1 2 1 3 5
        */
       private void testOne() {
+            System.out.println("Test 1");
             List<Integer> nums = new ArrayList<>(Arrays.asList(1, 2, 1, 3, 5));
             System.out.println("Nums : " + nums);
-            int changesQty = 1;
+            int changesQty = 2;
             System.out.println("changesQty = " + changesQty);
             List<Integer> expectedNums = List.of(9, 2, 9, 3, 5);
             int expectedSumDifference = 16;
@@ -158,6 +160,7 @@ public class Task4 {
             меняем первую цифру в числе 85 на 95 - так как это даст максимальную выгоду
        */
       private void testTwo() {
+            System.out.println("Test 2");
             List<Integer> nums = new ArrayList<>(Arrays.asList(99, 5, 85));
             System.out.println("Nums : " + nums);
             int changesQty = 1;
@@ -232,8 +235,8 @@ public class Task4 {
       }
 
       private void findFirstMaxProfitAndChangeNums(List<Integer> nums) {
-            int maxProfit = -1;
-            int maxIndex = -1;
+            int maxProfit = 0;
+            int maxIndex = 0;
             for (int i = 0; i < nums.size(); i++) {
                   int number = nums.get(i);
                   int profit = calculateMaxProfitByChangingOneDigit(number);
@@ -260,7 +263,7 @@ public class Task4 {
       private int calculateMaxProfitByChangingOneDigit(int number) {
             int delimiter = 1;
             // increase delimiter while he less than number
-            while (delimiter < number) {
+            while (delimiter <= number) {
                   delimiter *= 10;
             }
             delimiter /= 10;
