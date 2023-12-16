@@ -44,7 +44,7 @@ public class Task5 {
       public static void main(String[] args) {
             Task5 task5 = new Task5();
             task5.testOne();
-            task5.testTwo();
+            //task5.testTwo();
       }
 
       private void testOne() {
@@ -78,28 +78,23 @@ public class Task5 {
       }
 
       private List<Integer> getTestQty(int from, int to) {
-            List<Integer> numbers = new LinkedList<>();
-            if (from <= 9) {
-                  for (int i = from; i <= to ; i++) {
-                       numbers.add(i);
-                  }
+            List<Integer> result = new LinkedList<>();
+            int length = 1;
+            // from 1 to 9
+            for (int i = from; i <= to && i < 10 ; i++) {
+                  int repDigit = getRepDigit(i, length);
+                  result.add(repDigit);
             }
-            if (to >= 11) {
-                  int num = 11;
-                  int max = 100;
-                  int j = 1;
-                  for (int i = from; i <= to; i= j * num) {
-                        if (i >= max) {
-                              num = num + max;
-                              max = max * 10;
-                        }
-                        if (i  % num == 0) {
-                              numbers.add(i);
-                        }
-                        j =
-                  }
-            }
-            return numbers;
+
+            return result;
+      }
+            /*       B^y - 1
+       repDog =  x --------------
+                     B - 1
+             */
+      private int getRepDigit (int digit, int length) {
+           int repDigit =  digit * ( (int)(Math.pow(10, length) ) - 1 ) / ( 10 - 1 );
+           return repDigit;
       }
 
 }
