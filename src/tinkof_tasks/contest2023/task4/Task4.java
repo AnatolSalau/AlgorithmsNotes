@@ -274,6 +274,7 @@ public class Task4 {
                   if (lastDigitLeftHalf == 9) {
                         delimiter /= 10;
                   } else {
+                        //change requared digit to 9
                         int numberAfterChange = (leftHalf - lastDigitLeftHalf) + (9 * delimiter) + rigthHalf;
                         int profit = numberAfterChange - number;
                         return profit;
