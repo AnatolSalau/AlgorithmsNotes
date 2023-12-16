@@ -253,12 +253,9 @@ public class Task4 {
       }
       /*
             82 -> 92
-
             leftHalf = 8
             rightHalf = 2;
             delimeter = 10;
-
-
        */
       private int calculateMaxProfitByChangingOneDigit(int number) {
             int delimiter = 1;
