@@ -44,7 +44,7 @@ public class Task5 {
       public static void main(String[] args) {
             Task5 task5 = new Task5();
             task5.testOne();
-            //task5.testTwo();
+            task5.testTwo();
       }
 
       private void testOne() {
@@ -63,7 +63,7 @@ public class Task5 {
       }
 
       private void testTwo() {
-            int from = 90;
+            int from = 10;
             int to = 1000;
             int expectedResult = 9;
             int[] expectedNumbers = {11, 22, 33, 44, 55, 66, 77, 88, 99};
@@ -77,13 +77,20 @@ public class Task5 {
             System.out.println();
       }
 
-      private List<Integer> getTestQty(int from, int to) {
+      private List<Integer> getTestQty(int start, int end) {
             List<Integer> result = new LinkedList<>();
-            int length = 1;
-            // from 1 to 9
-            for (int i = from; i <= to && i < 10 ; i++) {
-                  int repDigit = getRepDigit(i, length);
-                  result.add(repDigit);
+            int qtyRepDigitIn = 1; // quantity repeating digit in number
+            int currNumber = 0;
+            while (currNumber <= end) { // break when currNumber more then end
+                  for (int i = 1; i <= 9; i++) {
+                        currNumber = getRepDigit(i,qtyRepDigitIn);
+
+                        if (currNumber > end) break;
+
+                        if (currNumber < start ) continue;
+                        result.add(currNumber);
+                  }
+                  qtyRepDigitIn++;
             }
 
             return result;
@@ -92,9 +99,8 @@ public class Task5 {
        repDog =  x --------------
                      B - 1
              */
-      private int getRepDigit (int digit, int length) {
-           int repDigit =  digit * ( (int)(Math.pow(10, length) ) - 1 ) / ( 10 - 1 );
+      private int getRepDigit (int digit, int qtyRepDigitIn) {
+           int repDigit =  digit * ( (int)(Math.pow(10, qtyRepDigitIn) ) - 1 ) / ( 10 - 1 );
            return repDigit;
       }
-
 }
