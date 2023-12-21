@@ -35,8 +35,40 @@ public class BalancedBinaryTree {
             balancedBinaryTree.test2();
       }
 
-      private boolean isBalanced(TreeNode treeNode) {
-            return false;
+      private boolean isBalanced(TreeNode root) {
+            TreeNode left = root.left;
+            TreeNode right = root.right;
+
+            if (left == null || right == null) return false;
+
+            int height = 0;
+
+            int leftHeight = getMaxHeightSubTree(left, height);
+            int rightHeight = getMaxHeightSubTree(right, height);
+
+            if (  Math.abs(leftHeight - rightHeight) > 1 || leftHeight == -1 || rightHeight == - 1)
+                  return false;
+
+            return true;
+      }
+
+      int getMaxHeightSubTree(TreeNode node, int height) {
+            if (node == null) {return height;}
+
+            TreeNode left = node.left;
+            TreeNode right = node.right;
+
+            if (node != null) height += 1;
+
+
+
+            int leftHeight = getMaxHeightSubTree(left, height);
+            int rightHeight = getMaxHeightSubTree(right, height);
+
+            if (  Math.abs(leftHeight - rightHeight) > 1 || leftHeight == -1 || rightHeight == - 1)
+                  return -1;
+
+            return Math.max(leftHeight, rightHeight);
       }
       /*
                   3
