@@ -14,13 +14,17 @@ package strings.rle_function;
  */
 public class RleFunction {
       public static void main(String[] args) {
-
+            RleFunction rleFunction = new RleFunction();
+            rleFunction.testOne();
+            //rleFunction.testTwo();
+            //rleFunction.testThree();
       }
 
       private void testOne() {
             String input = "AAAABBBCCXYZDDDDEEEFFFAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBB";
             System.out.println(input);
             doRLE(input);
+            System.out.println("A4B3C2XYZD4E3F3A6B28");
             System.out.println();
       }
 
@@ -39,18 +43,29 @@ public class RleFunction {
       }
 
       private void doRLE(String input) {
-            //check string
             checkString(input);
-
-            char[] characters = input.toCharArray();
             StringBuilder stringBuilder = new StringBuilder();
-
-            for (int i = 0; i < characters.length; i++) {
-                  char curr = characters[i];
-                  //check character
-                  checkCharacter(curr);
-
+            int count = 1;
+            for (int i = 0; i < input.length(); i++) {
+                  char current = input.charAt(i);
+                  checkCharacter(current);
+                  for (int j = i; j < input.length()-1; j++) {
+                        char next = input.charAt(j + 1);
+                        if (current == next) {
+                              count ++;
+                              i++;
+                        } else {
+                              break;
+                        }
+                  }
+                  if (count == 1) {
+                        stringBuilder.append(current);
+                  } else {
+                        stringBuilder.append(current).append(count);
+                  }
+                  count = 1;
             }
+            System.out.println(stringBuilder.toString());
       }
 
       private void checkString(String str) {
