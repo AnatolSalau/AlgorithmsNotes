@@ -42,7 +42,9 @@ public class BinarySearch {
             System.out.println("Expected : " + expected);
             System.out.println();
       }
-
+      /*
+            
+       */
       private int doSearch(int[] arr, int startIndex, int endIndex, int target) {
             //exit from recursion
             if (startIndex <= endIndex) {
