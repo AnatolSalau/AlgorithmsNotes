@@ -1,5 +1,8 @@
 package graphs.matrix_graph_impl;
 
+/**
+      Graph implementation by matrix
+ */
 public class MatrixGraphImpl implements MatrixGraph {
       private boolean[][] matrix;
       private int vertexQty;

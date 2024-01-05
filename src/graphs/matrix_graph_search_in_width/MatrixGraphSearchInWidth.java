@@ -2,6 +2,9 @@ package graphs.matrix_graph_search_in_width;
 
 import java.util.*;
 
+/**
+ * Print path from one vertex of graph to another by search in width
+ */
 public class MatrixGraphSearchInWidth {
       public static void main(String[] args) {
             MatrixGraphSearchInWidth matrixGraph = new MatrixGraphSearchInWidth();

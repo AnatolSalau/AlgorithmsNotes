@@ -1,0 +1,144 @@
+Советы для успешного прохождения собеседований:
+
+
+
+- Потренируйтесь решать задачи на онлайн-ресурсах (алгоритмы, которые чаще всего бывают в задачках отмечены с 1 по 7 пункты на Литкоде);
+
+- Проговаривайте вслух ход мыслей, подробно обосновывайте выводы;
+
+- Старайтесь предлагать разные решения: первое решение не всегда самое удачное. Если вам пришло в голову, как его можно улучшить, — непременно скажите об этом, даже если задачу уже рассмотрели и отложили в сторону;
+
+- Не стесняйтесь просить подсказку у интервьюера;
+
+- Обязательно проверяйте код на ошибки, перед тем как его сдать;
+
+- Оцените алгоритмическую сложность (https://habr.com/ru/post/188010/)
+
+
+
+Материалы для подготовки
+
+1. Система Яндекс.Контест, где стоит потренироваться решать задачки, т.к. они схожи с теми, которые дают на собеседовании: https://contest.yandex.ru/contest/8458/enter/
+
+2. Cистема Яндекс.Код, которую используют при решении задач на ноутбуке: https://code.yandex-team.ru/
+
+3. В этих видео мы разбираем решение алгоритмических задач:
+
+https://www.youtube.com/watch?v=0yxjWwoZtLw
+
+https://www.youtube.com/watch?v=zU-LndSG5RE
+
+
+
+Must Have для подготовки Leetcode:
+
+
+
+1. two pointers
+
+    https://leetcode.com/problems/container-with-most-water/
+
+    https://leetcode.com/problems/partition-labels/
+
+    https://leetcode.com/problems/squares-of-a-sorted-array/
+
+    https://leetcode.com/problems/subarray-sum-equals-k/
+
+
+
+2. hash table
+
+https://leetcode.com/problems/find-all-anagrams-in-a-string/
+
+https://leetcode.com/problems/permutation-in-string/ https://leetcode.com/problems/single-number/ - решить за O(1) по памяти
+
+    https://leetcode.com/problems/two-sum/
+
+    https://leetcode.com/problems/4sum/
+
+    https://leetcode.com/problems/group-anagrams/
+
+    https://leetcode.com/problems/valid-anagram/
+
+
+
+3. sort
+
+https://leetcode.com/problems/merge-intervals/
+
+
+
+4. queue/stack
+
+https://leetcode.com/problems/valid-parentheses/
+
+
+
+5. sliding window
+
+https://leetcode.com/problems/sliding-window-median/
+
+https://leetcode.com/problems/sliding-window-maximum/
+
+https://leetcode.com/problems/longest-repeating-character-replacement/
+
+
+
+6. iterator
+
+https://leetcode.com/problems/peeking-iterator/
+
+
+
+7. greedy problems
+
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock/ https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/ https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
+
+
+
+
+
+Для дополнительной тренировки:
+
+ 1. linked lists
+
+    https://leetcode.com/problems/merge-k-sorted-lists/
+
+    https://leetcode.com/problems/reverse-linked-list/
+
+
+
+2. dfs/bfs
+
+    https://leetcode.com/problems/number-of-islands/
+
+    https://leetcode.com/problems/remove-invalid-parentheses/
+
+
+
+3. heap/hash
+
+    https://leetcode.com/problems/top-k-frequent-words/
+
+    https://leetcode.com/problems/top-k-frequent-elements/
+
+
+
+4. binary search – бинарный поиск
+
+    https://leetcode.com/problems/binary-search/
+
+    https://leetcode.com/problems/guess-number-higher-or-lower/
+
+
+
+5. tree -деревья
+
+    https://leetcode.com/problems/same-tree/
+
+    https://leetcode.com/problems/symmetric-tree/
+
+    https://leetcode.com/problems/balanced-binary-tree/
+
+    https://leetcode.com/problems/path-sum-ii/
+
