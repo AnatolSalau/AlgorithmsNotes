@@ -1,4 +1,4 @@
-package linked_list;
+package linked_list.reverse_linked_list;
 
 import java.util.List;
 import java.util.Stack;
