@@ -5,3 +5,6 @@ https://github.com/AnatolSalau/AlgorithmsNotes/tree/master/src/linked_list/merge
 Leet code link
 https://leetcode.com/problems/merge-k-sorted-lists/
 
+Explanations :
+https://www.youtube.com/watch?v=lApM_8DUIiQ&ab_channel=MasteringProgramming
+
