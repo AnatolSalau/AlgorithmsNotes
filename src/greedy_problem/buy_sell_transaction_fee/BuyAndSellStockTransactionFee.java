@@ -28,34 +28,82 @@ import java.util.Arrays;
 
  * Example 2:
  * Input: prices = [1,3,7,5,10,3], fee = 3
- * Explanation: (7-1-3 = 3) + (10 - 5 - 3 = 2) = 5
+ * Explanation: (7-1-3 = 3) + (10 - 5 - 3 = 2) = 5 but (10 - 1 - 3 = 6)
  * Output: 6
  *
- *
+ * Example 3:
+ * Input: prices = [1,3,7,5,10,3,8], fee = 3
+ * Explanation: (10 - 1 - 3 = 6) + (8 - 3 - 3 = 2) = 8
  */
 public class BuyAndSellStockTransactionFee {
       public static void main(String[] args) {
             BuyAndSellStockTransactionFee buyAndSellStockTransactionFee = new BuyAndSellStockTransactionFee();
-            //buyAndSellStockTransactionFee.testOne();
+            buyAndSellStockTransactionFee.testOne();
             buyAndSellStockTransactionFee.testTwo();
+            buyAndSellStockTransactionFee.testThree();
       }
 
       void testOne() {
-            int[] prices = {1, 3, 2, 8, 4, 9};
+            int[] prices = {3, 1, 2, 8, 4, 9};
             int fee = 2;
             int expected = 8;
             System.out.println(Arrays.toString(prices));
+            System.out.println("Fee: " + fee);
+            int maxProfit = getMaxProfit(prices, fee);
+            System.out.println("Result : " + maxProfit);
+            System.out.println("Expected : " + expected);
+            System.out.println();
+      }
+      /*
+      i:    0  1  2  3  4   5
+            3, 1, 7, 5, 10, 3, fee = 3
+
+            i: 0(3)
+            minBuy = 3;
+            profit = 3 - 1 - 3 = -1
+
+            i: 1(1)
+            minBuy = 1;
+            profit = 1 - 1 - 3 = -3
+
+            i: 2(7)
+            minBuy = 1;
+            profit = 7 - 1 - 3 = 3 - > cash = 3
+            curBuy = 7 - 7 - 3 = -3;
+
+            i: 3(5)
+            minBuy = 1;
+            profit = 5 - 1 - 3 = 1
+            curBuy = 5 - 5  - 3= -3;
+
+            i: 4(10)
+            minBuy = 1;
+            profit = 10 - 1 - 3 = 6
+            curBuy = 10 - 5 -3 = 2;
+
+            i: 5(3)
+            minBuy = 1;
+            profit = 3 - 1 - 3 = -1
+            curBuy = 3 - 5 -3 = -5;
+       */
+      void testTwo() {
+            int[] prices = {3, 1, 7, 5, 10, 3};
+            int fee = 3;
+            int expected = 6;
+            System.out.println(Arrays.toString(prices));
+            System.out.println("Fee: " + fee);
             int maxProfit = getMaxProfit(prices, fee);
             System.out.println("Result : " + maxProfit);
             System.out.println("Expected : " + expected);
             System.out.println();
       }
 
-      void testTwo() {
-            int[] prices = {1, 3, 7, 5, 10, 3};
+      void testThree() {
+            int[] prices = {3,1,7,5,10,3,8};
             int fee = 3;
-            int expected = 6;
+            int expected = 8;
             System.out.println(Arrays.toString(prices));
+            System.out.println("Fee: " + fee);
             int maxProfit = getMaxProfit(prices, fee);
             System.out.println("Result : " + maxProfit);
             System.out.println("Expected : " + expected);
@@ -72,7 +120,6 @@ public class BuyAndSellStockTransactionFee {
                   int newCash = Math.max(cash, hold + prices[i] - fee);
                   // Calculate the new hold by buying the stock today, if it's a better option than holding the current stock
                   hold = Math.max(hold, cash - prices[i]);
-
                   // Update cash to the newly calculated max profit with 0 stocks
                   cash = newCash;
             }
