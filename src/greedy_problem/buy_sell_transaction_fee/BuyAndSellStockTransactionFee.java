@@ -136,7 +136,7 @@ public class BuyAndSellStockTransactionFee {
             int minPrice = prices[0];
             int maxPrice = prices[0];
             int profitFromManyTransaction = 0;
-            int result = 0;
+            int maxProfitFromOneTransaction = 0;
             for (int currPrice : prices) {
                   minBuy = Math.min(currPrice, minBuy);
                   minPrice = Math.min(currPrice, minPrice);
@@ -146,14 +146,13 @@ public class BuyAndSellStockTransactionFee {
                         profitFromManyTransaction += currProfit;
                         minBuy = currPrice;
                   }
-                  int maxProfitFromOneTransaction = maxPrice - minPrice - fee;
-                  if (maxProfitFromOneTransaction > profitFromManyTransaction) {
-                        result = maxProfitFromOneTransaction;
-                        profitFromManyTransaction = maxProfitFromOneTransaction;
+                  int oneTransactionProfit = maxPrice - minPrice - fee;
+                  if (oneTransactionProfit > profitFromManyTransaction) {
+                        maxProfitFromOneTransaction = oneTransactionProfit;
+                        profitFromManyTransaction = oneTransactionProfit;
                         minPrice = currPrice;
                   }
-
             }
-            return Math.max(profitFromManyTransaction, result);
+            return Math.max(profitFromManyTransaction, maxProfitFromOneTransaction);
       }
 }
