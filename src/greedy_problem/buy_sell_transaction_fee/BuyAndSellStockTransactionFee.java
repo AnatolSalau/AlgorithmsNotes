@@ -25,6 +25,7 @@ import java.util.Arrays;
  * - Buying at prices[4] = 4
  * - Selling at prices[5] = 9
  * The total profit is ((8 - 1) - 2) + ((9 - 4) - 2) = 8.
+ * but (9-1-2 = 6)
 
  * Example 2:
  * Input: prices = [1,3,7,5,10,3], fee = 3
@@ -43,6 +44,36 @@ public class BuyAndSellStockTransactionFee {
             buyAndSellStockTransactionFee.testThree();
       }
 
+      /*
+            3 1 2 8 4 9
+            i: 3
+            min buy = 3
+            1 - 3 - 2 = -4
+
+            i: 1
+            min buy = 1
+            1 - 1 - 2 = -2
+
+            i: 2
+            min buy = 1
+            2 - 1 - 2 = -1
+
+            i: 8
+            min buy = 1
+            8 - 1 - 2 = 5 -> 5 > 0 so sell stock (add to answer) and buy new
+
+            i: 4
+            min buy = 4
+            4 - 4 - 2 = -2
+
+            i: 9
+            min buy = 4
+            9 - 4 - 2 = 3 -> 3 > 0 so sell stock (add to answer) and buy new
+
+            as result,  we have ( 3 + 5 ) = 8,
+            but also we have to check another opportunity  (max sell (9) - min buy (1) - 2) = 6
+            and return Math.max(8,6) = 8
+       */
       void testOne() {
             int[] prices = {3, 1, 2, 8, 4, 9};
             int fee = 2;
@@ -54,37 +85,8 @@ public class BuyAndSellStockTransactionFee {
             System.out.println("Expected : " + expected);
             System.out.println();
       }
+
       /*
-      i:    0  1  2  3  4   5
-            3, 1, 7, 5, 10, 3, fee = 3
-
-            i: 0(3)
-            minBuy = 3;
-            profit = 3 - 1 - 3 = -1
-
-            i: 1(1)
-            minBuy = 1;
-            profit = 1 - 1 - 3 = -3
-
-            i: 2(7)
-            minBuy = 1;
-            profit = 7 - 1 - 3 = 3 - > cash = 3
-            curBuy = 7 - 7 - 3 = -3;
-
-            i: 3(5)
-            minBuy = 1;
-            profit = 5 - 1 - 3 = 1
-            curBuy = 5 - 5  - 3= -3;
-
-            i: 4(10)
-            minBuy = 1;
-            profit = 10 - 1 - 3 = 6
-            curBuy = 10 - 5 -3 = 2;
-
-            i: 5(3)
-            minBuy = 1;
-            profit = 3 - 1 - 3 = -1
-            curBuy = 3 - 5 -3 = -5;
        */
       void testTwo() {
             int[] prices = {3, 1, 7, 5, 10, 3};
@@ -99,7 +101,7 @@ public class BuyAndSellStockTransactionFee {
       }
 
       void testThree() {
-            int[] prices = {3,1,7,5,10,3,8};
+            int[] prices = {3, 1, 7, 5, 10, 3, 8};
             int fee = 3;
             int expected = 8;
             System.out.println(Arrays.toString(prices));
@@ -110,6 +112,7 @@ public class BuyAndSellStockTransactionFee {
             System.out.println();
       }
 
+      /*
       int getMaxProfit(int[] prices, int fee) {
             // Initialize cash (f0) to represent max profit with 0 stocks on hand
             // Initialize hold (f1) to represent max profit with 1 stock on hand - bought on the first day
@@ -126,5 +129,31 @@ public class BuyAndSellStockTransactionFee {
 
             // Finally, return the cash, which represents the maximum profit with 0 stocks on hand after all transactions
             return cash;
+      }
+      */
+      int getMaxProfit(int[] prices, int fee) {
+            int minBuy = prices[0];
+            int minPrice = prices[0];
+            int maxPrice = prices[0];
+            int profitFromManyTransaction = 0;
+            int result = 0;
+            for (int currPrice : prices) {
+                  minBuy = Math.min(currPrice, minBuy);
+                  minPrice = Math.min(currPrice, minPrice);
+                  maxPrice = Math.max(maxPrice, currPrice);
+                  int currProfit = currPrice - minBuy - fee;
+                  if (currProfit > 0) {
+                        profitFromManyTransaction += currProfit;
+                        minBuy = currPrice;
+                  }
+                  int maxProfitFromOneTransaction = maxPrice - minPrice - fee;
+                  if (maxProfitFromOneTransaction > profitFromManyTransaction) {
+                        result = maxProfitFromOneTransaction;
+                        profitFromManyTransaction = maxProfitFromOneTransaction;
+                        minPrice = currPrice;
+                  }
+
+            }
+            return Math.max(profitFromManyTransaction, result);
       }
 }
