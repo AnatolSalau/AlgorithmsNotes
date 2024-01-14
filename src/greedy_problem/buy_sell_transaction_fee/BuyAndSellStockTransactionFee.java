@@ -134,18 +134,23 @@ public class BuyAndSellStockTransactionFee {
 
       int getMaxProfitWrong(int[] prices, int fee) {
             int profit = 0;
-            int buyPrice = prices[0];
+            int minBuyPrice = prices[0];
 
             for (int i = 0; i < prices.length; i++) {
                   int currPrice = prices[i];
-                  int currProfit = currPrice - buyPrice - fee;
+                  int currProfit = currPrice - minBuyPrice - fee;
                   if (currProfit > profit) {
                         profit = currProfit;
                   }
                   int currBuyPrice = currPrice - profit;
-                  if (currBuyPrice < buyPrice) {
-                        buyPrice = currBuyPrice;
+                  if (currBuyPrice < minBuyPrice) {
+                        minBuyPrice = currBuyPrice;
                   }
+                  System.out.println("i : " + i);
+                  System.out.println("currPrice : " + currPrice);
+                  System.out.println("minBuyPrice : " + minBuyPrice);
+                  System.out.println("profit : " + profit);
+                  System.out.println();
             }
 
             return  profit ;
