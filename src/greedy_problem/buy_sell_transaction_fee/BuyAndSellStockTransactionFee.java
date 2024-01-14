@@ -80,7 +80,7 @@ public class BuyAndSellStockTransactionFee {
             int expected = 8;
             System.out.println(Arrays.toString(prices));
             System.out.println("Fee: " + fee);
-            int maxProfit = getMaxProfit(prices, fee);
+            int maxProfit = getMaxProfitWrong(prices, fee);
             System.out.println("Result : " + maxProfit);
             System.out.println("Expected : " + expected);
             System.out.println();
@@ -94,7 +94,7 @@ public class BuyAndSellStockTransactionFee {
             int expected = 6;
             System.out.println(Arrays.toString(prices));
             System.out.println("Fee: " + fee);
-            int maxProfit = getMaxProfit(prices, fee);
+            int maxProfit = getMaxProfitWrong(prices, fee);
             System.out.println("Result : " + maxProfit);
             System.out.println("Expected : " + expected);
             System.out.println();
@@ -106,7 +106,7 @@ public class BuyAndSellStockTransactionFee {
             int expected = 8;
             System.out.println(Arrays.toString(prices));
             System.out.println("Fee: " + fee);
-            int maxProfit = getMaxProfit(prices, fee);
+            int maxProfit = getMaxProfitWrong(prices, fee);
             System.out.println("Result : " + maxProfit);
             System.out.println("Expected : " + expected);
             System.out.println();
@@ -131,28 +131,23 @@ public class BuyAndSellStockTransactionFee {
             return cash;
       }
       */
-      int getMaxProfit(int[] prices, int fee) {
-            int minBuy = prices[0];
-            int minPrice = prices[0];
-            int maxPrice = prices[0];
-            int profitFromManyTransaction = 0;
-            int maxProfitFromOneTransaction = 0;
-            for (int currPrice : prices) {
-                  minBuy = Math.min(currPrice, minBuy);
-                  minPrice = Math.min(currPrice, minPrice);
-                  maxPrice = Math.max(maxPrice, currPrice);
-                  int currProfit = currPrice - minBuy - fee;
-                  if (currProfit > 0) {
-                        profitFromManyTransaction += currProfit;
-                        minBuy = currPrice;
+
+      int getMaxProfitWrong(int[] prices, int fee) {
+            int profit = 0;
+            int buyPrice = prices[0];
+
+            for (int i = 0; i < prices.length; i++) {
+                  int currPrice = prices[i];
+                  int currProfit = currPrice - buyPrice - fee;
+                  if (currProfit > profit) {
+                        profit = currProfit;
                   }
-                  int oneTransactionProfit = maxPrice - minPrice - fee;
-                  if (oneTransactionProfit > profitFromManyTransaction) {
-                        maxProfitFromOneTransaction = oneTransactionProfit;
-                        profitFromManyTransaction = oneTransactionProfit;
-                        minPrice = currPrice;
+                  int currBuyPrice = currPrice - profit;
+                  if (currBuyPrice < buyPrice) {
+                        buyPrice = currBuyPrice;
                   }
             }
-            return Math.max(profitFromManyTransaction, maxProfitFromOneTransaction);
+
+            return  profit ;
       }
 }
