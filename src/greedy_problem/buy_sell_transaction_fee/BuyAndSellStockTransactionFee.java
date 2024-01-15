@@ -40,39 +40,11 @@ public class BuyAndSellStockTransactionFee {
       public static void main(String[] args) {
             BuyAndSellStockTransactionFee buyAndSellStockTransactionFee = new BuyAndSellStockTransactionFee();
             buyAndSellStockTransactionFee.testOne();
-            buyAndSellStockTransactionFee.testTwo();
-            buyAndSellStockTransactionFee.testThree();
+            //buyAndSellStockTransactionFee.testTwo();
+            //buyAndSellStockTransactionFee.testThree();
       }
-
       /*
-            3 1 2 8 4 9
-            i: 3
-            min buy = 3
-            1 - 3 - 2 = -4
 
-            i: 1
-            min buy = 1
-            1 - 1 - 2 = -2
-
-            i: 2
-            min buy = 1
-            2 - 1 - 2 = -1
-
-            i: 8
-            min buy = 1
-            8 - 1 - 2 = 5 -> 5 > 0 so sell stock (add to answer) and buy new
-
-            i: 4
-            min buy = 4
-            4 - 4 - 2 = -2
-
-            i: 9
-            min buy = 4
-            9 - 4 - 2 = 3 -> 3 > 0 so sell stock (add to answer) and buy new
-
-            as result,  we have ( 3 + 5 ) = 8,
-            but also we have to check another opportunity  (max sell (9) - min buy (1) - 2) = 6
-            and return Math.max(8,6) = 8
        */
       void testOne() {
             int[] prices = {3, 1, 2, 8, 4, 9};
@@ -80,21 +52,20 @@ public class BuyAndSellStockTransactionFee {
             int expected = 8;
             System.out.println(Arrays.toString(prices));
             System.out.println("Fee: " + fee);
-            int maxProfit = getMaxProfitWrong(prices, fee);
+            int maxProfit = maxProfit(prices, fee);
             System.out.println("Result : " + maxProfit);
             System.out.println("Expected : " + expected);
             System.out.println();
       }
 
-      /*
-       */
+
       void testTwo() {
             int[] prices = {3, 1, 7, 5, 10, 3};
             int fee = 3;
             int expected = 6;
             System.out.println(Arrays.toString(prices));
             System.out.println("Fee: " + fee);
-            int maxProfit = getMaxProfitWrong(prices, fee);
+            int maxProfit = maxProfit(prices, fee);
             System.out.println("Result : " + maxProfit);
             System.out.println("Expected : " + expected);
             System.out.println();
@@ -106,7 +77,7 @@ public class BuyAndSellStockTransactionFee {
             int expected = 8;
             System.out.println(Arrays.toString(prices));
             System.out.println("Fee: " + fee);
-            int maxProfit = getMaxProfitWrong(prices, fee);
+            int maxProfit = maxProfit(prices, fee);
             System.out.println("Result : " + maxProfit);
             System.out.println("Expected : " + expected);
             System.out.println();
@@ -132,7 +103,7 @@ public class BuyAndSellStockTransactionFee {
       }
       */
 
-      int getMaxProfitWrong(int[] prices, int fee) {
+      int getMaxProfit(int[] prices, int fee) {
             int profit = 0;
             int minBuyPrice = prices[0];
 
@@ -146,13 +117,25 @@ public class BuyAndSellStockTransactionFee {
                   if (currBuyPrice < minBuyPrice) {
                         minBuyPrice = currBuyPrice;
                   }
-                  System.out.println("i : " + i);
-                  System.out.println("currPrice : " + currPrice);
-                  System.out.println("minBuyPrice : " + minBuyPrice);
-                  System.out.println("profit : " + profit);
-                  System.out.println();
             }
 
             return  profit ;
+      }
+
+      public int maxProfit(int[] prices, int fee) {
+            if (prices == null || prices.length == 0) {return 0;}
+
+            int len = prices.length;
+            int[] hold = new int[len + 1];
+            int[] nothold = new int[len + 1];
+
+            hold[0] = -0x3f3f3f3f;
+
+            for (int i = 1; i <= len; i++) {
+                  hold[i] = Math.max(hold[i - 1], nothold[i - 1] - prices[i - 1]);
+                  nothold[i] = Math.max(nothold[i - 1], hold[i - 1] + prices[i - 1] - fee);
+            }
+
+            return nothold[len];
       }
 }
