@@ -94,14 +94,16 @@ public class TwoSum {
             HashMap<Integer,Integer> map = new HashMap<>();
             for (int i = 0; i < numbers.length; i++) {
                   int curr = numbers[i];
+
                   int remainder = target - curr;
 
                   if (map.containsKey(remainder)) { // check Does map contain remainder ?
                         result[0] = map.get(remainder); // if contains, we have right answer
                         result[1] = i;    // because (remainder + existing key from map) = target
-                  } else {
-                        map.put(curr, i);
                   }
+
+                  map.put(curr, i);
+
             }
             return result;
       }
