@@ -1,5 +1,10 @@
 package sliding_window.longest_repeating_replacement;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
        You are given a string s and an integer k.
        You can choose any character of the string and change it to any other uppercase English character.
@@ -28,6 +33,74 @@ public class LongestRepeatingCharacterReplacement {
             characterReplacement.test1();
             characterReplacement.test2();
             characterReplacement.test3();
+      }
+
+      private  int getMaxRepeatingOfElements(String str, int k) {
+            char[] letters = str.toCharArray();
+            int l = 0; // start index
+            int r = 0; // end index
+            int maxLength = 1;
+
+            Map<Character, Integer> charFreqMap = new HashMap<>(); // initialize char freq map
+            charFreqMap.put(letters[r], 1); // put to freq map default value
+
+            while (r < letters.length) {
+
+                  int length = r - l + 1;
+
+                  int maxFreq = getMaxFreq(charFreqMap);
+
+                  int possibleChanges = length - maxFreq;
+
+                  if (possibleChanges <= k) { // update possible changes only if it corresponds  k
+                        maxLength = Math.max(length, maxLength);
+                  }
+
+                  if (possibleChanges <= k) {
+                        r++;
+                        if (r<letters.length) { // check right bound of arr before add next char in map
+                              char right = letters[r];
+                              addAndUpdateFreq(right, charFreqMap);
+                        }
+                  } else {
+                        char left = letters[l];
+                        reduceAndUpdateFreq(left, charFreqMap);
+                        l++;
+                  }
+
+            }
+            return maxLength;
+      }
+
+
+
+      private void addAndUpdateFreq(char key, Map<Character, Integer> charFreqMap) {
+            if (charFreqMap.containsKey(key)) {
+                  int count = charFreqMap.get(key);
+                  count ++;
+                  charFreqMap.put(key,count);
+            } else {
+                  charFreqMap.put(key,1);
+            }
+      }
+
+      private void reduceAndUpdateFreq(char key, Map<Character, Integer> charFreqMap) {
+            if (charFreqMap.containsKey(key)) {
+                  int count = charFreqMap.get(key);
+                  count -- ;
+
+                  if (count == 0) {
+                        charFreqMap.remove(key);
+                  } else {
+                        charFreqMap.put(key,count);
+                  }
+            }
+      }
+
+      private int getMaxFreq(Map<Character, Integer> charFreqMap) {
+            Collection<Integer> values = charFreqMap.values();
+            Integer max = Collections.max(values);
+            return max;
       }
 
       /*
@@ -119,6 +192,7 @@ public class LongestRepeatingCharacterReplacement {
            possibleChanges <= k = 2 <= 2 -> e++ -> e >= array.length - 1 (7 - 1)
        */
       private void test1() {
+            System.out.println("Test 1");
             String str = "aabccbb";
             int k = 2;
             int expected = 5;
@@ -132,6 +206,7 @@ public class LongestRepeatingCharacterReplacement {
       }
 
       private void test2() {
+            System.out.println("Test 2");
             String str = "abbcb";
             int k = 1;
             int expected = 4;
@@ -145,6 +220,7 @@ public class LongestRepeatingCharacterReplacement {
       }
 
       private void test3() {
+            System.out.println("Test 3");
             String str = "abccde";
             int k = 1;
             int expected = 3;
@@ -156,9 +232,5 @@ public class LongestRepeatingCharacterReplacement {
             System.out.println("Expected : " + expected + " " + longestRepeating);
 
             System.out.println();
-      }
-
-      private  int getMaxRepeatingOfElements(String str, int k) {
-            return 0;
       }
 }
