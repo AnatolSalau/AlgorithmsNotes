@@ -1,6 +1,7 @@
 package sliding_window.sliding_window_median;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -43,7 +44,9 @@ final class SlidingWindowMedianPower {
             slidingWindowMedianPower.testTwo();
             slidingWindowMedianPower.testThree();
       }
+      /*
 
+       */
       private void testOne() {
             int[] numbers = {1,2,3,4,2,3,1,4,2};
             double[] expected = {2.00000,3.00000,3.00000,3.00000,2.00000,3.00000,2.00000};
@@ -80,8 +83,58 @@ final class SlidingWindowMedianPower {
             System.out.println();
       }
 
+      /*
+            1 2 3 length = 3, k = 3
+            l = 0
+            r = l + k = 3
+
+            1 2 3 4 5 length = 5, k = 4
+            l = 0
+            r = l + k = 0 + 4 = 4
+       */
       private static List<Double> getMedians(int[] numbers, int k) {
-            return null;
+            List<Double> medians = new LinkedList<>();
+
+            if (k > numbers.length) return null;
+
+            for ( int l = 0,  r = l + k; r <= numbers.length ; l++, r++) {
+                  int[] window = getWindowArr(numbers, l, r, k);
+                  System.out.println("window : " + Arrays.toString(window));
+                  Arrays.sort(window);
+                  double median = getMedianFromWindow(window);
+                  medians.add(median);
+            }
+            return medians;
+      }
+/*                      0 1 2 3
+            length = 4 (1 2 3 4)
+
+                        0 1 2
+            length = 3 (1 2 3)
+       */
+      private static double getMedianFromWindow(int[] window) {
+            int length = window.length;
+
+            if (length % 2 == 0) {
+                  //even length
+                  int l = length / 2 - 1;
+                  int r = length / 2;
+                  double median = ((double) window[l] + (double) window[r]) / 2;
+                  return median;
+            } else {
+                  //odd length
+                  int i = length / 2;
+                  double median = window[i];
+                  return median;
+            }
+      }
+
+      private static int[] getWindowArr(int[] numbers, int from, int to, int length) {
+            int[] window = new int [length];
+            for (int i = from, j = 0; i < to; i++, j++) {
+                  window[j] = numbers[i];
+            }
+            return window;
       }
 
 
