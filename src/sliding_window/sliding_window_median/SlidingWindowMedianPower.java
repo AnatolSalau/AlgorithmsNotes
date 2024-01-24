@@ -45,8 +45,17 @@ final class SlidingWindowMedianPower {
             slidingWindowMedianPower.testThree();
       }
       /*
+            2 3 3 5 7 10 - 4 (even length (3+5)/2 = median is 4
 
-       */
+            1,3,-1,-3,5,3,6,7   k=3
+
+            1 3 -1  sort->  -1 1 3 (median is 1)
+            3  -1  -3 sort-> -3 -1 3 (median is -1)
+            -1  -3  5 sort-> -3 -1 5 (median is -1)
+            -3  5  3 sort-> -3 3 5 (median is 3)
+            5  3  6 sort-> 3 5 6 (median is 5)
+            3  6  7 sort-> 3 6 7 (median is 6)
+      */
       private void testOne() {
             int[] numbers = {1,2,3,4,2,3,1,4,2};
             double[] expected = {2.00000,3.00000,3.00000,3.00000,2.00000,3.00000,2.00000};
