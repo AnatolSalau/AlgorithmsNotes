@@ -121,12 +121,7 @@ final class SlidingWindowMedianTwoHeap {
                   double median = getMedian(leftQueue, rightQueue, k);
                   allMedians.add(median);
 
-                  System.out.print(leftQueue);
-                  System.out.print("+");
-                  System.out.print(rightQueue);
-                  System.out.println();
-                  System.out.println(median);
-                  System.out.println();
+                  printStatisticCMD(median, leftQueue, rightQueue);
 
                   int willDelete = numbers[l];
                   deleteFromQueues(willDelete, leftQueue, rightQueue);
@@ -139,8 +134,6 @@ final class SlidingWindowMedianTwoHeap {
 
                   // update queues function
                   updateQueues(leftCapacity,rightCapacity,leftQueue, rightQueue);
-
-
             }
             return allMedians;
       }
@@ -246,5 +239,14 @@ final class SlidingWindowMedianTwoHeap {
                   int minRightQueue = rightQueue.poll();
                   leftQueue.add(minRightQueue);
             }
+      }
+
+      private void printStatisticCMD(double median, PriorityQueue<Integer> leftQueue, PriorityQueue<Integer> rightQueue) {
+            System.out.print(leftQueue);
+            System.out.print("+");
+            System.out.print(rightQueue);
+            System.out.println();
+            System.out.println(median);
+            System.out.println();
       }
 }
