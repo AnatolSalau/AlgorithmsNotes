@@ -102,18 +102,7 @@ public class MergeIntervals {
       }
 
       private List<List<Integer>> getNonOverlappingIntervals(int[][] arrays) {
-            List<List<Integer>> intervalsWithoutOverlapping = new LinkedList<>();
 
-            for (int i = 0; i + 1 < arrays.length; i++) {
-                  int left = arrays[i][1];
-                  int right = arrays[i + 1][0];
-
-                  if (intervalsWithoutOverlapping.size() == 0) { // initialize first overlapping
-                        if (left >= right) {
-                              List<Integer> interval = new ArrayList<>(2);
-                        }
-                  }
-            }
             return null;
       }
 
