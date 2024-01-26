@@ -1,6 +1,8 @@
 package sortings.merge_intervals;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -28,7 +30,7 @@ public class MergeIntervals {
             int[][] arrays = {{1,3},{2,6},{8,10},{15,18}};
             int[][] expectedResult = {{1,6},{8,10},{15,18}};
             System.out.println("Interfals before sort : " + Arrays.deepToString(arrays));
-            sortIntervalsQuick(arrays,0,arrays.length - 1);
+            sortIntervalsByFirstValueInSubArrQuick(arrays,0,arrays.length - 1);
             System.out.println("Interfals after sort : " + Arrays.deepToString(arrays));
             List<List<Integer>> nonOverlappingIntervals = getNonOverlappingIntervals(arrays);
             System.out.println("Non overlapping arrays : " + nonOverlappingIntervals);
@@ -40,19 +42,58 @@ public class MergeIntervals {
             int[][] arrays = {{1,4},{4,5}};
             int[][] expectedResult = {{1,5}};
             System.out.println("Interfals before sort : " + Arrays.deepToString(arrays));
-            sortIntervalsQuick(arrays,0,arrays.length - 1);
+            sortIntervalsByFirstValueInSubArrQuick(arrays,0,arrays.length - 1);
             System.out.println("Interfals after sort : " + Arrays.deepToString(arrays));
             List<List<Integer>> nonOverlappingIntervals = getNonOverlappingIntervals(arrays);
             System.out.println("Non overlapping arrays : " + nonOverlappingIntervals);
             System.out.println("Expected : " + Arrays.deepToString(expectedResult));
             System.out.println();
       }
+      /*
+            {2, 6}, {8, 9}, {8,10}, {9,11}, {15,18}, {2, 4},  {16, 17}, {1,  3}
+            sort by first value in sub arr
+            [1, 3], [2, 4], [2, 6], [8, 9], [8, 10], [9, 11], [15, 18], [16, 17]
 
+            i:0
+                l    r
+            [1, 3], [2, 4], [2, 6], [8, 9], [8, 10], [9, 11], [15, 18], [16, 17]
+            l(3) > r(2)                                                           [1 4]
+            i:1
+                        l    r
+            [1, 3], [2, 4], [2, 6], [8, 9], [8, 10], [9, 11], [15, 18], [16, 17]
+            l(4) > r(2)
+                                                                                   [1 6]
+            i:2
+                                l    r
+            [1, 3], [2, 4], [2, 6], [8, 9], [8, 10], [9, 11], [15, 18], [16, 17]
+            l(6) < r(8)                                                           [1 6] [8,9]
+
+            i:3
+                                        l    r
+            [1, 3], [2, 4], [2, 6], [8, 9], [8, 10], [9, 11], [15, 18], [16, 17]
+            l(9) > r(8)                                                           [1 6] [8,10]
+
+            i:4
+                                                 l    r
+            [1, 3], [2, 4], [2, 6], [8, 9], [8, 10], [9, 11], [15, 18], [16, 17]
+            l(10) > r(9)                                                           [1 6] [8,11]
+
+            i:5
+                                                          l    r
+            [1, 3], [2, 4], [2, 6], [8, 9], [8, 10], [9, 11], [15, 18], [16, 17]
+            l(11) < r(15)                                                           [1 6] [8,11] [15, 18]
+
+            i:6
+                                                                    l    r
+            [1, 3], [2, 4], [2, 6], [8, 9], [8, 10], [9, 11], [15, 18], [16, 17]
+            l(18) < r(16)                                                           [1 6] [8,11] [15, 18]
+       */
       private void test3() {
-            int[][] arrays = {{2,6},{8,10},{8,9},{9,11},{15,18},{2,4},{16, 17},{1,3}};
+            int[][] arrays = {{2,6},{8,9},{8,10},{9,11},{15,18},{2,4},{16, 17},{1,3}};
             int[][] expectedResult = {{1,6}, {8,11}, {15,18}};
             System.out.println("Interfals before sort : " + Arrays.deepToString(arrays));
-            sortIntervalsQuick(arrays,0,arrays.length - 1);
+            sortIntervalsByFirstValueInSubArrBubble(arrays);
+            //sortIntervalsByFirstValueInSubArrQuick(arrays,0,arrays.length - 1);
             System.out.println("Interfals after sort : " + Arrays.deepToString(arrays));
             List<List<Integer>> nonOverlappingIntervals = getNonOverlappingIntervals(arrays);
             System.out.println("Non overlapping arrays : " + nonOverlappingIntervals);
@@ -61,10 +102,40 @@ public class MergeIntervals {
       }
 
       private List<List<Integer>> getNonOverlappingIntervals(int[][] arrays) {
+            List<List<Integer>> intervalsWithoutOverlapping = new LinkedList<>();
+
+            for (int i = 0; i + 1 < arrays.length; i++) {
+                  int left = arrays[i][1];
+                  int right = arrays[i + 1][0];
+
+                  if (intervalsWithoutOverlapping.size() == 0) { // initialize first overlapping
+                        if (left >= right) {
+                              List<Integer> interval = new ArrayList<>(2);
+                        }
+                  }
+            }
             return null;
       }
 
 
-      private void sortIntervalsQuick(int[][] arrays, int i, int i1) {
+      private void sortIntervalsByFirstValueInSubArrQuick(int[][] arrays, int i, int i1) {
+      }
+
+      private void sortIntervalsByFirstValueInSubArrBubble(int[][] arrays) {
+            for (int i = 0; i < arrays.length - 1; i++) {
+                  for (int j = i + 1; j < arrays.length; j++) {
+                        int first = arrays[i][0];
+                        int second = arrays[j][0];
+
+                        if (first > second) {
+                              int temp0 = arrays[i][0];
+                              int temp1 = arrays[i][1];
+                              arrays[i][0] = arrays[j][0];
+                              arrays[i][1] = arrays[j][1];
+                              arrays[j][0] = temp0;
+                              arrays[j][1] = temp1;
+                        }
+                  }
+            }
       }
 }
