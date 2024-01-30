@@ -1,5 +1,7 @@
 package stack.valid_parenthesses;
 
+import java.util.Stack;
+
 /**
        Given a string s containing just the characters '(', ')', '{', '}', '[' and ']',
        determine if the input string is valid.
@@ -38,7 +40,28 @@ public class ValidParenthesses {
             System.out.println("Result " + result);
             System.out.println("Expect " + expectedResult);
       }
+      /*
+            0 1 2 3 4 5
+            ( ) [ ] { }
 
+            i:0
+            )
+            i:1
+            )
+            ) -> delete from stack
+            i:2
+            ]
+            i:3
+            ]
+            ] -> delete from stack
+            i:4
+            }
+            i:5
+            }
+            } - delete from stack
+
+            stack is empty - return true
+       */
       void test2() {
             String str = "()[]{}";
             boolean expectedResult = true;
@@ -49,9 +72,19 @@ public class ValidParenthesses {
             System.out.println("Expect " + expectedResult);
       }
 
+      /*    0 1
+            ( ]
+            i:0
+            )
+            i:1
+            ]
+            )
+
+            stack is empty - return false
+       */
       void test3() {
             String str = "(]";
-            boolean expectedResult = true;
+            boolean expectedResult = false;
             boolean result = isValidParentheses(str);
             System.out.println();
             System.out.println(str);
@@ -60,6 +93,26 @@ public class ValidParenthesses {
       }
 
       private boolean isValidParentheses(String str) {
-            return false;
+            char[] characters = str.toCharArray();
+
+            Stack<Character> stack = new Stack<>();
+            for ( char curr : characters) {
+                  if (curr == '(' ) {
+                        stack.push(')');
+                        continue;
+                  }
+                  if (curr == '[' ) {
+                        stack.push(']');
+                        continue;
+                  }
+                  if (curr == '{' ) {
+                        stack.push('}');
+                        continue;
+                  }
+                  if (!stack.isEmpty() && stack.peek() == curr ) {
+                        stack.pop();
+                  }
+            }
+            return stack.isEmpty();
       }
 }
