@@ -25,6 +25,7 @@ public class MergeIntervals {
             mergeIntervals.test1();
             mergeIntervals.test2();
             mergeIntervals.test3();
+            mergeIntervals.testQuickSort();
       }
       private void test1() {
             int[][] arrays = {{1,3},{2,6},{8,10},{15,18}};
@@ -75,13 +76,21 @@ public class MergeIntervals {
             int[][] arrays = {{2,6},{8,9},{8,10},{9,11},{15,18},{2,4},{16, 17},{1,3}};
             int[][] expectedResult = {{1,6}, {8,11}, {15,18}};
             System.out.println("Interfals before sort : " + Arrays.deepToString(arrays));
-            sortIntervalsByFirstValueInSubArrBubble(arrays);
+            sortIntervalsByFirstValueInSubArrQuick(arrays, 0, arrays.length - 1);
             //sortIntervalsByFirstValueInSubArrQuick(arrays,0,arrays.length - 1);
             System.out.println("Interfals after sort : " + Arrays.deepToString(arrays));
             List<List<Integer>> nonOverlappingIntervals = getNonOverlappingIntervals(arrays);
             System.out.println("Non overlapping arrays : " + nonOverlappingIntervals);
             System.out.println("Expected : " + Arrays.deepToString(expectedResult));
             System.out.println();
+      }
+
+      private void testQuickSort() {
+            System.out.println("\nTest quick sort");
+            int[][] arrays = {{4,0},{3,0},{2,0},{1,0}};
+            System.out.println("Before sort : " + Arrays.deepToString(arrays));
+            sortIntervalsByFirstValueInSubArrQuick(arrays,0,arrays.length - 1);
+            System.out.println("After sort : " + Arrays.deepToString(arrays));
       }
 
       private List<List<Integer>> getNonOverlappingIntervals(int[][] arrays) {
@@ -114,7 +123,40 @@ public class MergeIntervals {
       }
 
 
-      private void sortIntervalsByFirstValueInSubArrQuick(int[][] arrays, int i, int i1) {
+      private void sortIntervalsByFirstValueInSubArrQuick(int[][] arrays, int startIndex, int endIndex) {
+            if (startIndex >= endIndex) return;
+
+            int pivotIndex = particion(arrays, startIndex, endIndex);
+
+            sortIntervalsByFirstValueInSubArrQuick(arrays,startIndex,pivotIndex - 1);
+            sortIntervalsByFirstValueInSubArrQuick(arrays,pivotIndex + 1, endIndex);
+      }
+
+      private int particion(int[][] arrays, int startIndex, int endIndex) {
+            int i = startIndex - 1;
+            int pivot = arrays[endIndex][0];
+
+            for (int j = startIndex; j <= endIndex - 1; j++) {
+                  if (arrays[j][0] < pivot) {
+                        i++;
+                        int temp0 = arrays[j][0];
+                        int temp1 = arrays[j][1];
+                        arrays[j][0] = arrays[i][0];
+                        arrays[j][1] = arrays[i][1];
+                        arrays[i][0] = temp0;
+                        arrays[i][1] = temp1;
+                  }
+            }
+
+            i++;
+            int temp0 = arrays[i][0];
+            int temp1 = arrays[i][1];
+            arrays[i][0] = arrays[endIndex][0];
+            arrays[i][1] = arrays[endIndex][1];
+            arrays[endIndex][0] = temp0;
+            arrays[endIndex][1] = temp1;
+
+            return i;
       }
 
       private void sortIntervalsByFirstValueInSubArrBubble(int[][] arrays) {
