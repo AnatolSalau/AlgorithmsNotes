@@ -1,14 +1,19 @@
 null - (prev)1(next) - (prev)2(next) - (prev)3(next) - (prev)4(next) - (prev)5(next) - null
 
 prev    curr        next
-2 - (prev)1(next) - null
+2 - (prev)1(next) - null    +
+
 prev    curr        next
-3 - (prev)2(next) - (prev)1(next) - null
+3 - (prev)2(next) - (prev)1(next) - null +
+
 prev    curr        next
 4 - (prev)3(next) - (prev)2(next) - (prev)1(next) - null
+
 prev    curr        next
 5 - (prev)4(next) - (prev)3(next) - (prev)2(next) - (prev)1(next) - null
-prev    curr           next
+
+prev        curr           next
 null - (prev)5(next) - (prev)4(next) - (prev)3(next) - (prev)2(next) - (prev)1(next) - null
+
 
 if (prev == null) -----> new head = curr(5)
