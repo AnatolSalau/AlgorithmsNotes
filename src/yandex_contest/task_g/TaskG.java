@@ -4,6 +4,7 @@ import java.util.*;
 
 public class TaskG {
       /**
+       *
        * Не секрет, что некоторые программисты очень любят путешествовать.
        * Хорошо всем известный программист Петя тоже очень любит путешествовать,
        * посещать музеи и осматривать достопримечательности других городов.
@@ -29,7 +30,8 @@ public class TaskG {
        * Если существуют пути, удовлетворяющие описанным выше условиям, то выведите минимальное количество дорог,
        * которое нужно проехать, чтобы попасть из начальной точки маршрута в конечную. Если пути не существует, выведите -1.
        */
-      /**
+      /*
+
        * 1. Строим граф дистанций между городами в виде матрицы
        *          Номера - строк и стобцов в матрицы - это номера городов
        *          В ячейхах матрицы - буду посчитанные расстояния между городами.
@@ -68,39 +70,39 @@ public class TaskG {
 
             while (!queue.isEmpty()) {
                   Integer currentCity = queue.poll();
-
+                  visited.add(currentCity);
                   System.out.println("search in city = " + currentCity);
 
                   if(currentCity == endCity) {
-                        System.out.println("City  number " + currentCity + " was founded");
-                        System.out.println("Visited cities :  " +visited);
-                        System.out.println("");
-                        return visited.size();
+                        //System.out.println("City  number " + currentCity + " was founded");
+                        //System.out.println("Visited cities :  " +visited);
+                        //System.out.println("");
+                        int distance = visited.size() - 2;
+                        return distance;
                   }
-                  visited.add(currentCity);
                   int[] distancesFromCurrentCityToAnother = matrixGraph[currentCity];
-                  System.out.println("distances to another cities : " + Arrays.toString(distancesFromCurrentCityToAnother));
+                  //System.out.println("distances to another cities : " + Arrays.toString(distancesFromCurrentCityToAnother));
                   for (int i = 1; i < distancesFromCurrentCityToAnother.length; i++) {
-                        int currentDistance = distancesFromCurrentCityToAnother[i];
-                        System.out.println(currentDistance);
+                        int distanceToAnotherCity = distancesFromCurrentCityToAnother[i];
+                        //System.out.println(currentDistance);
                         if (!visited.contains(i)) {
-                              if (currentDistance > 0 && currentDistance <= maxDistance) {
+                              if (distanceToAnotherCity > 0 && distanceToAnotherCity <= maxDistance) {
                                     queue.add(i);
-                                    visited.add(i);
                               }
                         }
                   }
             }
-            System.out.println("Citi didn't found : ");
-            System.out.println(visited);
-            return visited.size();
+            //System.out.println("Citi didn't found : ");
+            //System.out.println(visited);
+            int distance = visited.size() - 2;
+            return distance;
       }
 
       static void printMatrix(int[][] matrix) {
-            System.out.println("Numbers :  1  2  3  4  5  6  7");
-            for (int i = 1; i < matrix.length; i++) {
+            System.out.println("Numbers :  0  1  2  3  4  5  6  7");
+            for (int i = 0; i < matrix.length; i++) {
 
-                  int[] ints = Arrays.copyOfRange(matrix[i], 1, matrix.length);
+                  int[] ints = Arrays.copyOfRange(matrix[i], 0, matrix.length);
                   System.out.println("City N" + i +" : " +  Arrays.toString(ints));
             }
       }
@@ -138,14 +140,18 @@ public class TaskG {
             System.out.println("from :" + startCity + " to " + endCity);
             System.out.println("Max distance = " + maxDistance);
             int[][] matrixGraph = generateMatrixOfDistanceBetweenCities(citiesCoordinates);
-            searchInWidthPathBetweenCities(matrixGraph, startCity, endCity, maxDistance);
+            int shortestPath = searchInWidthPathBetweenCities(matrixGraph, startCity, endCity, maxDistance);
+            System.out.println("Result : ");
+            System.out.println(shortestPath);
+            System.out.println("Expected result : 2");
+            System.out.println();
       }
 
       static void test2() {
             Map<Integer,List<Integer>> citiesCoordinates = new HashMap<>();
             citiesCoordinates.put(1, Arrays.asList(0, 0));
             citiesCoordinates.put(2, Arrays.asList(1, 0));
-            citiesCoordinates.put(3, Arrays.asList(0, 3));
+            citiesCoordinates.put(3, Arrays.asList(0, 1));
             citiesCoordinates.put(4, Arrays.asList(1, 1));
             int maxDistance = 2;
             int startCity = 1;
@@ -155,8 +161,11 @@ public class TaskG {
             System.out.println("from :" + startCity + " to " + endCity);
             System.out.println("Max distance = " + maxDistance);
             int[][] matrixGraph = generateMatrixOfDistanceBetweenCities(citiesCoordinates);
-            searchInWidthPathBetweenCities(matrixGraph, startCity, endCity, maxDistance);
-
+            int shortestPath = searchInWidthPathBetweenCities(matrixGraph, startCity, endCity, maxDistance);
+            System.out.println("Result : ");
+            System.out.println(shortestPath);
+            System.out.println("Expected result : 1");
+            System.out.println();
       }
 
       static void test3() {
@@ -173,7 +182,10 @@ public class TaskG {
             System.out.println("from :" + startCity + " to " + endCity);
             System.out.println("Max distance = " + maxDistance);
             int[][] matrixGraph = generateMatrixOfDistanceBetweenCities(citiesCoordinates);
-            searchInWidthPathBetweenCities(matrixGraph, startCity, endCity, maxDistance);
-
+            int shortestPath = searchInWidthPathBetweenCities(matrixGraph, startCity, endCity, maxDistance);
+            System.out.println("Result : ");
+            System.out.println(shortestPath);
+            System.out.println("Expected result : -1");
+            System.out.println();
       }
 }
