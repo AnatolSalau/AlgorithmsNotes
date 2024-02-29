@@ -1,4 +1,4 @@
-package yandex_internet;
+package yandex_internet.get_all_intersections;
 
 import java.util.*;
 
