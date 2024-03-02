@@ -2,7 +2,11 @@ package yandex_internet.same_string_after_deleting;
 /**
        Написать функцию, которая вернёт True,
        если из первой строки можно получить вторую,
-       совершив не более 1 изменения (== удаление / замена символа).
+       совершив не более 1 изменения (== удаление / замена символа/добавление).
+
+      Write function that return true
+      if we can get second string from first
+      do only one change (== deleting / change symbol / adding symbol)
 
       a b c d
       a b c
@@ -65,6 +69,7 @@ public class SameStringAfterDeleting {
             System.out.println(str2);
             System.out.println(isEditDistanceOne(str1,str2));
             System.out.println("Expected : true" );
+            System.out.println();
       }
       /*    expected result = false
             i
@@ -96,6 +101,7 @@ public class SameStringAfterDeleting {
             System.out.println(str2);
             System.out.println(isEditDistanceOne(str1,str2));
             System.out.println("Expected : false" );
+            System.out.println();
       }
       /*
             i
@@ -124,6 +130,7 @@ public class SameStringAfterDeleting {
             System.out.println(str2);
             System.out.println(isEditDistanceOne(str1,str2));
             System.out.println("Expected : true" );
+            System.out.println();
       }
       /*
             i
@@ -135,11 +142,6 @@ public class SameStringAfterDeleting {
             aabcv
              j
             abcv -> count = 1, length1 > length2 -> i++
-
-              i
-            aabcv
-             j
-            abcv -> count = 1
 
               i
             aabcv
@@ -163,52 +165,50 @@ public class SameStringAfterDeleting {
             System.out.println(str2);
             System.out.println(isEditDistanceOne(str1,str2));
             System.out.println("Expected : true" );
+            System.out.println();
       }
 
-      static boolean isEditDistanceOne(String s1,
-                                       String s2)
-      {
-            int length1 = s1.length();
-            int length2 = s2.length();
+      static boolean isEditDistanceOne(String s1, String s2) {
+            char[] chars1 = s1.toCharArray();
+            char[] chars2 = s2.toCharArray();
 
-            char[] c1 = s1.toCharArray();
-            char[] c2 = s2.toCharArray();
+            if (s1.isBlank() || s2.isBlank() || s1 == null || s2 == null) return false;
 
-            // check both string is empty
-            if (s1.isEmpty() && s2.isEmpty()) return false;
-            // check string lengths is different more than 1
+            // if length strings are different more than 1 char -> return false
             if (Math.abs(s1.length() - s2.length()) > 1) return false;
 
-            int count = 0;
-            int i = 0; //pointer s1
-            int j = 0; //pointer s2
+            int countChanges = 0;
 
-            while (i < length1 && j < length2) {
-                  char curr1 = c1[i];
-                  char curr2 = c2[j];
+            int i = 0;// pointer in first string
+            int j = 0;// pointer in second string
 
-                  if (curr1 == curr2) {
-                        i++;
-                        j++;
-                  } else {
-                        if (length1 > length2) {
-                              i++;
-                        } else if (length1 < length2) {
-                              j++;
-                        } else {
+            while (i < chars1.length && j < chars2.length) {
+
+                  if(countChanges > 1) return false; //check count
+                  //compare chars
+                  if (chars1[i] == chars2[j]) { // if chars equal just move pointer ahead
+                       i++;
+                       j++;
+                  } else {// if chars are different
+                        //compare lengths of strings
+                        if(chars1.length == chars2.length) { //length the same so move two pointers ahead
                               i++;
                               j++;
+                        } else { // length are different so move ahead in more long string
+                              if (chars1.length > chars2.length) { //move in first string
+                                    i++;
+                              } else {// move in second  string
+                                    j++;
+                              }
                         }
-                        count ++;
+                        countChanges++;
                   }
             }
+            // if count changes = 0 and length the same-> strings are equal and we
+            //cannot to change this string -> so answer is false
+            if (countChanges == 0 && s1.length() == s2.length()) return false;
 
-            // edge case check, when count = 0, but we have one extra character
-            if (i < length1  || j < length2) {
-                  count ++;
-            }
-            //if string is equal count = 0 -> return false
-            return count == 1;
+            return true;
       }
 }
 
