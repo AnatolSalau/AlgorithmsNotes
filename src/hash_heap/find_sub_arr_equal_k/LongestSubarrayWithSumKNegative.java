@@ -71,52 +71,7 @@ public class LongestSubarrayWithSumKNegative {
                                                                                     3 -> 7
        */
       static List<Integer> getLongestSubArray(int[] array, int k) {
-            List<Integer> result = new LinkedList<>();
-
-            HashMap<Integer, Integer> prefixMap = new HashMap<>();
-
-            int startInd = -1;
-            int endInd = -1;
-
-            int maxLen = 0;
-            int sum = 0;
-
-            for (int i = 0; i < array.length; i++) {
-                  int currLength = i + 1;
-                  int currElem = array[i];
-                  sum = sum + currElem;
-                  int remainder = sum - k;
-
-                  if (sum == k) {   //if this sum equal k -> save answer
-                        if (currLength > maxLen) {
-                              maxLen = currLength;
-                              startInd = 0;
-                              endInd = i;
-                        }
-                        continue;
-                  }
-
-                  if (!prefixMap.containsKey(remainder)) {
-                        prefixMap.put(sum, i);
-                  }
-
-                  if (prefixMap.containsKey(remainder)) {
-                        int prefixLastIndex = prefixMap.get(remainder);
-                        int prefixlength = prefixLastIndex + 1;
-                        int nextPartLength = i - prefixlength + 1;
-
-                        if (nextPartLength > maxLen) {
-                              maxLen = nextPartLength;
-                              startInd = prefixLastIndex + 1;
-                              endInd = i;
-                        }
-                        prefixMap.put(sum, i);
-                  }
-            }
-            for (int i = startInd; i <= endInd; i++) {
-                  result.add(array[i]);
-            }
-            return result;
+            return null;
       }
 
       static void testOne() {
@@ -128,6 +83,7 @@ public class LongestSubarrayWithSumKNegative {
             int[] expectedResult2 = {-14, 2, 4, 3};
             System.out.println("Test1");
             System.out.println("Arr: " + Arrays.toString(nums));
+            System.out.println("K = " + k);
             System.out.println("Expect: " + Arrays.toString(expectedResult1));
             List<Integer> result = getLongestSubArray(nums, k);
             System.out.println("Result: " + result);
@@ -141,6 +97,7 @@ public class LongestSubarrayWithSumKNegative {
             List<Integer> result = getLongestSubArray(nums, k);
             System.out.println("Test1");
             System.out.println("Arr: " + Arrays.toString(nums));
+            System.out.println("K = " + k);
             System.out.println("Expect: " + "[1, 2, 1, 0]");
             System.out.println("Result: " + result);
             System.out.println();
