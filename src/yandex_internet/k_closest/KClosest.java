@@ -19,33 +19,56 @@ public class KClosest {
             test2();
             test3();
       }
+      /*
+            Explanation
+            1. Create two pointers
+                  l - from start arr
+                  e - from end arr
+            2. Go through arr
+                  - calculate sliding window size - > if size == target -> break from loop
+                  - calculate distance to left side from target number
+                  - calculate distance to right side from target number
+                  - if left distance > right distance -> increase left pointer
+                  - if right distance > left distance -> decrease right pointer
+                  - if distances are equal -> move forward left pointer
+            3. Fill result from left pointer  to right pointer
 
+       */
       static public int[] findClosetElements(int[] arr, int range, int indexTarget) {
-            int target = arr[indexTarget];
-            int l = 0;
-            int r = arr.length - 1;
+            int startIndex = 0;
+            int endIndex = 0;
 
-            while (r - l >= range) {
-                  int left = arr[l];
-                  int leftDistance = Math.abs(left - target); // distance between left element and target
+            int l = 0; // left pointer
+            int r = arr.length - 1; // right pointer
+            int sizeWindow = r - l + 1;
 
-                  int right = arr[r];
-                  int rightDistance = Math.abs(right - target);// distance between target and right element
+            //check size arr
+            if (arr.length == 0 || arr.length < sizeWindow) return null;
 
-                  if (leftDistance >= rightDistance) {
+            while (l < arr.length && r >= 0) {
+                  sizeWindow = r - l + 1; //calculate sliding window size - > if size == target -> break from loop
+                  if (sizeWindow == range) {
+                        startIndex = l;
+                        endIndex = r;
+                        break;
+                  }
+                  int leftDistance = arr[indexTarget] - arr[l];
+                  int rightDistance = arr[r] - arr[indexTarget];
+
+                  //if left distance > right distance -> increase left pointer
+                  //if distances are equal -> move forward left pointer
+                  if ( (leftDistance > rightDistance) || (leftDistance == rightDistance) ) {
                         l++;
-                  } else {
+                  } else {//if right distance > left distance -> decrease right pointer
                         r--;
                   }
             }
-            int resultLength = r - l + 1;
-            int[] result = new int[resultLength];
-
-            for (int i = l, j = 0; i <= r ; i++, j++) {
-                  result[j] = arr[i];
+            //fill result from left pointer  to right pointer
+            int[] resultRange = new int[sizeWindow];
+            for (int i = startIndex, j = 0; i <= endIndex; i++, j++) {
+                  resultRange[j] = arr[i];
             }
-
-            return result;
+           return resultRange;
       }
       /*
           i:0 1 2 3  4, target = 7, range 2
@@ -57,21 +80,21 @@ public class KClosest {
 
           i:0 1 2 3  4, target = 7, range 2
             2 3 5 7 11
-              l      h  (h[4] - l[1]) = 3
+              l      h  (h[4] - l[1]) = 3 - sliding window size
             arr[l] - target ( 3 - 7 ) = 4
             arr[h] - target ( 11 - 7 ) = 4
             4 >= 4 -> l++
 
           i:0 1 2 3  4, target = 7, range 2
             2 3 5 7 11
-                l    h  (h[4] - l[2]) = 2
+                l    h  (h[4] - l[2]) = 2 - sliding window size
             arr[l] - target ( 5 - 7 ) = 2
             arr[h] - target ( 11 - 7 ) = 4
             4 >= 4 -> h--
 
           i:0 1 2 3  4, target = 7, range 2
             2 3 5 7 11
-                l h     (h[3] - l[2]) = 1
+                l h     (h[3] - l[2]) = 1 - sliding window size < target -> return result
                 break;
 
           for i = 2; i <= 3 -> 5 7
