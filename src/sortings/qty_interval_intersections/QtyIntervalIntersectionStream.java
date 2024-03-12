@@ -1,14 +1,17 @@
 package sortings.qty_interval_intersections;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class QtyIntervalIntersection {
+public class QtyIntervalIntersectionStream {
       /**
-             Дан массив каждый элемент массива это два числа первое число это день заезда
-       второе день выезда нужно найти количество элементов у которых есть
-       пересечения причем если одна пара 1-5 а вторая 5-1 то это не считается
-       пересечением, а считается пересечением 1-5 и допустим 2-18.
-
+       * Дан массив каждый элемент массива это два числа первое число это день заезда
+       * второе день выезда нужно найти количество элементов у которых есть
+       * пересечения причем если одна пара 1-5 а вторая 5-1 то это не считается
+       * пересечением, а считается пересечением 1-5 и допустим 2-18.
        */
 
       public static void main(String[] args) {
@@ -18,20 +21,20 @@ public class QtyIntervalIntersection {
       }
 
       static void testOne() {
-            int[][] numbers = {{20, 23}, {20,22}, {18,19}, {1,5}, {2,18}, {18,19} };
+            int[][] numbers = {{20, 23}, {20, 22}, {18, 19}, {1, 5}, {2, 18}, {18, 19}};
             int expectedResult = 3;
             System.out.println(Arrays.deepToString(numbers));
-            int qtyIntersections = getQtyIntersections(numbers);
+            int qtyIntersections = getQtyIntersectionsByStream(numbers);
             System.out.println(Arrays.deepToString(numbers));
             System.out.println("Result : " + qtyIntersections);
             System.out.println("ExpectedResult : " + expectedResult);
       }
 
       static void testTwo() {
-            int[][] numbers = {{1, 5}, {2,18}};
+            int[][] numbers = {{1, 5}, {2, 18}};
             int expectedResult = 1;
             System.out.println(Arrays.deepToString(numbers));
-            int qtyIntersections = getQtyIntersections(numbers);
+            int qtyIntersections = getQtyIntersectionsByStream(numbers);
             System.out.println(Arrays.deepToString(numbers));
             System.out.println("Result : " + qtyIntersections);
             System.out.println("ExpectedResult : " + expectedResult);
@@ -41,11 +44,12 @@ public class QtyIntervalIntersection {
             int[][] numbers = {{1, 2}, {1, 3}, {2, 4}, {2, 3},};
             int expectedResult = 3;
             System.out.println(Arrays.deepToString(numbers));
-            int qtyIntersections = getQtyIntersections(numbers);
+            int qtyIntersections = getQtyIntersectionsByStream(numbers);
             System.out.println(Arrays.deepToString(numbers));
             System.out.println("Result : " + qtyIntersections);
             System.out.println("ExpectedResult : " + expectedResult);
       }
+
       /*
             [1, 5], [2, 18], [18, 19], [18, 19], [20, 23], [20, 22]
                 l    r                                               1
@@ -54,18 +58,16 @@ public class QtyIntervalIntersection {
                                              l    r
                                                        l    r        1
        */
-      static int getQtyIntersections(int[][] numbers) {
-            quickSortMultipleArr(numbers, 0, numbers.length - 1);
-            int countIntersections = 0;
-            int maxDayLeft = 0;
-            for (int i = 1; i < numbers.length; i++) {
-                  int lastDayLeftRange = numbers[i - 1][1];
-                  int firstDayRightRange = numbers[i][0];
-                  maxDayLeft = Math.max(maxDayLeft, lastDayLeftRange);
-                  if (maxDayLeft > firstDayRightRange) countIntersections++;
-            }
+      static int getQtyIntersectionsByStream(int[][] numbers) {
+            System.out.println("Before sort : " + Arrays.deepToString(numbers));
+            int[][] integers = Arrays.stream(numbers)
+                  .sorted((range2, range1) -> Integer.compare(range2[0], range1[0]))
+                  //.sorted(Comparator.comparingInt(range2 -> range2[0])) - new way to sort array
 
-            return countIntersections;
+                  .toArray(int[][]::new);
+
+            System.out.println("After sort : " + Arrays.deepToString(integers));
+            return -1;
       }
 
       static void bubbleSortMultipleArr(int[][] numbers) {
@@ -84,12 +86,12 @@ public class QtyIntervalIntersection {
       }
 
       static void quickSortMultipleArr(int[][] numbers, int startIndex, int endIndex) {
-            if(startIndex >= endIndex) return;
+            if (startIndex >= endIndex) return;
 
             int pivotIndex = partition(numbers, startIndex, endIndex);
 
-            quickSortMultipleArr(numbers,startIndex,pivotIndex - 1);
-            quickSortMultipleArr(numbers,pivotIndex +1,endIndex);
+            quickSortMultipleArr(numbers, startIndex, pivotIndex - 1);
+            quickSortMultipleArr(numbers, pivotIndex + 1, endIndex);
       }
 
       static int partition(int[][] numbers, int startIndex, int endIndex) {
@@ -109,7 +111,7 @@ public class QtyIntervalIntersection {
                         numbers[j][1] = temp1;
                   }
             }
-            i ++;
+            i++;
             int temp0 = numbers[endIndex][0];
             int temp1 = numbers[endIndex][1];
             numbers[endIndex][0] = numbers[i][0];
