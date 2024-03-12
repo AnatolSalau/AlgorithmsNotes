@@ -1,10 +1,8 @@
 package sortings.qty_interval_intersections;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 public class QtyIntervalIntersectionStream {
       /**
@@ -60,14 +58,25 @@ public class QtyIntervalIntersectionStream {
        */
       static int getQtyIntersectionsByStream(int[][] numbers) {
             System.out.println("Before sort : " + Arrays.deepToString(numbers));
-            int[][] integers = Arrays.stream(numbers)
+
+            // 1. sort array
+            int[][] sorted = Arrays.stream(numbers)
                   .sorted((range2, range1) -> Integer.compare(range2[0], range1[0]))
                   //.sorted(Comparator.comparingInt(range2 -> range2[0])) - new way to sort array
-
                   .toArray(int[][]::new);
-
-            System.out.println("After sort : " + Arrays.deepToString(integers));
-            return -1;
+            // 2. Initialize mad day of wth first day of
+            AtomicInteger maxCurrDayOf = new AtomicInteger(sorted[0][1]);
+            // 3. Initialize count for intersections day in and day of
+            AtomicInteger count = new AtomicInteger(0);
+            // 4/ Go through arr by stream with index
+            IntStream.range(0, sorted.length - 1)
+                  .forEach(i -> {
+                        if ( maxCurrDayOf.get() > sorted[i + 1][0]) { // increment count
+                              count.incrementAndGet();
+                        }
+                        maxCurrDayOf.set(Math.max(sorted[i][1], sorted[i + 1][1])); // set new max current day of
+                  });
+            return count.get();
       }
 
       static void bubbleSortMultipleArr(int[][] numbers) {
