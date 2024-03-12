@@ -1,4 +1,4 @@
-package hash_heap.qty_interval_intersections;
+package sortings.qty_interval_intersections;
 
 import java.util.Arrays;
 import java.util.HashMap;
