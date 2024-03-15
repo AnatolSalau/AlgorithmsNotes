@@ -21,7 +21,19 @@ public class ArraysIntersection {
             test1();
             test2();
       }
+      /*
+            Explanation by HashHeap
+            0. Create list result
+            1. Go through arr1 -> create number frequency map1 ( num -> qty)
+            2. Go through arr2 -> create number frequency map2 (num -> qty)
+            3. Find map with the largest size and go through it
+                  1. Check every key
+                        if key is contain in another map
+                              compare qty1 from map1 and qty2 from map2
+                              find the less qty
+                              add to result key with a specified number of times
 
+       */
       public int[] intersect(int[] nums1, int[] nums2) {
             HashMap<Integer, Integer> nums1QtyMap = new HashMap<>();
             for (int i = 0; i < nums1.length; i++) {
