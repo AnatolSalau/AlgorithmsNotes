@@ -36,7 +36,29 @@ public class BalancedBrackets {
                         if they are not equal - return false
        */
       static boolean isRightParenthesesSequence(String str) {
-            return false;
+            char[] chars = str.toCharArray();
+            Stack<Character> stack = new Stack<>();
+
+            for (char curr : chars) {
+                  //1. For every open backed like '(' or '[' add to stack it mirror
+                  if (curr == '(') {
+                        stack.push(')');// '(' add ')'
+                        continue;
+                  }
+                  if (curr == '[') {
+                        stack.push(']');// '[' add ')'
+                        continue;
+                  }
+
+                  if (stack.isEmpty()) continue;// 2. Check stack is to avoid stack is empty exception
+
+                  if (curr == ')' || curr == ']') {//For every closed brackets pop from stack current char
+                      char fromStack = stack.pop();
+                      if (curr == fromStack) continue;
+                      else return false;
+                  }
+            }
+            return stack.isEmpty();
       }
       static void testOne() {
             String str = "([])";
