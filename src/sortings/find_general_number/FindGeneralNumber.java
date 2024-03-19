@@ -9,8 +9,83 @@ public class FindGeneralNumber {
       public static void main(String[] args) {
             testOne();
             testTwo();
+            testThree();
       }
+      /*
+      max = 8
+       i -> increase
+      [1, 2, 3, 10]
+       j
+      [4, 5, 6, 7, 10]
+       k
+      [8, 9, 10]
 
+      max = 8
+          i -> increase
+      [1, 2, 3, 10]
+       j
+      [4, 5, 6, 7, 10]
+       k
+      [8, 9, 10]
+
+      max = 8
+             i -> increase
+      [1, 2, 3, 10]
+       j
+      [4, 5, 6, 7, 10]
+       k
+      [8, 9, 10]
+
+      max = 10
+                  i
+      [1, 2, 3, 10]
+          j -> increase
+      [4, 5, 6, 7, 10]
+       k
+      [8, 9, 10]
+
+       max = 10
+                  i
+      [1, 2, 3, 10]
+             j -> increase
+      [4, 5, 6, 7, 10]
+       k
+      [8, 9, 10]
+
+      max = 10
+                  i
+      [1, 2, 3, 10]
+                j -> increase
+      [4, 5, 6, 7, 10]
+       k
+      [8, 9, 10]
+
+      max = 10
+                  i
+      [1, 2, 3, 10]
+                    j
+      [4, 5, 6, 7, 10]
+       k -> increase
+      [8, 9, 10]
+
+      max = 10
+                  i
+      [1, 2, 3, 10]
+                    j
+      [4, 5, 6, 7, 10]
+          k -> increase
+      [8, 9, 10]
+
+            max = 10
+                  i
+      [1, 2, 3, 10]
+                    j
+      [4, 5, 6, 7, 10]
+              k -> increase
+      [8, 9, 10]
+
+      10 = 10 = 10 -> return 10
+       */
       static void testOne() {
             int[] arr1 = {3,2,1,10};
             int[] arr2 = {4,5,6,7,10};
@@ -32,43 +107,51 @@ public class FindGeneralNumber {
             System.out.println("Expect : 10 ");
             System.out.println();
       }
+
+      static void testThree() {
+            int[] arr1 = {3,10,1};
+            int[] arr2 = {10,4,5,6,7};
+            int[] arr3 = {8,9,10};
+            System.out.println("Test 3");
+            int generalNumber = getGeneralNumber(arr1, arr2, arr3);
+            System.out.println("Result : " + generalNumber);
+            System.out.println("Expect : 10 ");
+            System.out.println();
+      }
+
       /*
             max = 3
             i -> increase
             1 2 3
-            j -> increase
+            j
             3 4 5 6 7
-            k -> increase
+            k
             3 4 5 6
 
-            max = 4
+            max = 3
               i -> increase
             1 2 3
-              j -> increase
+            j
             3 4 5 6 7
-              k -> increase
+             k
             3 4 5 6
 
-            max = 4
-                i -> increase
+            max = 3
+                i
             1 2 3
-                j -> increase
+            j
             3 4 5 6 7
-                k -> increase
+            k
             3 4 5 6
+
+            3 = 3 = 3 -> break
        */
       static int getGeneralNumber(int[] arr1, int[] arr2, int[] arr3) {
-            System.out.println("Before sort:");
-            System.out.println(Arrays.toString(arr1));
-            System.out.println(Arrays.toString(arr2));
-            System.out.println(Arrays.toString(arr3));
+/*
             quickSort(arr1,0,arr1.length - 1);
             quickSort(arr2,0,arr2.length - 1);
-            quickSort(arr3,0,arr3.length - 1);
-            System.out.println("After sort:");
-            System.out.println(Arrays.toString(arr1));
-            System.out.println(Arrays.toString(arr2));
-            System.out.println(Arrays.toString(arr3));
+            quickSort(arr3,0,arr3.length - 1);*/
+
 
             int max = 0;
 
