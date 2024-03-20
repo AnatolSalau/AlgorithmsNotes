@@ -146,72 +146,86 @@ public class FindGeneralNumber {
 
             3 = 3 = 3 -> break
        */
+      /*
+            1. Sort every arr in increasing order
+            2. Create three pointer for every arr
+            3. Create max value for max value between all passed values
+            4. Go through all arr by while loop
+                  while i,j,k < arr1,2,3.length
+                  1. Compare every curr between each other
+                        if curr1 == curr2 == curr3 -> return curr1
+                  2. Find max between current values
+                  3. Move pointers forward
+                        if curr1 < max -> increase curr1 and skip all pointer increasing (continue)
+                        if curr2 < max -> increase curr2 and skip all pointer increasing (continue)
+                        if curr3 < max -> increase curr3 and skip all pointer increasing (continue)
+            5. Return -999 if we didn't find three equal value
+
+       */
       static int getGeneralNumber(int[] arr1, int[] arr2, int[] arr3) {
-/*
+            // 1. Sort every arr in increasing order
             quickSort(arr1,0,arr1.length - 1);
             quickSort(arr2,0,arr2.length - 1);
-            quickSort(arr3,0,arr3.length - 1);*/
+            quickSort(arr3,0,arr3.length - 1);
 
+            int i = 0, j = 0, k = 0; //2. Create three pointer for every arr
 
-            int max = 0;
+            int max = 0; // 3. Create max value for max value between all passed values
 
-            int i = 0;
-            int j = 0;
-            int k = 0;
+            while (i < arr1.length && j < arr2.length && k < arr3.length) {
+                  int curr1 = arr1[i];
+                  int curr2 = arr2[j];
+                  int curr3 = arr3[k];
 
-            while ( (i < arr1.length) && (j < arr2.length) && (k < arr3.length) ) {
-                  int num1 = arr1[i];
+                  if (curr1 == curr2 && curr2 == curr3) return curr1; //1. Compare every curr between each other
 
-                  int num2 = arr2[j];
+                  max = Math.max(curr1, Math.max(curr2, curr3));//2. Find max between current values
 
-                  int num3 = arr3[k];
-
-
-                  if (num1 == num2 && num2 == num3) return num1;
-
-                  max = Math.max(num1,Math.max(num2, num3));
-
-                  if (num1 < max) {
+                  //3. Move pointers forward
+                  if (curr1 < max) {//if curr1 < max -> increase curr1 and skip all pointer increasing (continue)
                         i++;
                         continue;
                   }
-                  if (num2 < max) {
+                  if (curr2 < max) {//if curr2 < max -> increase curr2 and skip all pointer increasing (continue)
                         j++;
                         continue;
                   }
-                  if (num3 < max) {
+                  if (curr3< max) {//if curr3 < max -> increase curr3 and skip all pointer increasing (continue)
                         k++;
                         continue;
                   }
             }
-            return -999;
+            return -999;//5. Return -999 if we didn't find three equal value
       }
 
       static void quickSort(int[] array, int startIndex, int endIndex) {
-            if(endIndex<= startIndex) return; //base case
+            if (startIndex >= endIndex) return; // exit from recursion
 
             int pivotIndex = partition(array,startIndex, endIndex);
 
             quickSort(array,startIndex,pivotIndex - 1);
-            quickSort(array,pivotIndex +1,endIndex);
+            quickSort(array,pivotIndex + 1, endIndex);
+
       }
 
       static int partition(int[] array, int startIndex, int endIndex) {
-            int pivot = array[endIndex];
             int i = startIndex - 1;
 
+            int pivot = array[endIndex];
+
             for (int j = startIndex; j <= endIndex - 1; j++) {
-                  if(array[j] < pivot) {
+                  if (array[j] < pivot) {
                         i++;
                         int temp = array[i];
                         array[i] = array[j];
                         array[j] = temp;
                   }
             }
+
             i++;
-            int temp = array[i];
-            array[i] = array[endIndex];
-            array[endIndex] = temp;
+            int temp = array[endIndex];
+            array[endIndex] = array[i];
+            array[i] = temp;
 
             return i;
       }
