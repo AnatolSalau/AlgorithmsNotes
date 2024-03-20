@@ -2,7 +2,7 @@ package two_pointers.sorted_squares_arr;
 
 import java.util.Arrays;
 
-public class Task34 {
+public class SortedSquaresArr {
       /**
        * Given an integer array nums sorted in non-decreasing order,
        * return an array of the squares of each number sorted in non-decreasing order.
