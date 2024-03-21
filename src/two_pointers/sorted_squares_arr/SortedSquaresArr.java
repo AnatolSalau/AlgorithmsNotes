@@ -82,21 +82,44 @@ i=4.        -4,-1,0,3,10  res: [0, 1, 9, 16, 100]
             add to result 0*0 = 0
             l == r increase l
        */
+      /*
+            1. Create arr result with size the same as nums
+            2. Create two pointers
+                  l - from start arr
+                  r - from end arr
+                  i - end of result
+            3. Go through while until l <= r
+                  Compare modules left and right
+                        if module left more then right or equal to right
+                              add left square to the end of result
+                              increase l
+                              decrease i
+                        else (module left less than right)
+                              add right square to the end of result
+                              decrease r
+                              decrease i
+
+       */
       static int[] sortedSquares(int[] nums) {
-            int[] result = new int[nums.length];
-            int leftIndex = 0;
-            int rightIndex = nums.length - 1;
+            int[] result = new int[nums.length]; //1. Create arr result with size the same as nums
+            int l = 0;// from start arr
+            int r = nums.length-1;// from end arr
+            int i = result.length - 1;// end of result
 
-            for (int i = nums.length - 1; i >=0; i--) {
-                  int leftAbs = Math.abs(nums[leftIndex]);
-                  int rightAbs = Math.abs(nums[rightIndex]);
-
-                  if (leftAbs >= rightAbs) {
-                        result[i] = leftAbs * leftAbs;
-                        leftIndex ++;
-                  } else {
-                        result[i] = rightAbs * rightAbs;
-                        rightIndex --;
+            while (l <= r) {
+                  int left = Math.abs(nums[l]);
+                  int right = Math.abs((nums[r]));
+                  //Compare modules left and right
+                  if (left >= right) {//if module left more then right or equal to right
+                        int sqr = left * left;
+                        result[i] = sqr; //add left square to the end of result
+                        l++;//increase l
+                        i--;//decrease i
+                  } else {//module left less than right
+                        int sqr = right *right;
+                        result[i] = sqr; //add left square to the end of result
+                        r--;//increase l
+                        i--;//decrease i
                   }
             }
             return result;
