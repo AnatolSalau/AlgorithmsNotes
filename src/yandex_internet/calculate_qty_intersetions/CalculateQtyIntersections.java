@@ -36,13 +36,13 @@ public class CalculateQtyIntersections {
                                                                   maxLeft = Math.max(7, maxLeft) = 7
        */
       static int getQtyIntersections(int[][] numbers) {
-            quickSortMultipleArr(numbers, 0, numbers.length - 1);
+            quickSortMultipleArr(numbers, 0, numbers.length - 1);             //O(nlog(n))
             int intersectionQty = 0;
             int l = 0; // pointer to left line segment
             int r = 1; // pointer to right line segment
             int maxLeft = numbers[0][1]; // max left value in current line segment
 
-            while (r < numbers.length) {
+            while (r < numbers.length) {                                                      //O(n)
                   if (maxLeft > numbers[r][0]) {//compare max left with right0
                         intersectionQty ++;
                   }
@@ -50,8 +50,11 @@ public class CalculateQtyIntersections {
                   l++;
                   r++;
             }
-            return intersectionQty;
+            return intersectionQty;         // O(nlog(n)) + O(n) = O(n) ?
       }
+      /*
+            O(log(n))
+       */
       static void quickSortMultipleArr(int[][] numbers, int startIndex, int endIndex) {
             if(startIndex >= endIndex) return; //exit from recursion
 
@@ -61,6 +64,9 @@ public class CalculateQtyIntersections {
             quickSortMultipleArr(numbers,pivotIndex + 1,endIndex);
       }
 
+      /*
+            O(n^2)
+       */
       static void bubbleSortMultipleArr(int[][] numbers) {
             for (int i = 0; i < numbers.length - 1; i++) {
                   for (int j = i; j < numbers.length; j++) {

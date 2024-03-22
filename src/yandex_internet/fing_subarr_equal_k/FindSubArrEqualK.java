@@ -11,6 +11,17 @@ import java.util.List;
  * target = 9
  * result = range(4, 5) # because elements[3] + elements[4] == target
  */
+/*
+      0 ->  1
+      1 -> -2
+      2 ->  2
+      3 ->  7
+
+      [1, -3, 4, 5]
+              ____ -> 9
+       _____ -> -2
+      ____________ -> 7 - 9 = -2
+ */
 public class FindSubArrEqualK {
       public static void main(String[] args) {
             testOne();
@@ -101,28 +112,28 @@ public class FindSubArrEqualK {
             List<Integer> result = new ArrayList<>();
 
             int sum = 0;
-            for (int i = 0; i < elem.length; i++) { // iterate through arr
+            for (int i = 0; i < elem.length; i++) { // iterate through arr                            //O(n)
                   int curr = elem[i];
                   sum = sum + curr;//update sum with curr value
 
-                  sumIndexPrefixMap.put(sum,i); //update map with curr  (sum -> index)
+                  sumIndexPrefixMap.put(sum,i); //update map with curr  (sum -> index)                //O(1)
 
                   if (sum == target) { // if current range equal k - just return curr index
                         result.add(elem[0]);//add start value
                         result.add(elem[i]);//add end
-                        return result.stream().mapToInt(Integer::intValue).toArray();
+                        return result.stream().mapToInt(Integer::intValue).toArray();         //O(2)
                   }
 
                   int prefix = sum - target;
 
-                  if (sumIndexPrefixMap.containsKey(prefix)) { // if map contains prefix
+                  if (sumIndexPrefixMap.containsKey(prefix)) { // if map contains prefix        //O(1)
                         Integer endPrefixIndex = sumIndexPrefixMap.get(prefix); // get prefix end index
                         result.add(elem[endPrefixIndex + 1]);// add start value
                         result.add(elem[i]);
-                        return result.stream().mapToInt(Integer::intValue).toArray();
+                        return result.stream().mapToInt(Integer::intValue).toArray();        //O(n)
                   }
             }
-            return result.stream().mapToInt(Integer::intValue).toArray();
+            return result.stream().mapToInt(Integer::intValue).toArray();// result O(n)
       }
 
 

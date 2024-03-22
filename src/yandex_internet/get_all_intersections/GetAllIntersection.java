@@ -8,6 +8,10 @@ import java.util.*;
  Return [1, 2, 2, 3] (order is not important)
  - all intersections with duplicates
  */
+/*
+      Go through arr1 -> create map
+      Go throught arr2 - decrease count in map
+ */
 public class GetAllIntersection {
 
       public static void main(String[] args) {
@@ -28,7 +32,7 @@ public class GetAllIntersection {
             //create map with quantity number in arr1
             Map<Integer, Integer> numberQtyArr1Map = new HashMap<>();
             //fill charQtyArr1Map
-            for (int i = 0; i < arr1.length; i++) {
+            for (int i = 0; i < arr1.length; i++) {                                 //O(n)
                   int curr = arr1[i];
 
                   if (numberQtyArr1Map.containsKey(curr)) {
@@ -40,7 +44,7 @@ public class GetAllIntersection {
                   }
             }
             // iterate through arr2
-            for (int i = 0; i < arr2.length; i++) {
+            for (int i = 0; i < arr2.length; i++) {                                 //O(m)
                   int curr = arr2[i];
                   //check curr number exist in qtyMap
                   if (numberQtyArr1Map.containsKey(curr)) {
@@ -53,7 +57,7 @@ public class GetAllIntersection {
                   }
             }
 
-            return intersectionsList;
+            return intersectionsList;                                               // O(n+m)
       }
       static void testOne() {
             int[] arr1 = {1, 2, 3, 2, 0};

@@ -14,6 +14,28 @@ public class KClosest {
                              *
        find_k_closest(a={2,3,5,7,11}, index=2, k=2) -> {5,7} или {3,5}
        */
+
+      /*          *
+            2,3,5,7,11
+
+                  *
+            2,3,5,7,11
+            l       r length = 5
+              5    4
+                  *
+            2,3,5,7,11
+              l     r length = 4
+              4    4
+
+                  *
+            2,3,5,7,11
+                l    r length = 3
+                2    4
+                  *
+            2,3,5,7,11
+                l r length = 2
+                2 0
+       */
       public static void main(String[] args) {
             test1();
             test2();
@@ -45,7 +67,7 @@ public class KClosest {
             //check size arr
             if (arr.length == 0 || arr.length < sizeWindow) return null;
 
-            while (l < arr.length && r >= 0) {
+            while (l < arr.length && r >= 0) {                                                 //O(n)
                   sizeWindow = r - l + 1; //calculate sliding window size - > if size == target -> break from loop
                   if (sizeWindow == range) {
                         startIndex = l;
@@ -65,10 +87,10 @@ public class KClosest {
             }
             //fill result from left pointer  to right pointer
             int[] resultRange = new int[sizeWindow];
-            for (int i = startIndex, j = 0; i <= endIndex; i++, j++) {
+            for (int i = startIndex, j = 0; i <= endIndex; i++, j++) {                         //O(m)
                   resultRange[j] = arr[i];
             }
-           return resultRange;
+           return resultRange;                                                                 //O(n + m)
       }
       /*
           i:0 1 2 3  4, target = 7, range 2
