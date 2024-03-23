@@ -49,6 +49,17 @@ public class LongestSubArrOf1 {
                   Result this is length between r and l pointers
                   result = r - l
        */
+      /*
+            0,1,1,1,0,1,1,0,1
+
+            1.    l pointer go through arr
+                  calculate every 0
+                  if count zero more then 1 (the same as 2)
+                  run inner loop (move r pointer forward) until count zero will be 1
+                        break from inner loop
+            2. calculate length between r and l when qty zero 1
+
+       */
       /*    i:    0 1 2 3 4 5 6 7 8
             arr:  0,1,1,1,0,1,1,0,1
                   lr                      countZero = 1                             lengthOf1 = 0 - 0 = 0
@@ -105,14 +116,15 @@ public class LongestSubArrOf1 {
       }
 
       private static int gemLongestSubarrayAfterDeletingOneEl(int[] nums) {
+            StringBuilder stringBuilder = new StringBuilder();
             int l = 0; // left pointer
             int zeroQty = 0; //quantity of zero in length
             int maxLength = 0;
 
-            for (int r = 0; r < nums.length; r++) {
+            for (int r = 0; r < nums.length; r++) {                                                         //O(n)
                   if (nums[r] == 0) zeroQty++; // increase zero qty when we find 0
 
-                  while (zeroQty > 1) {
+                  while (zeroQty > 1) {                                                                     //O(n)
                         if (nums[l] == 0) zeroQty --;
                         l++;
                   }
@@ -120,6 +132,6 @@ public class LongestSubArrOf1 {
                   int currLength = r - l;
                   maxLength = Math.max(currLength, maxLength); // calculate max length
             }
-            return maxLength;
+            return maxLength;                         //O(n) + O(n) = O(2n) -> O(n)
       }
 }

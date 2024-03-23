@@ -31,6 +31,17 @@ public class BestBuySellEasy {
             bestBuySellEasy.test2();
       }
       /*
+            Explanation:
+            1. Create two variables
+                  minBuy
+                  maxProfit
+            2. Go through arr
+                  - every iteration
+                  calculate min buy
+                  calculate currProfit = currPrice - minBuy
+                  calculate max profit from from currProfit and maxProfit
+       */
+      /*
             Greedy approach
             i: 0 1 2 3 4 5
                7 1 5 3 6 4
@@ -85,7 +96,7 @@ public class BestBuySellEasy {
             int minBuy = prices[0];
             int maxProfit = -1;
 
-            for (int i = 0; i < prices.length; i++) {
+            for (int i = 0; i < prices.length; i++) {                                           //O(n)
                   int currPrice= prices[i];
 
                   minBuy = Math.min(currPrice,minBuy);
@@ -95,7 +106,7 @@ public class BestBuySellEasy {
                   maxProfit = Math.max(currProfit,maxProfit);
             }
 
-            return maxProfit;
+            return maxProfit;                                                             //Result O(n)
       }
 
 }

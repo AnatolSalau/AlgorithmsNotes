@@ -9,6 +9,15 @@ import java.util.HashMap;
        Input: s = "eceba", k = 2
        Output: 3 [ece]
  */
+/*
+      1. Go through arr
+            add new char with qty in map
+            if length map less or equal k -> go ahead
+                        calculate window size
+            else move l pointer forward -> decrease qty in map (remove char if necessary)
+
+
+ */
 public class LongestSubstringKUnique {
 
       public static void main(String[] args) {
@@ -49,23 +58,23 @@ public class LongestSubstringKUnique {
             int l = 0;
             int r =0;
 
-            while (l < arr.length && r < arr.length) {
+            while (l < arr.length && r < arr.length) {                                                //O(2n)
                   int currWindowSize = r - l + 1;
 
                   if(freqMap.size() <= k) { // if freqMap size is right
                         maxWindowSize = Math.max(currWindowSize, maxWindowSize); // update max size of sliding window
                         r++; // move right pointer forward
                         if (r < arr.length) { // check null pointer exception
-                              increaseFreqMap(freqMap,arr[r]);// add new char to frequency map
+                              increaseFreqMap(freqMap,arr[r]);// add new char to frequency map  //O(2)
                         }
 
                   } else {// if freqMap size is wrong
-                        decreaseFreqMap(freqMap, arr[l]);//decrease quantity in frequency map or remove char in qty is 0
+                        decreaseFreqMap(freqMap, arr[l]);//decrease quantity in frequency map or remove char in qty is 0      //O(1)
                         l++;// move left pointer forward
                   }
             }
 
-            return maxWindowSize;
+            return maxWindowSize; // O(2n) + O(2) + O(1) = O(n)
       }
 
       static void increaseFreqMap(HashMap<Character, Integer> freqMap, Character newChar) {
