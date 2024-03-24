@@ -39,6 +39,16 @@ public class BestBuySellMedium {
             bestBuySellMedium.testThree();
       }
       /*
+            Explanation
+            1. Create minBay var
+            2. Create profit var
+            3. Go through arr
+                  1. change minBuy
+                  2. calculate curr profit
+                  3. add curr profit to profit
+            4. Return profit
+       */
+      /*
             i:    0 1 2 3 4 5
                   7 1 5 3 6 4
             minBuy = 7
