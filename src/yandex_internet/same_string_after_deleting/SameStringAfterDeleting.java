@@ -30,6 +30,28 @@ package yandex_internet.same_string_after_deleting;
        b) Else, move ahead in both strings.
  */
 
+/*
+      Explanation:
+      1. Compare length two strings -> if  difference more than 1 (e.g 2) -> return false
+      2. Check string by isBlank
+      3. Convert both strings to arr
+      4. Introduce variable count - count for changes in string
+      5. Introduce two pointer - for both array
+      6. Create while loop, go through both arr
+            1. Check count if count more than 1 -> return false
+            2. Compare current char
+                  1. If they are equal -> move both pointer forward
+                  2. If they are different
+                        1. Compare length arrays
+                              1. If length the same move two pointers forward
+                              2. If length is different
+                                    Do one change in arr with the large length
+                                    increase count changes
+      7. check count and length
+            if length every string are equal and count is 0 return false
+            (because we couldn't get the same string after one change)
+      8. Return true
+ */
 public class SameStringAfterDeleting {
 
       public static void main(String[] args) {
@@ -169,10 +191,10 @@ public class SameStringAfterDeleting {
       }
 
       static boolean isEditDistanceOne(String s1, String s2) {
-            char[] chars1 = s1.toCharArray();
-            char[] chars2 = s2.toCharArray();
+            char[] chars1 = s1.toCharArray();                                                         //O(n)
+            char[] chars2 = s2.toCharArray();                                                         //O(m)
 
-            if (s1.isBlank() || s2.isBlank() || s1 == null || s2 == null) return false;
+            if (s1.isBlank() || s2.isBlank()) return false;
 
             // if length strings are different more than 1 char -> return false
             if (Math.abs(s1.length() - s2.length()) > 1) return false;
@@ -182,7 +204,7 @@ public class SameStringAfterDeleting {
             int i = 0;// pointer in first string
             int j = 0;// pointer in second string
 
-            while (i < chars1.length && j < chars2.length) {
+            while (i < chars1.length && j < chars2.length) {                                          //O(n) + O(m)
 
                   if(countChanges > 1) return false; //check count
                   //compare chars
@@ -208,7 +230,7 @@ public class SameStringAfterDeleting {
             //cannot to change this string -> so answer is false
             if (countChanges == 0 && s1.length() == s2.length()) return false;
 
-            return true;
+            return true;                                   //O(n) + O(n) + O(m) + O(m) = O(2n) + O(2m) = O(n + m)
       }
 }
 
