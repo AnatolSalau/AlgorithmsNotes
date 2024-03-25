@@ -15,10 +15,11 @@ package yandex_internet.rle_function;
 public class RleFunction {
       public static void main(String[] args) {
             RleFunction rleFunction = new RleFunction();
-            rleFunction.testOne();
-            rleFunction.testFour();
+            //rleFunction.testOne();
+            //rleFunction.testFour();
+            rleFunction.testFive();
             //rleFunction.testTwo();
-            rleFunction.testThree();
+            //rleFunction.testThree();
       }
 
       private void testOne() {
@@ -34,6 +35,14 @@ public class RleFunction {
             System.out.println(input);
             String result = doRLE(input);
             System.out.println("AB3C2XYZD4E3F3A6B28");
+            System.out.println(result);
+            System.out.println();
+      }
+      private void testFive() {
+            String input = "ABBBCCXYZDDDDEEEFFFAAAAAAB";
+            System.out.println(input);
+            String result = doRLE(input);
+            System.out.println("AB3C2XYZD4E3F3A6B");
             System.out.println(result);
             System.out.println();
       }
@@ -54,32 +63,25 @@ public class RleFunction {
       private String doRLE(String input) {
             checkString(input);
             StringBuilder stringBuilder = new StringBuilder();
-
-            char[] chars = input.toCharArray();
-
-            int count = 0;
-
-            for (int i = 0; i < chars.length; i++) {
-
-                  checkCharacter(chars[i]);
-
-                  for (int j = i; j < chars.length; j++) {
-                        if (chars[i] == chars[j]) {
-                              count++;
-                              if (j != chars.length - 1) { // check the last character
-                                    continue;
-                              }
-                        }
-
-                        if (count == 1) {
-                              stringBuilder.append(chars[i]);
+            int count = 1;
+            for (int i = 0; i < input.length(); i++) {
+                  char current = input.charAt(i);
+                  checkCharacter(current);
+                  for (int j = i; j < input.length()-1; j++) {
+                        char next = input.charAt(j + 1);
+                        if (current == next) {
+                              count ++;
+                              i++;
                         } else {
-                              stringBuilder.append(chars[i]);
-                              stringBuilder.append(count);
+                              break;
                         }
-                        i = j;
-                        count = 1;
                   }
+                  if (count == 1) {
+                        stringBuilder.append(current);
+                  } else {
+                        stringBuilder.append(current).append(count);
+                  }
+                  count = 1;
             }
             return stringBuilder.toString();
       }
