@@ -1,8 +1,9 @@
 package yandex_internet.tree_branch_with_max_sum;
 
+import javafx.util.*;
+
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 public class TreeBranchWithMaxSumRecursive {
       public static class TreeNode {
@@ -48,53 +49,57 @@ public class TreeBranchWithMaxSumRecursive {
             TreeNode _9Right1 = new TreeNode(9, _5Left2, _2Right2);
 
             TreeNode root0 = new TreeNode(1,_2Left1, _9Right1);
-            System.out.println("Result :" + findNumbersNodesInBranchWithMaxSum(root0));
+            Pair<Integer, List<Integer>> resultWithSum = findNumbersNodesInBranchWithMaxSumRecursive(root0, new LinkedList<>(), new LinkedList<>(), 0, 0);
+            System.out.println("Result :" + resultWithSum);
             System.out.println("Expect : [1, 9, 5, 7]");
       }
 
-      private static List<Integer> findNumbersNodesInBranchWithMaxSum(TreeNode root) {
-            List<Integer> pathWithMaxSum = null;
-            List<Integer> currPath = new LinkedList<>();
+      private static Pair<Integer, List<Integer>> findNumbersNodesInBranchWithMaxSumRecursive(TreeNode root, List<Integer> currPath, List<Integer>maxPath,  int currSum, int maxSum) {
+            //Direct recursion
+            int val = root.val;
+            TreeNode left = root.left;
+            TreeNode right = root.right;
 
-            Stack<TreeNode> stack = new Stack<>();
-            stack.add(root);
+            currPath.add(val);
+            currSum += val;
 
-            int maxSumInTheBottom = 0;
 
-            int currSumInTheBottom = 0;
-
-            while (!stack.isEmpty()) {
-                  TreeNode node = stack.pop();
-
-                  TreeNode left = node.left;
-                  TreeNode right = node.right;
-                  // stack.isEmpty()-> remove all from curr path because we in the root,
-                  // but we don't  have to remove curr path if we in the bottom, so add && left != null && right != null
-                  if(stack.isEmpty() && left != null && right != null) {
-                        currPath = new LinkedList<>();
-                        currSumInTheBottom = 0;
+            Pair<Integer, List<Integer>> resultWithSumLeft = null;
+            Pair<Integer, List<Integer>> resultWithSumRight = null;
+            if (left != null) {
+                  resultWithSumLeft = findNumbersNodesInBranchWithMaxSumRecursive(left,currPath, maxPath, currSum, maxSum);
+            }
+            if (right != null) {
+                  resultWithSumRight = findNumbersNodesInBranchWithMaxSumRecursive(right,currPath, maxPath, currSum, maxSum);
+            }
+            //Reverse recursion
+            if(left == null && right == null) {
+                  if (currSum > maxSum) {
+                        maxSum = currSum;
+                        maxPath = List.copyOf(currPath);
                   }
-
-                  currPath.add(node.val);//add curr value
-                  currSumInTheBottom = currSumInTheBottom + node.val; //update sum
-
-                  if (left == null && right == null) {// checking to see if we are at the bottom
-                        if (currSumInTheBottom > maxSumInTheBottom) { // update maximums
-                              maxSumInTheBottom = currSumInTheBottom;
-                              pathWithMaxSum = List.copyOf(currPath);
-                        }
-                        // remove last in path because we go up one level to the top
-                        currPath.remove(currPath.size() - 1);
-
-                        // remove val from curr sum in path because we go up one level to the top
-                        currSumInTheBottom = currSumInTheBottom - node.val;
-                  }
-
-                  if (left != null) stack.add(left);
-                  if (right != null) stack.add(right);
             }
 
-            return pathWithMaxSum;
+            if (!currPath.isEmpty()) currPath.remove(currPath.size() - 1);
+
+            currSum -= val;
+
+            if (resultWithSumLeft != null && resultWithSumRight == null) {
+                  return resultWithSumLeft;
+            }
+            if (resultWithSumLeft == null && resultWithSumRight != null) {
+                  return resultWithSumRight;
+            }
+            if (resultWithSumLeft != null && resultWithSumRight != null) {
+                  if (resultWithSumLeft.getKey() > resultWithSumRight.getKey()) {
+                        return resultWithSumLeft;
+                  } else {
+                        return resultWithSumRight;
+                  }
+            } else {
+                  return new Pair<>(maxSum, maxPath);
+            }
+
       }
 
       public static void main(String[] args) {
