@@ -48,10 +48,18 @@ public class TreeBranchWithMaxSumByStack {
             TreeNode _9Right1 = new TreeNode(9, _5Left2, _2Right2);
 
             TreeNode root0 = new TreeNode(1,_2Left1, _9Right1);
-            System.out.println("isBalanced " + findNumbersNodesInBranchWithMaxSum(root0));
-            System.out.println("Expected : [1, 9, 5, 7]");
+            System.out.println("Result :" + findNumbersNodesInBranchWithMaxSum(root0));
+            System.out.println("Expect : [1, 9, 5, 7]");
       }
-
+      /*
+            Explanation: iterative Search in Depth
+            Notes:
+                  when stack is empty we have two variants
+                        if (left node and right node is null)
+                              We at the bottom three
+                        else
+                              we in the root;
+       */
       private static List<Integer> findNumbersNodesInBranchWithMaxSum(TreeNode root) {
             List<Integer> pathWithMaxSum = null;
             List<Integer> currPath = new LinkedList<>();
@@ -66,19 +74,32 @@ public class TreeBranchWithMaxSumByStack {
             while (!stack.isEmpty()) {
                   TreeNode node = stack.pop();
 
-                  currPath.add(node.val);
-                  currSumInTheBottom = currSumInTheBottom + node.val;
-
                   TreeNode left = node.left;
                   TreeNode right = node.right;
-
-                  if (left == null && right == null) {
-                        if (currSumInTheBottom > maxSumInTheBottom) {
-                              maxSumInTheBottom = currSumInTheBottom;
-                              pathWithMaxSum = currPath;
-                        }
+                  // stack.isEmpty()-> remove all from curr path because we in the root,
+                  // but we don't  have to remove curr path if we in the bottom, so add && left != null && right != null
+                  if(stack.isEmpty() && left != null && right != null) {
+                        currPath = new LinkedList<>();
+                        currSumInTheBottom = 0;
                   }
 
+                  currPath.add(node.val);//add curr value
+                  currSumInTheBottom = currSumInTheBottom + node.val; //update sum
+
+                  if (left == null && right == null) {// checking to see if we are at the bottom
+                        if (currSumInTheBottom > maxSumInTheBottom) { // update maximums
+                              maxSumInTheBottom = currSumInTheBottom;
+                              pathWithMaxSum = List.copyOf(currPath);
+                        }
+                        // remove last in path because we go up one level to the top
+                        currPath.remove(currPath.size() - 1);
+
+                        // remove val from curr sum in path because we go up one level to the top
+                        currSumInTheBottom = currSumInTheBottom - node.val;
+                  }
+
+                  if (left != null) stack.add(left);
+                  if (right != null) stack.add(right);
             }
 
             return pathWithMaxSum;
