@@ -1,6 +1,7 @@
 package yandex_internet.is_isomorphic;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Given two strings s and t, determine if they are isomorphic.
@@ -44,37 +45,35 @@ public class IsIsomorphic {
             true
        */
       private boolean isIsomorphic(String str1, String str2) {
-            if (str1.length() != str2.length()) return false;
+            if (str1.length() != str2.length()) return false; //compare lengths
 
-            int length = str1.length();
+            char[] chars1 = str1.toCharArray();                                                 //O(n)
+            char[] chars2 = str2.toCharArray();                                                 //O(m)
 
-            char[] chars1 = str1.toCharArray();
-            char[] chars2 = str2.toCharArray();
+            Map<Character, Character> pairMap = new HashMap<>();
 
-            HashMap<Character, Character> characterLinksMap= new HashMap<>();
+            for (int i = 0; i < chars1.length; i++) {
+                  char ch1 = chars1[i];                                                         //O(n)
+                  char ch2 = chars2[i];                                                         //O(m)
 
-            for (int i = 0; i < length; i++) {
-                  char ch1 = chars1[i];
-                  char ch2 = chars2[i];
-
-                  if (characterLinksMap.containsKey(ch1)) {
-                        Character value = characterLinksMap.get(ch1);
-                        if (value != ch2) return false;
+                  if (pairMap.containsKey(ch1)) {
+                        Character val = pairMap.get(ch1);
+                        if (ch2 != val) return false;
                   } else {
-                        characterLinksMap.put(ch1,ch2);
+                        pairMap.put(ch1, ch2);
                   }
             }
 
-            return true;
+            return true;                                           //O(m +n)
       }
       private void testOne() {
-            //System.out.println(isIsomorphic("egg", "add")); // true
+            System.out.println(isIsomorphic("egg", "add")); // true
             System.out.println("Expected : " + true + "\n");
 
             System.out.println(isIsomorphic("foo", "bar")); // false
             System.out.println("Expected : " + false + "\n");
 
-            //System.out.println(isIsomorphic("paper", "title")); // true
+            System.out.println(isIsomorphic("paper", "title")); // true
             System.out.println("Expected : " + true + "\n");
       }
 }

@@ -16,18 +16,27 @@ public class RleFunction {
       public static void main(String[] args) {
             RleFunction rleFunction = new RleFunction();
             rleFunction.testOne();
+            rleFunction.testFour();
             //rleFunction.testTwo();
-            //rleFunction.testThree();
+            rleFunction.testThree();
       }
 
       private void testOne() {
             String input = "AAAABBBCCXYZDDDDEEEFFFAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBB";
             System.out.println(input);
-            doRLE(input);
+            String result = doRLE(input);
             System.out.println("A4B3C2XYZD4E3F3A6B28");
+            System.out.println(result);
             System.out.println();
       }
-
+      private void testFour() {
+            String input = "ABBBCCXYZDDDDEEEFFFAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBB";
+            System.out.println(input);
+            String result = doRLE(input);
+            System.out.println("AB3C2XYZD4E3F3A6B28");
+            System.out.println(result);
+            System.out.println();
+      }
       private void testTwo() {
             String input = "";
             System.out.println(input);
@@ -42,34 +51,41 @@ public class RleFunction {
             System.out.println();
       }
 
-      private void doRLE(String input) {
+      private String doRLE(String input) {
             checkString(input);
             StringBuilder stringBuilder = new StringBuilder();
-            int count = 1;
-            for (int i = 0; i < input.length(); i++) {
-                  char current = input.charAt(i);
-                  checkCharacter(current);
-                  for (int j = i; j < input.length()-1; j++) {
-                        char next = input.charAt(j + 1);
-                        if (current == next) {
-                              count ++;
-                              i++;
-                        } else {
-                              break;
+
+            char[] chars = input.toCharArray();
+
+            int count = 0;
+
+            for (int i = 0; i < chars.length; i++) {
+
+                  checkCharacter(chars[i]);
+
+                  for (int j = i; j < chars.length; j++) {
+                        if (chars[i] == chars[j]) {
+                              count++;
+                              if (j != chars.length - 1) { // check the last character
+                                    continue;
+                              }
                         }
+
+                        if (count == 1) {
+                              stringBuilder.append(chars[i]);
+                        } else {
+                              stringBuilder.append(chars[i]);
+                              stringBuilder.append(count);
+                        }
+                        i = j;
+                        count = 1;
                   }
-                  if (count == 1) {
-                        stringBuilder.append(current);
-                  } else {
-                        stringBuilder.append(current).append(count);
-                  }
-                  count = 1;
             }
-            System.out.println(stringBuilder.toString());
+            return stringBuilder.toString();
       }
 
       private void checkString(String str) {
-            if (str.isBlank()) throw new RuntimeException("Invalid string");
+            if (str == null || str.isBlank()) throw new RuntimeException("Invalid string");
       }
 
       private void checkCharacter(Character character) {

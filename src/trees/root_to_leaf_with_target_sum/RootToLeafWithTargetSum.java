@@ -129,7 +129,7 @@ public class RootToLeafWithTargetSum {
      /  \    /   \                /  \     /  \
  null null null  null          null null null null
  target = 22
- result = [[5,4,11,2],[5,8,4,5]]
+ result = [[5,4,11,2],[5,8,4,5]]          O(n)
        */
       private void testOne() {
             TreeNode root1 = new TreeNode(1, null, null);

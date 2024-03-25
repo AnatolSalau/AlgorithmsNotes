@@ -33,7 +33,7 @@ public class TreeBranchWithMaxSumRecursive {
                             /         /
                3           9         7
 
-               right answer is 1, 9, 5, 7
+               right answer is 1, 9, 5, 7 O(n)
        */
       private static void test1() {
             TreeNode _7Left3 = new TreeNode(7, null, null);

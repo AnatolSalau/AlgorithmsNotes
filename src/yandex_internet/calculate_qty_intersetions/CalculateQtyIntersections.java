@@ -50,7 +50,7 @@ public class CalculateQtyIntersections {
                   l++;
                   r++;
             }
-            return intersectionQty;         // O(nlog(n)) + O(n) = O(n) ?
+            return intersectionQty;         // O(nlog(n)) + O(n) = O(n)
       }
       /*
             O(log(n))
