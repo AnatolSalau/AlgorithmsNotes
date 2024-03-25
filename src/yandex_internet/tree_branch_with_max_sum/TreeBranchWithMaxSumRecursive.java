@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
-public class TreeBranchWithMaxSumByStack {
+public class TreeBranchWithMaxSumRecursive {
       public static class TreeNode {
             int val;
             TreeNode left;
@@ -51,18 +51,10 @@ public class TreeBranchWithMaxSumByStack {
             System.out.println("Result :" + findNumbersNodesInBranchWithMaxSum(root0));
             System.out.println("Expect : [1, 9, 5, 7]");
       }
-      /*
-            Explanation: iterative Search in Depth
-            Notes:
-                  when stack is empty we have two variants
-                        if (left node and right node is null)
-                              We at the bottom three
-                        else
-                              we in the root;
-       */
+
       private static List<Integer> findNumbersNodesInBranchWithMaxSum(TreeNode root) {
-            List<Integer> pathWithMaxSum = null;                                                      //O(m)
-            List<Integer> currPath = new LinkedList<>();                                              //O(m)
+            List<Integer> pathWithMaxSum = null;
+            List<Integer> currPath = new LinkedList<>();
 
             Stack<TreeNode> stack = new Stack<>();
             stack.add(root);
@@ -71,7 +63,7 @@ public class TreeBranchWithMaxSumByStack {
 
             int currSumInTheBottom = 0;
 
-            while (!stack.isEmpty()) {                                                                //O(n)
+            while (!stack.isEmpty()) {
                   TreeNode node = stack.pop();
 
                   TreeNode left = node.left;
@@ -89,7 +81,7 @@ public class TreeBranchWithMaxSumByStack {
                   if (left == null && right == null) {// checking to see if we are at the bottom
                         if (currSumInTheBottom > maxSumInTheBottom) { // update maximums
                               maxSumInTheBottom = currSumInTheBottom;
-                              pathWithMaxSum = List.copyOf(currPath);                           //O(n)
+                              pathWithMaxSum = List.copyOf(currPath);
                         }
                         // remove last in path because we go up one level to the top
                         currPath.remove(currPath.size() - 1);
@@ -102,7 +94,7 @@ public class TreeBranchWithMaxSumByStack {
                   if (right != null) stack.add(right);
             }
 
-            return pathWithMaxSum;                                // time : O(2n) memory : O(2m)
+            return pathWithMaxSum;
       }
 
       public static void main(String[] args) {
