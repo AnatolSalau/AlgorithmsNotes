@@ -131,6 +131,7 @@ public class LongestSubstringKUnique {
             int k = 2;
             int expectedResult = 4;
             System.out.println("Test 1");
+            System.out.println(s);
             System.out.println(geMaxLengthSubstringWithKDistinctChar(s,k));
             System.out.println("Expected result : " + expectedResult);
             System.out.println();
@@ -164,6 +165,8 @@ public class LongestSubstringKUnique {
             String s = "eceba";
             int k = 2;
             int expectedResult = 3;
+            System.out.println("Test 2");
+            System.out.println(s);
             System.out.println(geMaxLengthSubstringWithKDistinctChar(s,k));
             System.out.println("Expected result : " + expectedResult);
             System.out.println();
