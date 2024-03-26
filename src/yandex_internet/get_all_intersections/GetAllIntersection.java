@@ -24,6 +24,7 @@ public class GetAllIntersection {
                   - if curr number in arr 2 -> exist in qtyMap
                         add this number from map
                         decrease qty in map
+                        remove number from  map if qty is 0
 
        */
       static List<Integer> getAllIntersections(int[] arr1, int[] arr2) {
@@ -53,7 +54,11 @@ public class GetAllIntersection {
                         intersectionsList.add(curr);
                         // decrease count in map
                         qty --;
-                        numberQtyArr1Map.put(curr,qty);
+                        if (qty > 0) {
+                              numberQtyArr1Map.put(curr,qty);
+                        } else {
+                              numberQtyArr1Map.remove(curr);
+                        }
                   }
             }
 
