@@ -1,0 +1,100 @@
+Quick sorting------------------------------------------------
+private void quickSort(int[] arr, int startIndex, int endIndex) {
+        if (startIndex>= endIndex) return;
+        int pivotIndex = partition(arr, startIndex, endIndex);
+        quickSort(arr,startIndex,pivotIndex - 1);
+        quickSort(arr,pivotIndex + 1,endIndex);
+}
+
+private int partition(int[] arr, int startIndex, int endIndex) {
+    int i = startIndex - 1;
+    int pivot = arr[endIndex];
+    for (int j = startIndex; j <= endIndex - 1; j++) {
+        if (arr[j] < pivot) {
+              i++;
+              int temp = arr[j];
+        arr[j] = arr[i];
+        arr[i] = temp;
+        }
+    }
+    i++;
+    int temp = arr[endIndex];
+    arr[endIndex] = arr[i];
+    arr[i] = temp;
+    return i;
+}-----------------------------------------------------------------
+
+Quick sorting multi dimensional-------------------------
+static void quickSortMultipleArr(int[][] numbers, int startIndex, int endIndex) {
+      if(startIndex>= endIndex) return;
+      int pivotIndex = partition(numbers, startIndex, endIndex);
+      quickSortMultipleArr(numbers,startIndex,pivotIndex - 1);
+      quickSortMultipleArr(numbers,pivotIndex +1,endIndex);
+}
+
+static int partition(int[][] numbers, int startIndex, int endIndex) {
+      int i = startIndex - 1;
+      int pivot = numbers[endIndex][0];
+      for (int j = startIndex; j <= endIndex - 1; j++) {
+            if (numbers[j][0] < pivot) {
+                  i++;
+                  int temp0 = numbers[i][0];
+                  int temp1 = numbers[i][1];
+                  numbers[i][0] = numbers[j][0];
+                  numbers[i][1] = numbers[j][1];
+                  numbers[j][0] = temp0;
+                  numbers[j][1] = temp1;
+            }
+      }
+      i ++;
+      int temp0 = numbers[endIndex][0];
+      int temp1 = numbers[endIndex][1];
+      numbers[endIndex][0] = numbers[i][0];
+      numbers[endIndex][1] = numbers[i][1];
+      numbers[i][0] = temp0;
+      numbers[i][1] = temp1;
+      return i;
+}--------------------------------------------------------------
+
+Bubble sorting-------------------------------------------
+private void doSort(int[] arr) {
+      //go through all pairs in two loops by brut force
+      for (int i = 0; i <arr.length - 1; i++) {
+            for (int j = i; j <arr.length; j++) {
+                  //swap elements
+                  if (arr[i] >arr[j]) {
+                        int temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                  }
+            }
+      }
+}----------------------------------------------------------------
+
+Binary search-----------------------------------------------
+private int doSearch(int[] arr, int startIndex, int endIndex, int target) {
+      //exit from recursion
+      if (startIndex<= endIndex) {
+            int middleIndex = startIndex + ((endIndex - startIndex)/2);
+            int middle = arr[middleIndex];
+            if (middle == target) return middleIndex;
+            if (target < middle) { // target less than middle do search in left half
+                  return doSearch(arr, startIndex, middleIndex - 1, target);
+            } else {// target more than middle so do search in right half
+                 return doSearch(arr,middleIndex +1, endIndex, target);
+            }
+      }
+      return -1;
+}-------------------------------------------------------------------
+
+XoR (Get unrepeatable el)------------------------------
+private int getUnRepeatableEl(int[] nums) {
+      int first = nums[0];
+      for (int i = 1; i <nums.length; i++) {
+            int second = nums[i];
+            first = (first | second) & (~first | ~second); // XoR Using other bitwise operators
+            //first = (x + y) - 2 * (x & y); //XoR Using XOR & SUM
+      }
+      return first;                    //Time  O(n) + O(n) = O(n * 2) + Memory O(n)
+}------------------------------------------------------------------
+
