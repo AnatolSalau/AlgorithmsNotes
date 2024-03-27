@@ -33,6 +33,8 @@
 
 [18. Сдвинуть все нули в конец](./_18_zeros_to_end/MoveZerosToEnd.java)
 
+[19. Ось симметрии ](./_19_symmetric_line/SymmetricLine.java)
+
 
 
 
