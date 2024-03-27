@@ -21,7 +21,7 @@
 
 [11. Перекрывающие интервалы обьединить](./_11_merge_intervals/MergeIntervals.java)
 
-[12. День заезда идень выезда](./_12_qty_interval_intersections)
+[12. День заезда идень выезда](./_12_qty_interval_intersections/QtyIntervalIntersection.java)
 
 [14. RLE](./_14_rle_function/RleFunction.java)
 
