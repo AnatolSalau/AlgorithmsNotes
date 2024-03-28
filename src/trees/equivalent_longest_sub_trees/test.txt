@@ -1,0 +1,70 @@
+// Дано бинарное дерево с выделенным корнем, в каждой вершине которого записано по одной букве A-Z.
+// Две вершины считаются эквивалентными, если поддеревья этих вершин содержат одинаковое множество (т.е. без учета частот) букв.
+
+
+//       A
+//     /   \
+//      C      B+ {AB}          {c}          {B}
+//   /     \   /    \
+//   {AB}A+ D  A{A}  A{AB}+
+//  /                  \
+// B                    B{B}          {}
+  / \
+null null
+class TNode {
+    char value = '\0';  // [A-Z]
+    TNode left = null;
+    TNode right = null;
+};
+
+Pair<TNode, TNode> findEquivalentSubtrees(TNode root) {
+
+}
+
+/*
+    isEqviv(Node root) {
+
+Set letters
+
+        left
+        right
+        Set leftLetters
+        Set rightLetters
+
+        //check null
+         recurs(left)
+         recurs(right)
+        /*обратный ход
+
+
+    }
+
+    Set<> = recurs(Node node,) {
+                if (Set == Set)
+    }
+*/
+
+// answer: Pair<Node, Node>
+// cnt: Map<Int, Node>
+
+// A-Z
+
+// curr & (1 << (currLetter - 'A'))
+
+
+// dfs(node: Node): Int {
+//     if (node == null) {
+//         return setOf()
+//     }
+
+//     lSet = dfs(node.left)
+//     rSet = dfs(node.left)
+
+//     nodeSet = (1 << node.letter) & lSet & rSet
+
+//     if (cnt.contains(nodeSet)) {
+//         answer = (node, cnt.get(nodeSet))
+//     }
+
+//     return nodeSet
+// }
