@@ -19,9 +19,9 @@
 
 [10. Самая длинная подстрока из уникальных массивов](./_10_longest_substring_k_unique_char/LongestSubstringKUnique.java)
 
-[11. Перекрывающие интервалы обьединить](./_11_merge_intervals/MergeIntervals.java)
+[11. Перекрывающие интервалы обьединить (массив интервалов)](./_11_merge_intervals/MergeIntervals.java)
 
-[12. День заезда идень выезда](./_12_qty_interval_intersections)
+[12. День заезда идень выезда](./_12_qty_interval_intersections/QtyIntervalIntersectionHashMap.java)
 
 [14. RLE](./_14_rle_function/RleFunction.java)
 
@@ -32,6 +32,8 @@
 [17. Ветка в дереве с максимальной суммой](./_17_tree_branch_with_max_sum/TreeBranchWithMaxSumByStack.java)
 
 [18. Сдвинуть все нули в конец](./_18_zeros_to_end/MoveZerosToEnd.java)
+
+[19. Ось симметрии ](./_19_symmetric_line/SymmetricLine.java)
 
 
 
