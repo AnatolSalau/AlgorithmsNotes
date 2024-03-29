@@ -4,9 +4,9 @@ dsd
 
 //       A
 //     /   \
-//      C      B+ {AB}          {c}          {B}
+//    C      B+ {AB}          {c}          {B}
 //   /     \   /    \
-//   {AB}A+ D  A{A}  A{AB}+
+//  {AB}A+ D  A{A}  A{AB}+
 //  /                  \
 // B                    B{B}          {}
   / \
@@ -58,7 +58,7 @@ Set letters
 //     }
 
 //     lSet = dfs(node.left)
-//     rSet = dfs(node.left)
+//     rSet = dfs(node.right)
 
 //     nodeSet = (1 << node.letter) & lSet & rSet
 
@@ -68,3 +68,23 @@ Set letters
 
 //     return nodeSet
 // }
+      /*
+                    A
+                /        \
+               B+        B+
+              / \      /     \
+             C   D    B       D
+                     /  \    / \
+                    C    D  C   D
+        */
+
+      /*
+                A
+             /    \
+            C      B+
+          /  \   /  \
+         A+   D A    A
+        /             \
+       B               B
+
+      */
