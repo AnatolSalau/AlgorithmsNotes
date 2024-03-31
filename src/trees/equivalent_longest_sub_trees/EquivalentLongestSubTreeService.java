@@ -39,11 +39,11 @@ public class EquivalentLongestSubTreeService {
 
             if (leftLetter != null) {
                   leftLetter.add(node.letter);
-                  union.addAll(leftLetter);
+                  allSubtrees.add(leftLetter);
             }
             if (rightLetter != null) {
                   rightLetter.add(node.letter);
-                  union.addAll(rightLetter);
+                  allSubtrees.add(rightLetter);
             }
 
             union.add(node.letter);
