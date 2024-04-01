@@ -14,16 +14,36 @@ import java.util.*;
  */
 public class EquivalentLongestSubTreeService {
 
-      Map<Set <String>, TreeNode> allSubtrees = new HashMap();
+      Map<Set <String>, TreeNode> allSubtreesLetterComb = new HashMap();//Hash map with  <all letters set> -> Node
 
-      Pair<Set <String>, TreeNode> answer = null;
+      Pair<Set <String>, TreeNode> answer = null;//Pair with answer <all letters set> -> Node
 
+      /*
+      Explanation:
+      1.    Lets declare two variables at class level
+                  Hash map with  <all letters set> -> Node
+                  Map<Set <String>, TreeNode> allSubtreesLetterComb
+                        <Letter set> -> <this top level node>
+                        <<ABC>, <A>, <B>> -> Node<B>
+                  Pair with answer <all letters set> -> Node
+                  Pair<Set <String>, TreeNode> answer = null;
+      2.    Create method getTwoEquivalentSubTree that will call recursive search in debt
+      3.    Drop root to left and right half
+      4.    Call recursive DFS for every half
+
+            DFS
+            All actions in reverse way (from bottom to top)
+            1. DFS function return:
+                  !!!!!!!
+                  Union : Set <Node.letter + Left.letters + Right.letters>
+
+       */
       Pair<Set <String>, TreeNode> getTwoEquivalentSubTree(TreeNode root) {
 
-            TreeNode left = root.left;
+            TreeNode left = root.left;//Drop root to left and right half
             TreeNode right = root.right;
 
-            if (left != null) dfs(left);
+            if (left != null) dfs(left);//Call recursive DFS for every half
             if (right != null) dfs(right);
 
             return answer;
@@ -33,32 +53,30 @@ public class EquivalentLongestSubTreeService {
             TreeNode left = node.left;
             TreeNode right = node.right;
 
-            Set<String> union = new HashSet<>();
+            Set<String> union = new HashSet<>(); //union with letters
 
             if (left != null)  {
-                  Set<String> leftLetters = dfs(left);
+                  Set<String> leftLetters = dfs(left); // letters from left bottom
 
                   if (leftLetters != null) {
-                        allSubtrees.put(leftLetters, left);
-                        union.addAll(leftLetters);
+                        union.addAll(leftLetters); // add to union left half
                   }
 
             }
             if (right != null) {
-                  Set<String> rightLetters = dfs(right);
+                  Set<String> rightLetters = dfs(right);// // letters from right bottom
 
                   if (rightLetters != null) {
-                        allSubtrees.put(rightLetters, right);
-                        union.addAll(rightLetters);
+                        union.addAll(rightLetters);// add to union right half
                   }
             }
-            union.add(node.letter);
+            union.add(node.letter);// add to union letter current node
 
-            if (allSubtrees.containsKey(union)) {
+            if (allSubtreesLetterComb.containsKey(union)) { // check existing in union in letter combination
                   answer = new Pair<>(union, node);
             }
 
-            allSubtrees.put(union, node);
+            allSubtreesLetterComb.put(union, node);// add to letter combination current union
 
             return  union;
       }
@@ -68,7 +86,7 @@ public class EquivalentLongestSubTreeService {
             EquivalentLongestSubTreeService subTreeService = new EquivalentLongestSubTreeService();
 
             subTreeService.test1();
-            subTreeService.allSubtrees = new HashMap<>();
+            subTreeService.allSubtreesLetterComb = new HashMap<>();
             subTreeService.test2();
       }
       /*
