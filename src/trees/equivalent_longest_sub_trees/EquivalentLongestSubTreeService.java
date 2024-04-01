@@ -1,5 +1,7 @@
 package trees.equivalent_longest_sub_trees;
 
+import javafx.util.Pair;
+
 import java.util.*;
 
 /**
@@ -12,9 +14,11 @@ import java.util.*;
  */
 public class EquivalentLongestSubTreeService {
 
-      Set<Set<String>> allSubtrees = new HashSet<>();
+      Map<Set <String>, TreeNode> allSubtrees = new HashMap();
 
-      TreeNode getTwoEquivalentSubTree(TreeNode root) {
+      Pair<Set <String>, TreeNode> answer = null;
+
+      Pair<Set <String>, TreeNode> getTwoEquivalentSubTree(TreeNode root) {
 
             TreeNode left = root.left;
             TreeNode right = root.right;
@@ -22,33 +26,39 @@ public class EquivalentLongestSubTreeService {
             if (left != null) dfs(left);
             if (right != null) dfs(right);
 
-            return null;
+            return answer;
       }
 
       Set<String> dfs(TreeNode node) {
             TreeNode left = node.left;
             TreeNode right = node.right;
 
-            Set<String> leftLetter = null;
-            Set<String> rightLetter = null;
-
-            if (left != null) leftLetter = dfs(left);
-            if (right != null) rightLetter = dfs(right);
-
             Set<String> union = new HashSet<>();
 
-            if (leftLetter != null) {
-                  leftLetter.add(node.letter);
-                  allSubtrees.add(leftLetter);
-            }
-            if (rightLetter != null) {
-                  rightLetter.add(node.letter);
-                  allSubtrees.add(rightLetter);
-            }
+            if (left != null)  {
+                  Set<String> leftLetters = dfs(left);
 
+                  if (leftLetters != null) {
+                        allSubtrees.put(leftLetters, left);
+                        union.addAll(leftLetters);
+                  }
+
+            }
+            if (right != null) {
+                  Set<String> rightLetters = dfs(right);
+
+                  if (rightLetters != null) {
+                        allSubtrees.put(rightLetters, right);
+                        union.addAll(rightLetters);
+                  }
+            }
             union.add(node.letter);
 
-            allSubtrees.add(union);
+            if (allSubtrees.containsKey(union)) {
+                  answer = new Pair<>(union, node);
+            }
+
+            allSubtrees.put(union, node);
 
             return  union;
       }
@@ -58,6 +68,7 @@ public class EquivalentLongestSubTreeService {
             EquivalentLongestSubTreeService subTreeService = new EquivalentLongestSubTreeService();
 
             subTreeService.test1();
+            subTreeService.allSubtrees = new HashMap<>();
             subTreeService.test2();
       }
       /*
@@ -86,8 +97,8 @@ public class EquivalentLongestSubTreeService {
 
             TreeNode root = new TreeNode("A",left, right);
 
-            TreeNode largestEquivalentSubTree = getTwoEquivalentSubTree(root);
-            System.out.println(largestEquivalentSubTree);
+            Pair<Set <String>, TreeNode> answer = getTwoEquivalentSubTree(root);
+            System.out.println(answer);
       }
       /*
                 A
@@ -114,8 +125,8 @@ public class EquivalentLongestSubTreeService {
 
             TreeNode root = new TreeNode("A",left, right);
 
-            TreeNode largestEquivalentSubTree = getTwoEquivalentSubTree(root);
-            System.out.println(largestEquivalentSubTree);
+            Pair<Set <String>, TreeNode> answer = getTwoEquivalentSubTree(root);
+            System.out.println(answer);
       }
 
       public static class TreeNode {
