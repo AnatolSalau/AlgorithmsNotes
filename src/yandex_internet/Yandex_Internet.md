@@ -29,11 +29,13 @@
 
 [16. Найти уникальное число в массиве](./_16_single_number/SingleNumber.java)
 
-[17. Ветка в дереве с максимальной суммой](./_17_tree_branch_with_max_sum/TreeBranchWithMaxSumByStack.java)
+[17. Дерево - ветка в дереве с максимальной суммой](./_17_tree_branch_with_max_sum/TreeBranchWithMaxSumByStack.java)
 
 [18. Сдвинуть все нули в конец](./_18_zeros_to_end/MoveZerosToEnd.java)
 
 [19. Ось симметрии ](./_19_symmetric_line/SymmetricLine.java)
+
+[20. Дерево - эквивалентные под деревья ](./_20_equivalent_longest_sub_trees/EquivalentLongestSubTreeService.java)
 
 
 

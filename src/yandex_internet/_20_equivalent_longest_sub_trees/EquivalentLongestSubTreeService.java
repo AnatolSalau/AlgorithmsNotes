@@ -1,8 +1,11 @@
-package trees.equivalent_longest_sub_trees;
+package yandex_internet._20_equivalent_longest_sub_trees;
 
 import javafx.util.Pair;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
        Дано бинарное дерево с выделенным корнем, в каждой вершине которого
