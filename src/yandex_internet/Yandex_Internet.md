@@ -29,7 +29,7 @@
 
 [16. Найти уникальное число в массиве](./_16_single_number/SingleNumber.java)
 
-[17. Дерево - ветка в дереве с максимальной суммой](./_17_tree_branch_with_max_sum/TreeBranchWithMaxSumByStack.java)
+[17. Дерево - ветка в дереве с максимальной суммой](./_17_tree_branch_with_max_sum/TreeBranchWithMaxSumRecursive.java)
 
 [18. Сдвинуть все нули в конец](./_18_zeros_to_end/MoveZerosToEnd.java)
 
