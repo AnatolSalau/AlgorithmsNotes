@@ -1,4 +1,4 @@
-package stream_api.beginners;
+package stream_api.tutorial;
 
 import java.util.*;
 import java.util.function.Function;
@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 /**
  * https://blog.devgenius.io/java-8-coding-and-programming-interview-questions-and-answers-62512c44f062
  */
-public class BeginnersStreamApi {
+public class StreamTutorial {
       public static void main(String[] args) {
             //findAllEven();
             //findAllStartFromZero();
@@ -285,7 +285,7 @@ public class BeginnersStreamApi {
             List<String> names = Arrays.asList("AA", "BB", "AA", "CC");
             Map<String,Long> namesCount = names
                   .stream()
-                  .filter(x->Collections.frequency(names, x)>1)
+                  .filter(x->Collections.frequency(names, x) > 1)
                   .collect(Collectors.groupingBy
                         (Function.identity(), Collectors.counting()));
             System.out.println(namesCount);
