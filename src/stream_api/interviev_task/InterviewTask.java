@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class InterviewTask {
       public static void main(String[] args) {
@@ -13,7 +14,9 @@ public class InterviewTask {
             //_3_removeEvenIndexes();
             //_4_animals();
             //deleteAllAnimalFromL();
-            personMapTask();
+            //personMapTask();
+            //mapWithCountFromStr();
+            randomizeListTest();
       }
 
       /**
@@ -173,5 +176,57 @@ public class InterviewTask {
 
             return personMap;
       }
+
+      /**
+       * 7.
+       * Напишите программу на Java для подсчета количества
+       * конкретных слов в строке, используя HashMap.
+       */
+      public static void mapWithCountFromStr() {
+            String str = "Count words in this string with some words";
+            System.out.println(str);
+            HashMap<String, Long> mapFreq = getMapFreq(str);
+            System.out.println(mapFreq);
+
+      }
+      public static HashMap<String, Long> getMapFreq(String str) {
+            String[] s = str.split(" ");
+            System.out.println(Arrays.toString(s));
+            HashMap<String, Long> freqMap = Arrays
+                  .stream(s)
+                  .collect(
+                        Collectors.groupingBy(Function.identity(),
+                              HashMap::new,
+                              Collectors.counting()));
+            return freqMap;
+      }
+
+      /**
+       * Необходимо outputSize раз взять случайным образом элементы из списка input и
+       * поместить
+       *  * их в выходной список. Повторения допустимы.
+       *  *
+       *  * @param input входной список
+       *  * @param outputSize размер выходного списка
+       *  * @return выходной список со случайными элементами из входного списка
+       *  */
+
+      public static void randomizeListTest() {
+            List<String> input = List.of("One", "Two", "Three");
+            List<String> strings = randomizeList(input, 10);
+            System.out.println(strings);
+      }
+      public static  List<String> randomizeList(List<String> input, int outputSize) {
+            Random random = new Random();
+
+            List<String> strings = IntStream.range(0, outputSize)
+                  .mapToObj(index -> {
+                        return input.get(random.nextInt(input.size()));
+                  })
+                  .toList();
+
+            return strings;
+      };
+
 
 }
