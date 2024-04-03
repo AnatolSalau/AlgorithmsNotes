@@ -2,17 +2,20 @@ package stream_api.interviev_task;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class InterviewTask {
       public static void main(String[] args) {
 
-            _1_removeDuplicates();
-            _2_removeEvenNums();
-            _3_removeEvenIndexes();
-            _4_animals();
+            //_1_removeDuplicates();
+            //_2_removeEvenNums();
+            //_3_removeEvenIndexes();
+            //_4_animals();
+            deleteAllAnimalFromL();
       }
 
       /**
@@ -63,11 +66,11 @@ public class InterviewTask {
        * 4. Тест на работу со строками.
        */
       public static void _4_animals() {
-            List<String> animals = new ArrayList<>(List.of("Тигр", "Лев", "Горилла"));
+            List<String> animals = List.of("Тигр", "Лев", "Горилла");
             String result = concatAnimalNamesByConcat1(animals);
             String result2 = concatAnimalNamesByJoining(animals);
             System.out.println("Result 1 : " + result ) ;
-            System.out.println("Result 1 : " + result2 ) ;
+            System.out.println("Result 2 : " + result2 ) ;
             System.out.println("Expect : " + "Тигр; Лев; Горилла." ) ;
       }
       /**
@@ -84,16 +87,53 @@ public class InterviewTask {
       }
 
       public static String concatAnimalNamesByJoining(List<String> animals) {
-            String result = IntStream.range(0, animals.size())
+            StringBuilder result = new StringBuilder();
+            IntStream.range(0, animals.size())
                   .peek(index -> {
                         if (index == animals.size() - 1) {
-                              animals.add(index, animals.get(index) + ".");
+                              result.append(animals.get(index)).append(".");
                         } else {
-                              animals.add(index, animals.get(index) + ", ");
+                              result.append(animals.get(index)).append(", ");
                         }
                   })
                   .mapToObj(index -> animals.get(index))
                   .collect(Collectors.joining());
+            return result.toString();
+      }
+
+      /**
+       * Тест на работу с коллекциями.
+       */
+      public static void deleteAllAnimalFromL() {
+            List<String> animals = new ArrayList<>(List.of("Тигр", "Лев", "Горилла", "Лось"));
+            System.out.println("Animals before modifying");
+            System.out.println(animals);
+            //removeByRemoveAll(animals);
+            animals = removeByStreamSubstract(animals);
+            System.out.println("Animals after modifying");
+            System.out.println(animals);
+      }
+      /**
+       * Требуется модифицировать список - удалить всех животных, начинающиеся на русскую букву "Л"
+       * @param animals список животных
+       */
+      public static void removeByRemoveAll(List<String> animals) {
+            List<String> allWithL = animals
+                  .stream()
+                  .filter(animal -> animal.startsWith("Л"))
+                  .toList();
+            animals.removeAll(allWithL);
+            System.out.println(allWithL);
+      }
+      public static List<String> removeByStreamSubstract(List<String> animals) {
+            HashSet<String> allWithL = animals
+                  .stream()
+                  .filter(animal -> animal.startsWith("Л"))
+                  .collect(Collectors.toCollection(HashSet::new));
+
+            List<String> result = animals.stream()
+                  .filter(animal -> !allWithL.contains(animal))
+                  .toList();
             return result;
       }
 
