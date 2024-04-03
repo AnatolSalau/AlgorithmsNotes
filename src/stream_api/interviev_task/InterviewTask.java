@@ -1,12 +1,9 @@
 package stream_api.interviev_task;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class InterviewTask {
       public static void main(String[] args) {
@@ -15,7 +12,8 @@ public class InterviewTask {
             //_2_removeEvenNums();
             //_3_removeEvenIndexes();
             //_4_animals();
-            deleteAllAnimalFromL();
+            //deleteAllAnimalFromL();
+            personMapTask();
       }
 
       /**
@@ -102,7 +100,7 @@ public class InterviewTask {
       }
 
       /**
-       * Тест на работу с коллекциями.
+       * 5. Тест на работу с коллекциями.
        */
       public static void deleteAllAnimalFromL() {
             List<String> animals = new ArrayList<>(List.of("Тигр", "Лев", "Горилла", "Лось"));
@@ -135,6 +133,45 @@ public class InterviewTask {
                   .filter(animal -> !allWithL.contains(animal))
                   .toList();
             return result;
+      }
+
+      /**
+       * 6.
+       * Из листа, хранящих Person, создать мапу, где ключ - язык Person (у Person есть
+       * поле language), а значение - коллекция Person с этим языком.
+       * *Язык у каждого Person только один, это нативный язык.*
+       */
+
+      record Person(Long id, String name, String language) {}
+
+      public static void personMapTask() {
+            String one = new String("English");
+            String two = new String("English");
+            System.out.println("String.compare : ");
+            System.out.println(one.compareTo(two));
+            List<Person> personList = List.of(
+                 new Person(1L, "One", "English"),
+                  new Person(2L, "Two", "Russian"),
+                  new Person(3L, "Three", "French"),
+                  new Person(4L, "Four", "Russian"),
+                  new Person(5L, "Five", "Russian"),
+                  new Person(6L, "Six", "English"),
+                  new Person(7L, "Seven", "French")
+            );
+            System.out.println(personList);
+            Map<String, List<Person>> personMap = getPersonMap(personList, "English");
+            System.out.println("All persons with english");
+            System.out.println(personMap);
+      }
+
+      public static Map<String, List<Person>> getPersonMap(List<Person> personList, String languageName) {
+            Map<String, List<Person>> personMap = personList.stream()
+                  //.filter(person -> person.language().equals(languageName))
+                  .filter(person -> person.language().compareTo(languageName) == 0)
+                  .peek(System.out::println)
+                  .collect(Collectors.groupingBy(Person::language, Collectors.toList()));
+
+            return personMap;
       }
 
 }
