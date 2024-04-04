@@ -2,9 +2,9 @@ package stream_api.interviev_task;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class InterviewTask {
       public static void main(String[] args) {
@@ -17,7 +17,10 @@ public class InterviewTask {
             //personMapTask();
             //mapWithCountFromStr();
             //randomizeListTest();
-            findDuplicateElements();
+            //findDuplicateElements();
+            //addDelimiter();
+            //findUniqueInArr();
+            findAllRepeatingElements();
       }
 
       /**
@@ -275,6 +278,86 @@ public class InterviewTask {
        * Написать метод, который должен принимать n
        * количество объектов( строк), в методе вернуть строку с содержанием этих
        * объектов вставив между ними разделитель "-"
+       */
+      public static void addDelimiter() {
+            String[] strings = {"One", "Two", "Three", "Four"};
+            String except = "One-Two-Three-Four";
+
+            String join = String.join("-", strings);
+            System.out.println("Result : " + join + ".");
+
+            String collect = Arrays.stream(strings)
+                  .collect(Collectors.joining("-"));
+            System.out.println("Result : " + collect + ".");
+            System.out.println("Except : " + except);
+
+      }
+
+      /**
+       * 11
+       * Задача: найти первый не повторяющийся элемент в наборе целых чисеl
+       * //9, 4, 9, 9, 6, 7, 4, 5, 5 -> 6
+       * //5, 9, 8, 5, 7, 9, 8, 7, 1 -> 1
+       */
+      public static void findUniqueInArr() {
+            int[] nums1 = {9, 4, 9, 9, 6, 7, 4, 5, 5};
+            int[] nums2 = {5, 9, 8, 5, 7, 9, 8, 7, 1};
+            System.out.println(findFirstUnique(nums1));
+            System.out.println(findFirstUnique(nums2));
+      }
+
+      public static int findFirstUnique(int[] nums) {
+            HashMap<Integer, Long> collect = Arrays.stream(nums)
+                  .boxed()
+                  .collect(
+                        Collectors.groupingBy(Function.identity(),
+                              HashMap::new,
+                              Collectors.counting())
+                  );
+            int firstUnique = collect.entrySet().stream()
+                  .filter(entry -> entry.getValue() == 1L)
+                  .findFirst()
+                  .orElseThrow(() -> {
+                        return new RuntimeException("Dont find entry");
+                  })
+                  .getKey()
+                  .intValue();
+            return firstUnique;
+      }
+
+      /** 12
+       * Найти и вывести в консоль все не повторяющиеся элементы в массиве
+       * input [9, 4, 9, 6, 7, 4, 5]
+       * что должно быть напечатано в консоли [6, 7, 5]
+       * Написать фильтр без лямбда
+       */
+
+      public static void findAllRepeatingElements() {
+            int[] arr = {9, 4, 9, 6, 7, 4, 5};
+            LinkedHashMap<Integer, Long> freqMap = Arrays.stream(arr)
+                  .boxed()
+                  .collect(Collectors.groupingBy(
+                        Function.identity(), LinkedHashMap::new, Collectors.counting()
+                  ));
+
+            int[] result = freqMap.entrySet()
+                  .stream()
+                  //.filter(entry -> entry.getValue() == 1L)
+                  .filter(InterviewTask::compareWith_1L)
+                  .map(Map.Entry::getKey)
+                  .mapToInt(Integer::intValue)
+                  .toArray();
+
+            System.out.println(Arrays.toString(result));
+      }
+
+      public static boolean compareWith_1L (Map.Entry<Integer, Long> entry) {
+            return entry.getValue() == 1L;
+      }
+      /**
+       * 13
+       * Дан массив с числами, одно число удалили и перемешали массив.
+       * Найти удаленное число.
        */
 
 
