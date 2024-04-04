@@ -16,7 +16,8 @@ public class InterviewTask {
             //deleteAllAnimalFromL();
             //personMapTask();
             //mapWithCountFromStr();
-            randomizeListTest();
+            //randomizeListTest();
+            findDuplicateElements();
       }
 
       /**
@@ -239,6 +240,41 @@ public class InterviewTask {
        * Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
        * Output: [9,4]
        * Explanation: [4,9] is also accepted.
+       */
+      public static void findDuplicateElements() {
+            int[] arr1 = {1,2,2,1};
+            int[] arr2 = {2,2};
+            int[] answer1 = findDuplicate(arr1, arr2);
+            System.out.println("Answer 1 : " + Arrays.toString(answer1));
+            System.out.println("Expected 1 : " + "[2]");
+            System.out.println();
+
+            int[] arr3 = {4,9,5};
+            int[] arr4 = {9,4,9,8,4};
+            int[] answer2 = findDuplicate(arr3, arr4);
+            System.out.println("Answer 2 : " + Arrays.toString(answer2));
+            System.out.println("Expected 2 : " + "[9,4]");
+            System.out.println("");
+      }
+
+      public static int[] findDuplicate(int[] arr1, int[] arr2) {
+            HashSet<Integer> set1 = Arrays.stream(arr1)
+                  .boxed()
+                  .collect(Collectors.toCollection(HashSet::new));
+
+            int[] result = Arrays.stream(arr2)
+                  .boxed()
+                  .filter(set1::contains)
+                  .distinct()
+                  .mapToInt(Integer::intValue)
+                  .toArray();
+            return result;
+      }
+      /**
+       * 10
+       * Написать метод, который должен принимать n
+       * количество объектов( строк), в методе вернуть строку с содержанием этих
+       * объектов вставив между ними разделитель "-"
        */
 
 
