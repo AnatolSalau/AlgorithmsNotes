@@ -40,8 +40,10 @@ import java.util.stream.Stream;
 public class TaskScheduler {
       public static void main(String[] args) {
             TaskScheduler taskScheduler = new TaskScheduler();
+            //taskScheduler.test1();
+            //taskScheduler.test2();
             taskScheduler.test3();
-
+            //taskScheduler.test4();
       }
       public int leastInterval(char[] tasks, int n) {
             Map<Character, Integer> freqMap = IntStream
@@ -51,41 +53,69 @@ public class TaskScheduler {
                         Function.identity(),
                         Collectors.collectingAndThen(Collectors.counting(), Long::intValue)
                   ));
-            List<Map.Entry<Character, Integer>> entries = freqMap.entrySet().stream()
-                  .sorted(Comparator.comparingInt(Map.Entry::getValue))
-                  .collect(Collectors.toList());
+            List<Map.Entry<Character, Integer>> entries = new ArrayList<>(freqMap.entrySet());
 
+            Collections.sort(entries,  (entry1, entry2) -> entry2.getValue() - entry1.getValue());
             //Collections.sort(entries, (entry1, entry2) -> entry1.getValue() - entry2.getValue());
 
             List<Character> result = new LinkedList<>();
 
-            int i = 0;
-
-            int range = freqMap.size();
-
             while (!entries.isEmpty()) {
-                  Map.Entry<Character, Integer> curr = entries.get(i);
+                  int steps = 0;
+                  for (int i = 0; i < entries.size(); i++) {
+                        Map.Entry<Character, Integer> curr = entries.get(i);
 
-                  //if(result.size())
-                  result.add(curr.getKey());
+                        result.add(curr.getKey());
 
-                  Integer newCount = curr.getValue() - 1;
+                        Integer newCount = curr.getValue() - 1;
 
-                  if (newCount == 0) {
-                        entries.remove(i);
+                        if (newCount == 0) {
+                              entries.remove(i);
+                        }
+                        else {
+                              curr.setValue(newCount);
+                        }
+                        steps++;
                   }
-                  else {
-                        curr.setValue(newCount);
-                  }
+                  Character nextCharacter = null;
+                  if(!entries.isEmpty()) {
+                        nextCharacter = entries.get(0).getKey();
 
-                  if (i == entries.size() - 1) {
-                        i = 0;
-                  } else {
-                        i++;
+                              if (steps != 0 && (nextCharacter != result.get(result.size() - 1)) ) {
+                                    while (steps <= n) {
+                                          result.add('_');
+                                          steps++;
+                                    }
+                              }
+
                   }
 
             }
-            return -1;
+
+            System.out.println("Result" + result);
+            return result.size();
+      }
+
+      public  void test1() {
+            char[] tasks = {'A','A','A', 'B','B','B'};
+            int n = 2;
+            int expect = 8;
+            int result = this.leastInterval(tasks, n);
+            System.out.println("Test 1");
+            System.out.println(Arrays.toString(tasks));
+            System.out.println("Result : " + result);
+            System.out.println("Expected : " + expect);
+      }
+
+      public  void test2() {
+            char[] tasks = {'A','C','A', 'B','D','B'};
+            int n = 1;
+            int expect = 6;
+            int result = this.leastInterval(tasks, n);
+            System.out.println("Test 2");
+            System.out.println(Arrays.toString(tasks));
+            System.out.println("Result : " + result);
+            System.out.println("Expected : " + expect);
       }
 
       public  void test3() {
@@ -94,6 +124,17 @@ public class TaskScheduler {
             int expect = 10;
             int result = this.leastInterval(tasks, n);
             System.out.println("Test 3");
+            System.out.println(Arrays.toString(tasks));
+            System.out.println("Result : " + result);
+            System.out.println("Expected : " + expect);
+      }
+
+      public  void test4() {
+            char[] tasks = {'A','B','A'};
+            int n = 2;
+            int expect = 4;
+            int result = this.leastInterval(tasks, n);
+            System.out.println("Test 4");
             System.out.println(Arrays.toString(tasks));
             System.out.println("Result : " + result);
             System.out.println("Expected : " + expect);
