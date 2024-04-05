@@ -329,4 +329,22 @@ public class StreamTutorial {
                               LinkedHashMap::new, Collectors.counting()));
             System.out.println(map);
       }
+      /**
+       * 22 Count chars int char[] arr by Map<Character, Integer>
+       *       and then get List<Map.Entry> sorted in decreasing order
+       */
+      private static void calculateQtyAndSort() {
+            char[] tasks = {'A', 'C', 'A', 'B', 'D', 'B' };
+            Map<Character, Integer> freqMap = IntStream
+                  .range(0, tasks.length)
+                  .mapToObj(i -> tasks[i])
+                  .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors.collectingAndThen(Collectors.counting(), Long::intValue)
+                  ));
+
+            List<Map.Entry<Character, Integer>> entries = new ArrayList<>(freqMap.entrySet());
+
+            Collections.sort(entries, (entry1, entry2) -> entry2.getValue() - entry1.getValue());
+      }
 }
