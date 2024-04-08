@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class QuickSorting {
       public static void main(String[] args) {
+
             QuickSorting quickSorting = new QuickSorting();
             quickSorting.testQuickSorting();
       }
