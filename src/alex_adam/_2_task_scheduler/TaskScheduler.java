@@ -67,6 +67,7 @@ public class TaskScheduler {
 
                   int steps = 0;
                   for (int i = 0; i < entries.size(); i++) {
+
                         Map.Entry<Character, Integer> curr = entries.get(i);
 
                         result.add(curr.getKey());
