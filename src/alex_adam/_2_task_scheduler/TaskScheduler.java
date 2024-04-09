@@ -40,12 +40,14 @@ import java.util.stream.Stream;
 public class TaskScheduler {
       public static void main(String[] args) {
             TaskScheduler taskScheduler = new TaskScheduler();
-            taskScheduler.test1();
+/*            taskScheduler.test1();
             taskScheduler.test2();
             taskScheduler.test3();
             taskScheduler.test4();
             taskScheduler.test5();
             taskScheduler.test6();
+            taskScheduler.test7();*/
+            taskScheduler.test8();
       }
 
       public int leastInterval(char[] tasks, int n) {
@@ -65,8 +67,12 @@ public class TaskScheduler {
             int startIndex = 0;
             while (!entries.isEmpty()) {
 
-                  int steps = 0;
+                  int steps = -1;
                   for (int i = 0; i < entries.size(); i++) {
+
+                        if (steps >= n) {
+                              continue;
+                        }
 
                         Map.Entry<Character, Integer> curr = entries.get(i);
 
@@ -82,14 +88,14 @@ public class TaskScheduler {
                         }
                         steps++;
                   }
-
                   if (!entries.isEmpty() ) {
-                        while (steps <= n ) {
-                              Character charStart = result.get(startIndex);
+                        while (steps < n ) {
+                              Character charStart = startIndex >= result.size()-1 ? result.get(result.size() - 1) : result.get(startIndex);
                               Character nextCharacter = entries.get(0).getKey();
-                              if (charStart == nextCharacter) {
+                              if (charStart == nextCharacter || entries.size() > 1) {
                                     result.add('_');
                               }
+
                               steps++;
                         }
                   }
@@ -159,7 +165,7 @@ public class TaskScheduler {
             int n = 4;
             int expect = 10;
             int result = this.leastInterval(tasks, n);
-            System.out.println("Test 4");
+            System.out.println("Test 5");
             System.out.println(Arrays.toString(tasks));
             System.out.println("n = " + n);
             System.out.println("Result : " + result);
@@ -173,12 +179,40 @@ public class TaskScheduler {
             int n = 1;
             int expect = 12;
             int result = this.leastInterval(tasks, n);
-            System.out.println("Test 4");
+            System.out.println("Test 6");
             System.out.println(Arrays.toString(tasks));
             System.out.println("n = " + n);
             System.out.println("Result : " + result);
             System.out.println("Expected : " + expect);
             System.out.println("Expected : " + Arrays.toString(tasks));
+            System.out.println();
+      }
+
+      public void test7() {
+            char[] tasks = {'A','A','A','B','B','B', 'C','C','C', 'D', 'D', 'E'};
+            int n = 2;
+            int expect = 12;
+            int result = this.leastInterval(tasks, n);
+            System.out.println("Test 7");
+            System.out.println(Arrays.toString(tasks));
+            System.out.println("n = " + n);
+            System.out.println("Result : " + result);
+            System.out.println("Expected : " + expect);
+            System.out.println("Expected : " + "[A, B, C, A, B, C, A, B, C, D, E, D]");
+            System.out.println();
+      }
+
+      public void test8() {
+            char[] tasks = {'A','A','A'};
+            int n = 1;
+            int expect = 5;
+            int result = this.leastInterval(tasks, n);
+            System.out.println("Test 7");
+            System.out.println(Arrays.toString(tasks));
+            System.out.println("n = " + n);
+            System.out.println("Result : " + result);
+            System.out.println("Expected : " + expect);
+            System.out.println("Expected : " + "[A, B, C, A, B, C, A, B, C, D, E, D]");
             System.out.println();
       }
 }
