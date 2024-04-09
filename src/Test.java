@@ -28,6 +28,7 @@ public class Test {
             Test.A testA = new Test().new A();
             testA.printLength();
             System.out.println("-----------------------------------");
+            System.out.println("Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"String.length()\" because \"this.str\" is null");
             Test.B testB = new Test().new B();
             testB.printLength();
 
