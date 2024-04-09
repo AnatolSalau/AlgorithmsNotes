@@ -41,9 +41,11 @@ public class TaskScheduler {
       public static void main(String[] args) {
             TaskScheduler taskScheduler = new TaskScheduler();
             taskScheduler.test1();
-            //taskScheduler.test2();
-            //taskScheduler.test3();
-            //taskScheduler.test4();
+            taskScheduler.test2();
+            taskScheduler.test3();
+            taskScheduler.test4();
+            taskScheduler.test5();
+            taskScheduler.test6();
       }
 
       public int leastInterval(char[] tasks, int n) {
@@ -60,8 +62,9 @@ public class TaskScheduler {
             //Collections.sort(entries, (entry1, entry2) -> entry1.getValue() - entry2.getValue());
 
             List<Character> result = new LinkedList<>();
-
+            int startIndex = 0;
             while (!entries.isEmpty()) {
+
                   int steps = 0;
                   for (int i = 0; i < entries.size(); i++) {
                         Map.Entry<Character, Integer> curr = entries.get(i);
@@ -72,22 +75,27 @@ public class TaskScheduler {
 
                         if (newCount == 0) {
                               entries.remove(i);
+                              i--;
                         } else {
                               curr.setValue(newCount);
                         }
                         steps++;
                   }
 
-                  if (!entries.isEmpty()) {
-                        while (steps <= n  && steps <= entries.size() ) {
-                              result.add('_');
+                  if (!entries.isEmpty() ) {
+                        while (steps <= n ) {
+                              Character charStart = result.get(startIndex);
+                              Character nextCharacter = entries.get(0).getKey();
+                              if (charStart == nextCharacter) {
+                                    result.add('_');
+                              }
                               steps++;
                         }
                   }
-
+                  startIndex = startIndex + steps;
             }
 
-            System.out.println("Result" + result);
+            System.out.println("Result : " + result);
             return result.size();
       }
 
@@ -98,8 +106,12 @@ public class TaskScheduler {
             int result = this.leastInterval(tasks, n);
             System.out.println("Test 1");
             System.out.println(Arrays.toString(tasks));
+            System.out.println("n = " + n);
             System.out.println("Result : " + result);
             System.out.println("Expected : " + expect);
+
+            System.out.println("Expected : " + "[A, B, _, A, B, _, A, B]");
+            System.out.println();
       }
 
       public void test2() {
@@ -109,8 +121,10 @@ public class TaskScheduler {
             int result = this.leastInterval(tasks, n);
             System.out.println("Test 2");
             System.out.println(Arrays.toString(tasks));
+            System.out.println("n = " + n);
             System.out.println("Result : " + result);
             System.out.println("Expected : " + expect);
+            System.out.println();
       }
 
       public void test3() {
@@ -120,8 +134,10 @@ public class TaskScheduler {
             int result = this.leastInterval(tasks, n);
             System.out.println("Test 3");
             System.out.println(Arrays.toString(tasks));
+            System.out.println("n = " + n);
             System.out.println("Result : " + result);
             System.out.println("Expected : " + expect);
+            System.out.println();
       }
 
       public void test4() {
@@ -131,7 +147,37 @@ public class TaskScheduler {
             int result = this.leastInterval(tasks, n);
             System.out.println("Test 4");
             System.out.println(Arrays.toString(tasks));
+            System.out.println("n = " + n);
             System.out.println("Result : " + result);
             System.out.println("Expected : " + expect);
+            System.out.println();
+      }
+
+      public void test5() {
+            char[] tasks = {'A','B','C','D','E','A','B','C','D','E' };
+            int n = 4;
+            int expect = 10;
+            int result = this.leastInterval(tasks, n);
+            System.out.println("Test 4");
+            System.out.println(Arrays.toString(tasks));
+            System.out.println("n = " + n);
+            System.out.println("Result : " + result);
+            System.out.println("Expected : " + expect);
+            System.out.println("Expected : " + Arrays.toString(tasks));
+            System.out.println();
+      }
+
+      public void test6() {
+            char[] tasks = {'A','A','A','A','A','A','B','C','D','E','F','G' };
+            int n = 1;
+            int expect = 12;
+            int result = this.leastInterval(tasks, n);
+            System.out.println("Test 4");
+            System.out.println(Arrays.toString(tasks));
+            System.out.println("n = " + n);
+            System.out.println("Result : " + result);
+            System.out.println("Expected : " + expect);
+            System.out.println("Expected : " + Arrays.toString(tasks));
+            System.out.println();
       }
 }
