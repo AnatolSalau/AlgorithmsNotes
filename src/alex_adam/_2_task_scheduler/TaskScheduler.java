@@ -40,70 +40,19 @@ import java.util.stream.Stream;
 public class TaskScheduler {
       public static void main(String[] args) {
             TaskScheduler taskScheduler = new TaskScheduler();
-/*            taskScheduler.test1();
+            taskScheduler.test1();
             taskScheduler.test2();
             taskScheduler.test3();
             taskScheduler.test4();
             taskScheduler.test5();
             taskScheduler.test6();
-            taskScheduler.test7();*/
+            taskScheduler.test7();
             taskScheduler.test8();
       }
 
       public int leastInterval(char[] tasks, int n) {
-            Map<Character, Integer> freqMap = IntStream
-                  .range(0, tasks.length)
-                  .mapToObj(i -> tasks[i])
-                  .collect(Collectors.groupingBy(
-                        Function.identity(),
-                        Collectors.collectingAndThen(Collectors.counting(), Long::intValue)
-                  ));
-            List<Map.Entry<Character, Integer>> entries = new ArrayList<>(freqMap.entrySet());
 
-            Collections.sort(entries, (entry1, entry2) -> entry2.getValue() - entry1.getValue());
-            //Collections.sort(entries, (entry1, entry2) -> entry1.getValue() - entry2.getValue());
-
-            List<Character> result = new LinkedList<>();
-            int startIndex = 0;
-            while (!entries.isEmpty()) {
-
-                  int steps = -1;
-                  for (int i = 0; i < entries.size(); i++) {
-
-                        if (steps >= n) {
-                              continue;
-                        }
-
-                        Map.Entry<Character, Integer> curr = entries.get(i);
-
-                        result.add(curr.getKey());
-
-                        Integer newCount = curr.getValue() - 1;
-
-                        if (newCount == 0) {
-                              entries.remove(i);
-                              i--;
-                        } else {
-                              curr.setValue(newCount);
-                        }
-                        steps++;
-                  }
-                  if (!entries.isEmpty() ) {
-                        while (steps < n ) {
-                              Character charStart = startIndex >= result.size()-1 ? result.get(result.size() - 1) : result.get(startIndex);
-                              Character nextCharacter = entries.get(0).getKey();
-                              if (charStart == nextCharacter || entries.size() > 1) {
-                                    result.add('_');
-                              }
-
-                              steps++;
-                        }
-                  }
-                  startIndex = startIndex + steps;
-            }
-
-            System.out.println("Result : " + result);
-            return result.size();
+            return 0;
       }
 
       public void test1() {
@@ -207,7 +156,7 @@ public class TaskScheduler {
             int n = 1;
             int expect = 5;
             int result = this.leastInterval(tasks, n);
-            System.out.println("Test 7");
+            System.out.println("Test 8");
             System.out.println(Arrays.toString(tasks));
             System.out.println("n = " + n);
             System.out.println("Result : " + result);
