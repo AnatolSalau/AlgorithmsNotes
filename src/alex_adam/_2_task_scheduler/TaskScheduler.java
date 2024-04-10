@@ -43,16 +43,68 @@ public class TaskScheduler {
             taskScheduler.test1();
             taskScheduler.test2();
             taskScheduler.test3();
-            taskScheduler.test4();
-            taskScheduler.test5();
-            taskScheduler.test6();
-            taskScheduler.test7();
-            taskScheduler.test8();
+            //taskScheduler.test4();
+            //taskScheduler.test5();
+            //taskScheduler.test6();
+            //taskScheduler.test7();
+            //taskScheduler.test8();
       }
+      /*
+            Explanation
+            char[] tasks = {'A', 'A', 'A', 'B', 'B', 'B' };
+            int n = 2;
+            1. Create array with length 26 where
+                        each index in arr = index in alphabet
+                        like
+                              1 -> A
+                              2 -> B
+                              ...
+                              26-> Z
+            3. Fill this arr
+                        1->3
+                        2->3
+                        3->0
+                        ...
+                        26->0
+            4. For filling we will use this formula
+                   position in alphabet  = (int) c - 'A' + 1;
+            5. During filling frequency array we will calculate max quantity letters
 
+            6. Calculate time
+                  by formula int lengthOfRange = (maxQty-1)*(n+1);
+
+            7.
+
+
+       */
       public int leastInterval(char[] tasks, int n) {
+            int[] freq = new int[26];
+            int maxQty = 0;
+            for(char c: tasks){
+                  int position = 0;
+                  if(c>='A' && c<='Z') {
+                        position = (int) c - 'A' + 1;
+                  }
+                  if(c>='a' && c<= 'z'){
+                        position = ((int)c - 'a'+1);
+                  }
 
-            return 0;
+                  freq[position]++;
+
+                  maxQty = Math.max(maxQty, freq[position]);
+            }
+
+            // max-1 tasks needs gaps and n gaps and 1 cycle for self
+            int time = (maxQty-1)*(n+1);
+            System.out.println("lengthOfRange : " + time );
+
+            for(int i=0;i<26;i++){
+                  if(freq[i]==maxQty){
+                        time++;
+                  }
+            }
+
+            return Math.max(time, tasks.length);
       }
 
       public void test1() {
