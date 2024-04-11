@@ -20,7 +20,10 @@ public class InterviewTask {
             //findDuplicateElements();
             //addDelimiter();
             //findUniqueInArr();
-            findAllRepeatingElements();
+            //findDeleted();
+            //findAllRepeatingElements();
+            //dividedIntoPresentAndAbsent();
+            //countPresentAndAbsent();
       }
 
       /**
@@ -148,9 +151,7 @@ public class InterviewTask {
        * поле language), а значение - коллекция Person с этим языком.
        * *Язык у каждого Person только один, это нативный язык.*
        */
-
       record Person(Long id, String name, String language) {}
-
       public static void personMapTask() {
             String one = new String("English");
             String two = new String("English");
@@ -170,7 +171,6 @@ public class InterviewTask {
             System.out.println("All persons with english");
             System.out.println(personMap);
       }
-
       public static Map<String, List<Person>> getPersonMap(List<Person> personList, String languageName) {
             Map<String, List<Person>> personMap = personList.stream()
                   //.filter(person -> person.language().equals(languageName))
@@ -214,7 +214,6 @@ public class InterviewTask {
        *  * @param outputSize размер выходного списка
        *  * @return выходной список со случайными элементами из входного списка
        *  */
-
       public static void randomizeListTest() {
             List<String> input = List.of("One", "Two", "Three");
             List<String> strings = randomizeList(input, 10);
@@ -331,7 +330,6 @@ public class InterviewTask {
        * что должно быть напечатано в консоли [6, 7, 5]
        * Написать фильтр без лямбда
        */
-
       public static void findAllRepeatingElements() {
             int[] arr = {9, 4, 9, 6, 7, 4, 5};
             LinkedHashMap<Integer, Long> freqMap = Arrays.stream(arr)
@@ -354,11 +352,78 @@ public class InterviewTask {
       public static boolean compareWith_1L (Map.Entry<Integer, Long> entry) {
             return entry.getValue() == 1L;
       }
+
       /**
        * 13
        * Дан массив с числами, одно число удалили и перемешали массив.
        * Найти удаленное число.
-       */
+       * int[] first = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+       * int[] second = {10, 7, 1, 5, 8, 9, 6, 2, 3}, deleted number = 4
+       * */
+      public static void findDeleted() {
+            int[] first = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            int[] second = {10, 7, 1, 5, 8, 9, 6, 2, 3};
+            int deletedNumber = 4;
 
+            Set<Integer> set2 = Arrays.stream(second)
+                  .boxed()
+                  .collect(Collectors.toSet());
 
+            int result = Arrays.stream(first)
+                  .filter(e -> !set2.contains(e))
+                  .findFirst()
+                  .orElse(-99);
+
+            System.out.println(result);
+            System.out.println("Expected : " + result);
+      }
+
+      /**
+       * 14
+       * Дан массив с числами, несколько число удалили и перемешали массив.
+       * Получите мапу
+       *  True -> List цифры которые есть в массиве
+       *  False -> List цифры которых нету
+       * int[] first = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+       * int[] second = {10, 1, 5, 8, 9, 6, 3}, deleted number = 2, 4, 7
+       * */
+      public static void dividedIntoPresentAndAbsent() {
+            int[] first = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            int[] second = {10, 1, 5, 8, 9, 6, 3};
+
+            Set<Integer> collectSecond = Arrays.stream(second).boxed().collect(Collectors.toUnmodifiableSet());
+
+            Map<Boolean, List<Integer>> partition =
+                  Arrays.stream(first)
+                        .boxed()
+                        .collect(Collectors.partitioningBy(collectSecond::contains));
+            System.out.println(partition);
+      }
+
+      /**
+       * 15
+       * Дан массив с числами, несколько число удалили и перемешали массив.
+       * Получите мапу
+       *  True -> Integer Количество присутствующих
+       *  False -> Integer Количество отсутствующих
+       * int[] first = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+       * int[] second = {10, 1, 5, 8, 9, 6, 3}, deleted number = 2, 4, 7
+       * */
+
+      public static void countPresentAndAbsent() {
+            int[] first = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            int[] second = {10, 1, 5, 8, 9, 6, 3};
+
+            Set<Integer> collectSecond = Arrays.stream(second).boxed().collect(Collectors.toUnmodifiableSet());
+
+            Map<Boolean, Integer> countPresentAbsent =
+                  Arrays.stream(first)
+                        .boxed()
+                        .collect(Collectors.partitioningBy(
+                              collectSecond::contains,
+                              Collectors.collectingAndThen(Collectors.counting(), Long::intValue)
+                              )
+                        );
+            System.out.println(countPresentAbsent);
+      }
 }
