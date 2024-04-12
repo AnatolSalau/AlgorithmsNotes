@@ -1,5 +1,6 @@
 package stream_api.reduce_examples;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReduceExamples {
@@ -10,6 +11,7 @@ public class ReduceExamples {
             toUpperCase(List.of("one", "two", "three"));
             sumParallel(List.of(1,2,3));
             sumUserAges(List.of(new User("John", 30), new User("Julie", 35)));
+
       }
 
       public static void sumElements(List<Integer> numbers) {
@@ -59,4 +61,5 @@ public class ReduceExamples {
             System.out.println(result);
             System.out.println();
       }
+
 }
