@@ -20,4 +20,5 @@ public class ArraysUnion {
             System.out.println(Arrays.toString(union));
 
       }
+
 }
