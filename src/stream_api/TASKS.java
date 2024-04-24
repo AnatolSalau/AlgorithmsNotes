@@ -1,6 +1,8 @@
 package stream_api;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -8,9 +10,11 @@ import java.util.stream.Stream;
 
 public class TASKS {
       public static void main(String[] args) {
-            mergeTwoArr();
-            substractArray();
-            intersectionArray();
+            //mergeTwoArr();
+            //substractArray();
+            //intersectionArray();
+            //findMaxInArr();
+            sortArrDecreasingOrder();
       }
       /*Объединить два массива*/
       public static void mergeTwoArr() {
@@ -71,5 +75,30 @@ public class TASKS {
                   .filter(set::contains)
                   .toArray();
             System.out.println(Arrays.toString(result));
+      }
+
+      /*Find max in arr*/
+      public static void findMaxInArr() {
+            List<Integer> list = Arrays.asList(10,15,8,49,25,98,98,32,15);
+            //.sorted(Comparator.comparingInt(Integer::intValue).reversed())
+            int result = list.stream().max(Comparator.comparing(Integer::intValue, (val1, val2) -> val1 - val2))
+                  .orElse(-99);
+            System.out.println(result);
+
+      }
+
+      /*Sort array decreasing order*/
+      public static void sortArrDecreasingOrder() {
+            List<Integer> list = Arrays.asList(10,15,8,49,25,98,98,32,15);
+            //.sorted(Comparator.comparingInt(Integer::intValue).reversed())
+            int[] result = list.stream()
+                  //.sorted(Comparator.comparingInt(Integer::intValue).reversed())
+                  .sorted(Comparator
+                        .reverseOrder()
+                  )
+                  .mapToInt(Integer::intValue)
+                  .toArray();
+            System.out.println(Arrays.toString(result));
+
       }
 }
