@@ -1,4 +1,4 @@
-package stream_api.functional_interfaces;
+package functional_interfaces;
 
 import java.util.ArrayList;
 import java.util.Date;

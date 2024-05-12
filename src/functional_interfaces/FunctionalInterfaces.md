@@ -18,6 +18,8 @@ Schema
     
     Predicate.test(T) -> return boolean
 
+    Function.R apply(T t) -> Accepts an object of one type and return another type
+
 Interface list:
 
     Supplier -> Consumer
@@ -32,3 +34,8 @@ Interface list:
     BiConsumer<T, U> (Двойной потребитель)
         accept(T, U)
         andThen(BiConsumer<T, U>, BiConsumer<T, U>)
+
+    Function<T, R> (Функция)
+        R apply(T t)
+        <V> Function<V, R> compose(Function<V, T> before)
+        <V> Function<T, V> andThen(Function<R, V> after)
