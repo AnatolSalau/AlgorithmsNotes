@@ -39,3 +39,6 @@ Interface list:
         R apply(T t)
         <V> Function<V, R> compose(Function<V, T> before)
         <V> Function<T, V> andThen(Function<R, V> after)
+
+    BiFunction<T, U, R>
+        Accept T and U and return R

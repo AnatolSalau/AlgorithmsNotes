@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,10 @@ public class FunctionExample {
             Function<Integer, String> quoteIntToString = quote.compose(intToString);
             String result = quoteIntToString.apply(5);
             System.out.println(result);
+
+            BiFunction<Integer, Integer, String> concatIntegersInQuotedStr = (i1, i2) -> "'" + i1 + "" + i2 + "'";
+            String result2 = concatIntegersInQuotedStr.apply(1, 0);
+            System.out.println(result2);
       }
 
       private static Integer strLength(String str) {
