@@ -36,9 +36,19 @@ public class FunctionExample {
             BiFunction<Integer, Integer, String> concatIntegersInQuotedStr = (i1, i2) -> "'" + i1 + "" + i2 + "'";
             String result2 = concatIntegersInQuotedStr.apply(1, 0);
             System.out.println(result2);
+
+            Map<String, Integer> salaries = new HashMap<>();
+            salaries.put("John", 40000);
+            salaries.put("Freddy", 30000);
+            salaries.put("Samuel", 50000);
+
+            salaries.replaceAll((name, oldValue) ->
+                  name.equals("Freddy") ? oldValue : oldValue + 10000);
+            System.out.println(salaries);
       }
 
       private static Integer strLength(String str) {
             return str.length();
       }
+
 }

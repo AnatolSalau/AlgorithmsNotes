@@ -1,5 +1,3 @@
-Functional interfaces
-[https://www.baeldung.com/java-8-functional-interfaces](https://www.baeldung.com/java-8-functional-interfaces)
 
 Функциональные интерфейсы Хабр
 [https://habr.com/ru/articles/677610/](https://habr.com/ru/articles/677610/)
@@ -14,11 +12,13 @@ Functional interfaces Geeksforgeeks
 
 Schema
 
-    Producer.get() -> Consumer.accept(T)
+    Supplier.get() -> Consumer.accept(T)
     
     Predicate.test(T) -> return boolean
 
     Function.R apply(T t) -> Accepts an object of one type and return another type
+
+    UnaryOperator apply(T) -> Accept one type and return the same type
 
 Interface list:
 
