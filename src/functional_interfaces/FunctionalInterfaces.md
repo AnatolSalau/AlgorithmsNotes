@@ -42,3 +42,7 @@ Interface list:
 
     BiFunction<T, U, R>
         Accept T and U and return R
+
+    Stream.forEach( (item) -> {
+        Consumer.accept()   // в forEach потребитель
+    });
