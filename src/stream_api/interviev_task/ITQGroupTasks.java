@@ -72,5 +72,4 @@ public class ITQGroupTasks {
 
             return result;
       }
-
 }
