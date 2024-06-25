@@ -12,13 +12,13 @@ Functional interfaces Geeksforgeeks
 
 Schema
 
-    Supplier.get() -> Consumer.accept(T)
+    Supplier .get() -> Consumer .accept(T)
     
-    Predicate.test(T) -> return boolean
+    Predicate .test(T) -> return boolean
 
-    Function.R apply(T t) -> Accepts an object of one type and return another type
+    Function.R .apply(T t) -> Accepts an object of one type and return another type
 
-    UnaryOperator apply(T) -> Accept one type and return the same type
+    UnaryOperator .apply(T) -> Accept one type and return the same type
 
 Interface list:
 
