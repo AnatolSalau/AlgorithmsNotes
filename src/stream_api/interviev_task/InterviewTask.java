@@ -5,6 +5,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class InterviewTask {
       public static void main(String[] args) {
@@ -95,18 +96,19 @@ public class InterviewTask {
       }
 
       public static String concatAnimalNamesByJoining(List<String> animals) {
-            StringBuilder result = new StringBuilder();
-            IntStream.range(0, animals.size())
-                  .peek(index -> {
-                        if (index == animals.size() - 1) {
-                              result.append(animals.get(index)).append(".");
-                        } else {
-                              result.append(animals.get(index)).append(", ");
-                        }
-                  })
-                  .mapToObj(index -> animals.get(index))
-                  .collect(Collectors.joining());
-            return result.toString();
+            Stream<String> withoutLast =
+                  animals.stream()
+                        .limit(animals.size() - 1)
+                        .map(s -> s + "; ");
+
+            Stream<String> last = animals.stream()
+                  .skip(animals.size() - 1)
+                  .map(s -> s + ".");
+
+            String result = Stream
+                  .concat(withoutLast, last)
+                  .reduce("", (String s1, String s2) -> s1.concat(s2));
+            return result;
       }
 
       /**
