@@ -15,7 +15,7 @@ public class InterviewTask {
             //_3_removeEvenIndexes();
             //_4_animals();
             //deleteAllAnimalFromL();
-            //personMapTask();
+            personMapTask();
             //mapWithCountFromStr();
             //randomizeListTest();
             //findDuplicateElements();
@@ -33,7 +33,6 @@ public class InterviewTask {
       public static void _1_removeDuplicates() {
             ArrayList<Integer> data = new ArrayList<>();
             Collections.addAll(data, 1, 2, 2, 3, 4);
-            // remove all even nums from list
             ArrayList<Integer> finalData = data;
             data = data.stream()
                   .filter(s -> Collections.frequency(finalData, s) > 1)
@@ -159,6 +158,8 @@ public class InterviewTask {
             String two = new String("English");
             System.out.println("String.compare : ");
             System.out.println(one.compareTo(two));
+            System.out.println("String.equals : ");
+            System.out.println(one.equals(two));
             List<Person> personList = List.of(
                  new Person(1L, "One", "English"),
                   new Person(2L, "Two", "Russian"),
@@ -321,8 +322,7 @@ public class InterviewTask {
                   .orElseThrow(() -> {
                         return new RuntimeException("Dont find entry");
                   })
-                  .getKey()
-                  .intValue();
+                  .getKey();
             return firstUnique;
       }
 
