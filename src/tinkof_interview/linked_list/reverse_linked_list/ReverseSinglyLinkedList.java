@@ -1,6 +1,5 @@
-package linked_list.reverse_linked_list;
+package tinkof_interview.linked_list.reverse_linked_list;
 
-import java.util.List;
 import java.util.Stack;
 
 public class ReverseSinglyLinkedList {
@@ -34,6 +33,10 @@ public class ReverseSinglyLinkedList {
             reverseSinglyLinkedList.testThree();
       }
       void printList(ListNode head) {
+            if (head == null) {
+                  System.out.println(head);
+                  return;
+            }
             ListNode curr = head;
             while (curr.next != null) {
                   System.out.println(curr);
@@ -42,73 +45,22 @@ public class ReverseSinglyLinkedList {
             System.out.println(curr);
       }
 
-      ListNode reverseListByStack(ListNode head) {
-            Stack<ListNode> stack = new Stack<>();
-
-            //fill stack
-            stack.add(head);
-            ListNode next = head.next;
-            while (next != null) {
-                  stack.add(next);
-                  next = next.next;
-            }
-
-            // reverse list, assign last element as new head of list
-            ListNode newHead = stack.peek();
-            ListNode curr = null;
-            next = null;
-            while (!stack.isEmpty()) {
-                  curr = stack.pop();
-                  if (stack.isEmpty()) {
-                        curr.next = null;
-                        break;
-                  }
-                  next = stack.peek();
-                  curr.next = next;
-            }
-            return newHead;
-      }
-
       /*
             10 -> 20 -> 30 -> 40 -> 50
    null  <- l  <- m  <- r  <- n
        */
       ListNode reverseList(ListNode head) {
-            //Check is head null
-            ListNode left = null;
-            if (head != null) {left = head;}
-            else {return null;}
-            //Check is head.next null
-            ListNode middle = null;
-            if (head.next != null) {
-                  middle = head.next;
+            ListNode prev = null;
+            ListNode current = head;
+            ListNode next = null;
+            while (current != null) {
+                  next = current.next;
+                  current.next = prev;
+                  prev = current;
+                  current = next;
             }
-            else {return head;}
-            //check is head.next.next null
-            ListNode right = null;
-            if (middle.next != null) {
-                  right = middle.next;
-                  left.next = null;
-            }
-            else {
-                  middle.next = left;
-                  left.next = null;
-                  return middle;
-            }
-            //change links
-            while (right != null) {
-                  ListNode newNode = right.next;
-                  middle.next = left;
-                  right.next = middle;
-
-                  if (newNode == null) return right;
-
-                  left = middle;
-                  middle = right;
-                  right = newNode;
-
-            }
-            return right;
+            head = prev;
+            return head;
       }
 
       void testOne() {
@@ -119,9 +71,6 @@ public class ReverseSinglyLinkedList {
             ListNode list1 = new ListNode(1, list2);
             System.out.println("Linked list");
             printList(list1);
-            ListNode result = reverseListByStack(list1);
-            System.out.println("Reversed list");
-            printList(result);
       }
 
       void testTwo() {
