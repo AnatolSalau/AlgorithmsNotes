@@ -8,8 +8,7 @@ Arrays and Strings
 [4. ContainerMostWater](array_string/contain_most_water/ContainerMostAmountWater.java)
 
 Linked Lists
-
-	Reverse Linked List (Easy) - Problem #206
+[5. Reverse linked list](linked_list/reverse_linked_list/ReverseSinglyLinkedList.java)
 	Merge Two Sorted Lists (Easy) - Problem #21
 	Linked List Cycle (Easy) - Problem #141
 	Add Two Numbers (Medium) - Problem #2
