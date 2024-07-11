@@ -3,11 +3,9 @@ Array and Strings
 Two Sum: LeetCode Problem
 Arrays and Strings
 [1. Two Sum](array_string/two_sum/TwoSum.java)
-
-	Best Time to Buy and Sell Stock (Easy) - Problem #121
-	Longest Substring Without Repeating Characters (Medium) - Problem #3
-	Container With Most Water (Medium) - Problem #11
-
+[2. BuySellStock](array_string/buy_sell_stock/BestBuySellEasy.java)
+[3. LongestSubstring](array_string/longest_substring/LongestSubstring.java)
+[4. ContainerMostWater](array_string/contain_most_water/ContainerMostAmountWater.java)
 
 Linked Lists
 
