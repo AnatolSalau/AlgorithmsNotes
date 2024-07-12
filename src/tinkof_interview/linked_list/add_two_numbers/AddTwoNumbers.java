@@ -54,8 +54,15 @@ public class AddTwoNumbers {
                   int carry = 0;
 
                   while (l1 != null || l2 != null) {
-                        int val1 = l1.val;
-                        int val2 = l2.val;
+                        int val1 = 0;
+                        if (l1 != null) {
+                              val1 = l1.val;
+                        }
+                        int val2 = 0;
+                        if (l2 != null) {
+                              val2 = l2.val;
+                        }
+
                         int full_sum = val1 + val2;
                         int sum = full_sum % 10 + carry;
 
@@ -70,9 +77,13 @@ public class AddTwoNumbers {
                               curr = newNode;
                         }
 
+                        if (l1 != null) {
+                              l1 = l1.next;
+                        }
 
-                        l1 = l1.next;
-                        l2 = l2.next;
+                        if (l2 != null) {
+                              l2 = l2.next;
+                        }
                   }
                   return head;
       }
