@@ -1,15 +1,23 @@
 Array and Strings
 
 Two Sum: LeetCode Problem
+
 Arrays and Strings
+
 [1. Two Sum](array_string/two_sum/TwoSum.java)
+
 [2. BuySellStock](array_string/buy_sell_stock/BestBuySellEasy.java)
+
 [3. LongestSubstring](array_string/longest_substring/LongestSubstring.java)
+
 [4. ContainerMostWater](array_string/contain_most_water/ContainerMostAmountWater.java)
 
 Linked Lists
+
 [5. Reverse linked list](linked_list/reverse_linked_list/ReverseSinglyLinkedList.java)
-	Merge Two Sorted Lists (Easy) - Problem #21
+
+[6. Merge sorted lists](linked_list/merge_two_sorted_list/MergeTwoList.java)
+
 	Linked List Cycle (Easy) - Problem #141
 	Add Two Numbers (Medium) - Problem #2
 

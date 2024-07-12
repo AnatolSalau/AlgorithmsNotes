@@ -50,7 +50,6 @@ public class MergeTwoList {
       public static void main(String[] args) {
             MergeTwoList mergeTwoList = new MergeTwoList();
             mergeTwoList.test1();
-            mergeTwoList.test2();
       }
 
       public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
@@ -76,28 +75,6 @@ public class MergeTwoList {
             return firstNode;                                     //O(2n + 2m) - time O(n+m) - memory
       }
 
-      public ListNode mergeTwoListsByTwoPointer(ListNode list1, ListNode list2) {
-            ListNode head = null;
-
-            while (list1 != null && list2 != null) {
-                  ListNode curr = null;
-                  int val1 = Integer.MIN_VALUE;
-                  int val2 = Integer.MIN_VALUE;
-
-                  if (list1 != null ) {
-                        val1 = list1.val;
-                  }
-
-                  if (list2 != null ) {
-                        val2 = list2.val;
-                  }
-
-                  if (val1 == val2) {
-
-                  }
-            }
-            return head;
-      }
 
 
 
@@ -116,24 +93,6 @@ public class MergeTwoList {
             System.out.println("Expected : " + "[1,1,2,3,4,4]");
             System.out.println("Result :");
             printList(mergeTwoLists(list1_1, list2_1));
-            System.out.println();
-      }
-
-      public void test2() {
-            ListNode list1_4 = new ListNode(4, null);
-            ListNode list1_2 = new ListNode(2, list1_4);
-            ListNode list1_1 = new ListNode(1, list1_2);
-
-            ListNode list2_4 = new ListNode(4, null);
-            ListNode list2_3 = new ListNode(3, list2_4);
-            ListNode list2_1 = new ListNode(1, list2_3);
-            System.out.println("Test2");
-            printList(list1_1);
-            printList(list2_1);
-
-            System.out.println("Expected : " + "[1,1,2,3,4,4]");
-            System.out.println("Result :");
-            printList(mergeTwoListsByTwoPointer(list1_1, list2_1));
             System.out.println();
       }
 
