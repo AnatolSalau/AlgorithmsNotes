@@ -20,8 +20,7 @@ Linked Lists
 
 [7. Linked list cycle](linked_list/linked_list_cycle/LinkedListCycle.java)
 
-
-	Add Two Numbers (Medium) - Problem #2
+[8. Add Two Numbers](linked_list/add_two_numbers/AddTwoNumbers.java)
 
 Trees and Graphs
 
