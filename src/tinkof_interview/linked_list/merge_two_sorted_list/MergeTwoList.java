@@ -53,7 +53,7 @@ public class MergeTwoList {
             mergeTwoList.test2();
       }
 
-      public ListNode mergeTwoListsByPriorityQueue(ListNode list1, ListNode list2) {
+      public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
 
             PriorityQueue<ListNode> priorityQueue = new PriorityQueue<>(
                   Comparator.comparingInt(node -> node.val)
@@ -77,7 +77,26 @@ public class MergeTwoList {
       }
 
       public ListNode mergeTwoListsByTwoPointer(ListNode list1, ListNode list2) {
-            return null;
+            ListNode head = null;
+
+            while (list1 != null && list2 != null) {
+                  ListNode curr = null;
+                  int val1 = Integer.MIN_VALUE;
+                  int val2 = Integer.MIN_VALUE;
+
+                  if (list1 != null ) {
+                        val1 = list1.val;
+                  }
+
+                  if (list2 != null ) {
+                        val2 = list2.val;
+                  }
+
+                  if (val1 == val2) {
+
+                  }
+            }
+            return head;
       }
 
 
@@ -96,7 +115,7 @@ public class MergeTwoList {
 
             System.out.println("Expected : " + "[1,1,2,3,4,4]");
             System.out.println("Result :");
-            printList(mergeTwoListsByPriorityQueue(list1_1, list2_1));
+            printList(mergeTwoLists(list1_1, list2_1));
             System.out.println();
       }
 
