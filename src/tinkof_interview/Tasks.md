@@ -18,7 +18,9 @@ Linked Lists
 
 [6. Merge sorted lists](linked_list/merge_two_sorted_list/MergeTwoList.java)
 
-	Linked List Cycle (Easy) - Problem #141
+[7. Linked list cycle](linked_list/linked_list_cycle/LinkedListCycle.java)
+
+
 	Add Two Numbers (Medium) - Problem #2
 
 Trees and Graphs
