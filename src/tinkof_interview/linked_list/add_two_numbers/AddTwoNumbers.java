@@ -6,7 +6,7 @@ import tinkof_interview.linked_list.linked_list_cycle.LinkedListCycle;
 import java.util.Objects;
 
 public class AddTwoNumbers {
-            public class ListNode {
+      public class ListNode {
             int val;
             ListNode next;
 
@@ -47,45 +47,45 @@ public class AddTwoNumbers {
       }
 
       public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-                  if (l1 == null || l2 == null) return null;
+            if (l1 == null || l2 == null) return null;
 
-                  ListNode head = null;
-                  ListNode curr = null;
-                  int carry = 0;
+            ListNode head = null;
+            ListNode curr = null;
+            int carry = 0;
 
-                  while (l1 != null || l2 != null) {
-                        int val1 = 0;
-                        if (l1 != null) {
-                              val1 = l1.val;
-                        }
-                        int val2 = 0;
-                        if (l2 != null) {
-                              val2 = l2.val;
-                        }
-
-                        int full_sum = val1 + val2;
-                        int sum = full_sum % 10 + carry;
-
-                        carry = full_sum / 10;
-
-                        if (head == null) {
-                              head = new ListNode(sum, null);
-                              curr = head;
-                        } else {
-                              ListNode newNode = new ListNode(sum, null);
-                              curr.next = newNode;
-                              curr = newNode;
-                        }
-
-                        if (l1 != null) {
-                              l1 = l1.next;
-                        }
-
-                        if (l2 != null) {
-                              l2 = l2.next;
-                        }
+            while (l1 != null || l2 != null || carry != 0) {
+                  int val1 = 0;
+                  if (l1 != null) {
+                        val1 = l1.val;
                   }
-                  return head;
+                  int val2 = 0;
+                  if (l2 != null) {
+                        val2 = l2.val;
+                  }
+
+                  int full_sum = val1 + val2 + carry;
+                  int sum = full_sum % 10;
+
+                  carry = full_sum / 10;
+
+                  if (head == null) {
+                        head = new ListNode(sum, null);
+                        curr = head;
+                  } else {
+                        ListNode newNode = new ListNode(sum, null);
+                        curr.next = newNode;
+                        curr = newNode;
+                  }
+
+                  if (l1 != null) {
+                        l1 = l1.next;
+                  }
+
+                  if (l2 != null) {
+                        l2 = l2.next;
+                  }
+            }
+            return head;
       }
 
       public void test1() {
