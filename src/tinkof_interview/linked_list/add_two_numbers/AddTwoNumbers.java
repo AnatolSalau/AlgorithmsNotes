@@ -44,6 +44,7 @@ public class AddTwoNumbers {
       public static void main(String[] args) {
             AddTwoNumbers addTwoNumbers = new AddTwoNumbers();
             addTwoNumbers.test1();
+            addTwoNumbers.test2();
       }
 
       public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -51,7 +52,7 @@ public class AddTwoNumbers {
 
             ListNode head = null;
             ListNode curr = null;
-            int carry = 0;
+            int carry = 0; // remainder
 
             while (l1 != null || l2 != null || carry != 0) {
                   int val1 = 0;
@@ -64,24 +65,24 @@ public class AddTwoNumbers {
                   }
 
                   int full_sum = val1 + val2 + carry;
-                  int sum = full_sum % 10;
+                  int sum = full_sum % 10; // last digit
 
-                  carry = full_sum / 10;
+                  carry = full_sum / 10; // remainder
 
-                  if (head == null) {
+                  if (head == null) {     //first iteration
                         head = new ListNode(sum, null);
                         curr = head;
-                  } else {
+                  } else {    // all remaining ones
                         ListNode newNode = new ListNode(sum, null);
                         curr.next = newNode;
                         curr = newNode;
                   }
 
-                  if (l1 != null) {
+                  if (l1 != null) { // move pointer forward
                         l1 = l1.next;
                   }
 
-                  if (l2 != null) {
+                  if (l2 != null) { // move pointer forward
                         l2 = l2.next;
                   }
             }
@@ -97,11 +98,33 @@ public class AddTwoNumbers {
             ListNode list2_6 = new ListNode(6, list2_4);
             ListNode list2_5 = new ListNode(5, list2_6);
 
+            System.out.println();
             System.out.println("Test1");
             printList(list1_2);
             printList(list2_5);
 
             printList(addTwoNumbers(list1_2, list2_5));
+      }
+
+      public void test2() {
+            ListNode list1_7 = new ListNode(9, null);
+            ListNode list1_6 = new ListNode(9, list1_7);
+            ListNode list1_5 = new ListNode(9, list1_6);
+            ListNode list1_4 = new ListNode(9, list1_5);
+            ListNode list1_3 = new ListNode(9, list1_4);
+            ListNode list1_2 = new ListNode(9, list1_3);
+            ListNode list1_1 = new ListNode(9, list1_2);
+
+            ListNode list2_4 = new ListNode(9, null);
+            ListNode list2_3 = new ListNode(9, list2_4);
+            ListNode list2_2 = new ListNode(9, list2_3);
+            ListNode list2_1 = new ListNode(9, list2_2);
+            System.out.println();
+            System.out.println("Test2");
+            printList(list1_1);
+            printList(list2_1);
+
+            printList(addTwoNumbers(list1_1, list2_1));
       }
 
       public void printList(ListNode listNode) {
