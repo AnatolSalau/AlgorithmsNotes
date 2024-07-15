@@ -1,4 +1,4 @@
-package tinkof_interview.tree_graphs.invert_binary_tree;
+package tinkof_interview.tree.invert_binary_tree;
 
 public class InvertBinaryTree {
       public class TreeNode {
