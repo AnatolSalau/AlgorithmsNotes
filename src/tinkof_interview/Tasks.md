@@ -23,10 +23,11 @@ Linked Lists
 [8. Add Two Numbers](linked_list/add_two_numbers/AddTwoNumbers.java)
 
 Trees and Graphs
+[9. Invert Binary Tree](tree/invert_binary_tree/InvertBinaryTree.java)
 
-	Invert Binary Tree (Easy) - Problem #226
 	Maximum Depth of Binary Tree (Easy) - Problem #104
 	Binary Tree Inorder Traversal (Easy) - Problem #94
+
 	Lowest Common Ancestor of a Binary Tree (Medium) - Problem #236
 
 Sorting and Searching

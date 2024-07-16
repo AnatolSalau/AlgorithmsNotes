@@ -1,8 +1,8 @@
 package tinkof_interview.graphs.sea_battle;
 
-public class SeaBattleVar1 {
+public class SeaBattle {
       public static void main(String[] args) {
-            SeaBattleVar1 seaBattleVar1 = new SeaBattleVar1();
+            SeaBattle seaBattleVar1 = new SeaBattle();
             seaBattleVar1.test1();
             seaBattleVar1.test2();
       }
