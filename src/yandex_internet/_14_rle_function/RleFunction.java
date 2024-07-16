@@ -15,11 +15,11 @@ package yandex_internet._14_rle_function;
 public class RleFunction {
       public static void main(String[] args) {
             RleFunction rleFunction = new RleFunction();
-            //rleFunction.testOne();
-            //rleFunction.testFour();
+            rleFunction.testOne();
+            rleFunction.testFour();
             rleFunction.testFive();
-            //rleFunction.testTwo();
-            //rleFunction.testThree();
+            rleFunction.testTwo();
+            rleFunction.testThree();
       }
 
       private void testOne() {
