@@ -44,6 +44,7 @@ public class LowestCommonAncestor {
 
       public static void main(String[] args) {
             LowestCommonAncestor lowestCommonAncestor = new LowestCommonAncestor();
+            lowestCommonAncestor.test1();
             lowestCommonAncestor.test2();
       }
 
@@ -55,6 +56,7 @@ public class LowestCommonAncestor {
                   return key().size() - inner.key.size();
             }
       }
+
       /*
       https://www.youtube.com/watch?v=_-QHfMDde90&ab_channel=takeUforward
        */
@@ -155,7 +157,7 @@ public class LowestCommonAncestor {
             TreeNode node1_1 = new TreeNode(1, node2_0, node2_8);
 
             TreeNode node0_3_root = new TreeNode(3, node1_5, node1_1);
-            System.out.println("Test 1");
+            System.out.println("Test 2");
             System.out.println("Result : ");
             System.out.println(lowestCommonAncestor(node0_3_root, node1_5, node3_4));
             System.out.println("Expected output : ");
