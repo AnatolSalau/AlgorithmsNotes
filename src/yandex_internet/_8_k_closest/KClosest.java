@@ -57,6 +57,37 @@ public class KClosest {
 
        */
       static public int[] findClosetElements(int[] arr, int range, int indexTarget) {
+            int l = indexTarget;
+            int r = indexTarget;
+
+            int[] answer = new int[range];
+            int i = 0;
+
+            int windowsLength = r - l;
+            while (windowsLength <= range) {
+                  if (l == r) {
+                        answer[i] = arr[l];
+                        l--;
+                        r++;
+                        i++;
+                        continue;
+                  }
+                  if (l < 0) {
+                        answer[i] = arr[r];
+                        r++;
+                        i++;
+                        continue;
+                  }
+                  if (r > arr.length) {
+                        l--;
+                        i++;
+                        continue;
+                  }
+
+            }
+            return null;
+      }
+      static public int[] findClosetElementsRight(int[] arr, int range, int indexTarget) {
             int startIndex = 0;
             int endIndex = 0;
 
