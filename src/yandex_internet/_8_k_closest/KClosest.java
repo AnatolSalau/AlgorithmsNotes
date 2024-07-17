@@ -1,18 +1,20 @@
 package yandex_internet._8_k_closest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class KClosest {
       /**
-       Дан отсортированный массив чисел а, индекс элемента index и целое число k.
-       Необходимо вернуть в любом порядке k чисел из массива,
-       которые являются ближайшими по значению к элементу а[index].
-                               *
-       find_k_closest(a={2,3,5,7,11}, index=3, k=2) -> {5,7}
-                           *
-       find_k_closest(a={4,12,15,15,24}, index=1, k=3) -> {12,15,15}
-                             *
-       find_k_closest(a={2,3,5,7,11}, index=2, k=2) -> {5,7} или {3,5}
+       * Дан отсортированный массив чисел а, индекс элемента index и целое число k.
+       * Необходимо вернуть в любом порядке k чисел из массива,
+       * которые являются ближайшими по значению к элементу а[index].
+       * <p>
+       * find_k_closest(a={2,3,5,7,11}, index=3, k=2) -> {5,7}
+       * <p>
+       * find_k_closest(a={4,12,15,15,24}, index=1, k=3) -> {12,15,15}
+       * <p>
+       * find_k_closest(a={2,3,5,7,11}, index=2, k=2) -> {5,7} или {3,5}
        */
 
       /*          *
@@ -56,37 +58,44 @@ public class KClosest {
             3. Fill result from left pointer  to right pointer
 
        */
-      static public int[] findClosetElements(int[] arr, int range, int indexTarget) {
-            int l = indexTarget;
-            int r = indexTarget;
 
-            int[] answer = new int[range];
-            int i = 0;
+      public static List<Integer> findClosestElements(int[] arr, int k, int x) {
+            int startIndex = 0;
+            int endIndex = 0;
 
-            int windowsLength = r - l;
-            while (windowsLength <= range) {
-                  if (l == r) {
-                        answer[i] = arr[l];
-                        l--;
-                        r++;
-                        i++;
-                        continue;
-                  }
-                  if (l < 0) {
-                        answer[i] = arr[r];
-                        r++;
-                        i++;
-                        continue;
-                  }
-                  if (r > arr.length) {
-                        l--;
-                        i++;
-                        continue;
-                  }
+            int l = 0; // left pointer
+            int r = arr.length - 1; // right pointer
+            int sizeWindow = r - l + 1;
 
+            //check size arr
+            if (arr.length == 0 || arr.length < sizeWindow) return null;
+
+            while (l < arr.length && r >= 0) {                                                 //O(n)
+                  sizeWindow = r - l + 1; //calculate sliding window size - > if size == target -> break from loop
+                  if (sizeWindow == k) {
+                        startIndex = l;
+                        endIndex = r;
+                        break;
+                  }
+                  int leftDistance = arr[x] - arr[l];
+                  int rightDistance = arr[r] - arr[x];
+
+                  //if left distance > right distance -> increase left pointer
+                  //if distances are equal -> move forward left pointer
+                  if ((leftDistance > rightDistance) || (leftDistance == rightDistance)) {
+                        l++;
+                  } else {//if right distance > left distance -> decrease right pointer
+                        r--;
+                  }
             }
-            return null;
+            //fill result from left pointer  to right pointer
+            List<Integer> resultRange = new ArrayList<>(sizeWindow);
+            for (int i = startIndex, j = 0; i <= endIndex; i++, j++) {                         //O(m)
+                  resultRange.add(arr[i]);
+            }
+            return resultRange ;                                                                 //O(n + m)
       }
+
       static public int[] findClosetElementsRight(int[] arr, int range, int indexTarget) {
             int startIndex = 0;
             int endIndex = 0;
@@ -110,7 +119,7 @@ public class KClosest {
 
                   //if left distance > right distance -> increase left pointer
                   //if distances are equal -> move forward left pointer
-                  if ( (leftDistance > rightDistance) || (leftDistance == rightDistance) ) {
+                  if ((leftDistance > rightDistance) || (leftDistance == rightDistance)) {
                         l++;
                   } else {//if right distance > left distance -> decrease right pointer
                         r--;
@@ -121,8 +130,9 @@ public class KClosest {
             for (int i = startIndex, j = 0; i <= endIndex; i++, j++) {                         //O(m)
                   resultRange[j] = arr[i];
             }
-           return resultRange;                                                                 //O(n + m)
+            return resultRange;                                                                 //O(n + m)
       }
+
       /*
           i:0 1 2 3  4, target = 7, range 2
             2 3 5 7 11
@@ -153,18 +163,19 @@ public class KClosest {
           for i = 2; i <= 3 -> 5 7
        */
       public static void test1() {
-            int[] arr = {2,3,5,7,11};
+            int[] arr = {2, 3, 5, 7, 11};
             int indexTarget = 3;
             int range = 2;
-            int[] expected = {5,7};
-            int[] closetElements = findClosetElements(arr, range, indexTarget);
+            int[] expected = {5, 7};
+            List<Integer> closetElements = findClosestElements(arr, range, indexTarget);
             System.out.println(Arrays.toString(arr));
             System.out.println("Index : " + indexTarget + ", element : " + arr[indexTarget]);
             System.out.println("Range : " + range);
             System.out.println("Expect : " + Arrays.toString(expected));
-            System.out.println("Result : " + Arrays.toString(closetElements));
+            System.out.println("Result : " + closetElements);
             System.out.println();
       }
+
       /*
           i:0  1  0  3  4, target 15 (i:2), range = 3
             4 12 15 15 24
@@ -189,30 +200,30 @@ public class KClosest {
 
        */
       public static void test2() {
-            int[] arr = {4,12,15,15,24};
+            int[] arr = {4, 12, 15, 15, 24};
             int indexTarget = 2;
             int range = 3;
-            int[] expected = {12,15,15};
-            int[] closetElements = findClosetElements(arr, range, indexTarget);
+            int[] expected = {12, 15, 15};
+            List<Integer> closetElements = findClosestElements(arr, range, indexTarget);
             System.out.println(Arrays.toString(arr));
             System.out.println("Index : " + indexTarget + ", element : " + arr[indexTarget]);
             System.out.println("Range : " + range);
             System.out.println("Expect : " + Arrays.toString(expected));
-            System.out.println("Result : " + Arrays.toString(closetElements));
+            System.out.println("Result : " + closetElements);
             System.out.println();
       }
 
       public static void test3() {
-            int[] arr = {2,3,5,7,11};
+            int[] arr = {2, 3, 5, 7, 11};
             int indexTarget = 2;
             int range = 2;
             int[] expected = {5, 7};
-            int[] closetElements = findClosetElements(arr, range, indexTarget);
+            List<Integer> closetElements = findClosestElements(arr, range, indexTarget);
             System.out.println(Arrays.toString(arr));
             System.out.println("Index : " + indexTarget + ", element : " + arr[indexTarget]);
             System.out.println("Range : " + range);
             System.out.println("Expect : " + Arrays.toString(expected));
-            System.out.println("Result : " + Arrays.toString(closetElements));
+            System.out.println("Result : " + closetElements);
             System.out.println();
       }
 }
