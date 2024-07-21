@@ -28,11 +28,17 @@ public class GroupingExamplesBaeldung {
                   new BlogPost("Title4", "Autthor4", BlogPostType.NEWS, 4)
             );
 
-            //groupByBlogPostType(posts);
-            groupByPairTypeName(posts);
+            groupByBlogPostTypeTest(posts);
+            groupByPairTypeNameTest(posts);
       }
 
       public static void groupByBlogPostType(List<BlogPost> posts) {
+            Map<BlogPostType, List<BlogPost>> collect = posts.stream()
+                  .collect(Collectors.groupingBy(BlogPost::type));
+            System.out.println(collect);
+      }
+
+      public static void groupByBlogPostTypeTest(List<BlogPost> posts) {
             Map<BlogPostType, List<BlogPost>> collect = posts.stream()
                   .collect(Collectors.groupingBy(BlogPost::type));
             System.out.println(collect);
@@ -45,7 +51,9 @@ public class GroupingExamplesBaeldung {
                   ));
             System.out.println(collect);
       }
-
-
-
+      public static void groupByPairTypeNameTest(List<BlogPost> posts) {
+            Map<String, List<BlogPost>> map = posts.stream()
+                  .collect(Collectors.groupingBy(post -> post.author));
+            System.out.println(map);
+      }
 }
