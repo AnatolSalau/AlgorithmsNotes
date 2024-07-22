@@ -74,7 +74,11 @@ public class GroupingExamplesHabr {
             Map<String, Map<Integer, List<Worker>>> groupingByPositionAndAge = grouping.groupingByPositionAndAge(workerList);
             */
             //Map<String, Integer> groupByProfessionWithMaxSalary = grouping.groupByProfessionWithMaxSalary(workerList);
-            Map<String, Integer> stringIntegerMap = grouping.groupByProfessionWithMaxSalaryByGrouping(workerList);
+            //Map<String, Integer> stringIntegerMap = grouping.groupByProfessionWithMaxSalaryByGrouping(workerList);
+
+            Map<String, List<Worker>> stringListMap = grouping.groupByPositionTest(workerList);
+            Map<String, Set<Worker>> stringSetMap = grouping.groupByPositionBySetTest(workerList);
+            Map<String, Long> positionCountMap = grouping.countingByPositionLongTest(workerList);
 
       }
 
@@ -88,6 +92,11 @@ public class GroupingExamplesHabr {
             return result;
       }
 
+      Map<String, List<Worker>> groupByPositionTest(List<Worker> workerList) {
+
+            return null;
+      }
+
       /**
        * 2. Группировка списка рабочих по их должности (деление на множества)
        */
@@ -98,6 +107,9 @@ public class GroupingExamplesHabr {
                   );
             System.out.println(result);
             return result;
+      }
+      Map<String, Set<Worker>> groupByPositionBySetTest(List<Worker> workerList) {
+            return null;
       }
 
       /**
@@ -111,6 +123,13 @@ public class GroupingExamplesHabr {
                   );
             System.out.println(result);
             return result;
+      }
+      Map<String, Long> countingByPositionLongTest(List<Worker> workerList) {
+            Map<String, Long> collect = workerList.stream()
+                  .collect(
+                        Collectors.groupingBy(Worker::getPosition, Collectors.counting())
+                  );
+            return null;
       }
 
       /**
