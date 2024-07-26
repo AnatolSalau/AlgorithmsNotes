@@ -1,6 +1,7 @@
 package matrix;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class ValidateMatrix {
       /**
@@ -57,6 +58,27 @@ public class ValidateMatrix {
                   }
             }
             return true;
+      }
+      public String[] sortPeople(String[] names, int[] heights) {
+            String[] result = new String[names.length];
+
+            TreeMap<Integer, String> heightNameMap = new TreeMap<>();
+
+            for(int i = 0; i < names.length; i++) {
+                  String name = names[i];
+                  Integer height = heights[i];
+                  heightNameMap.put(height, name);
+            }
+
+            int j = 0;
+
+            while (!heightNameMap.isEmpty()) {
+                  result[j] = heightNameMap.get(heightNameMap.lastKey());
+                  
+                  j++;
+            }
+
+            return result;
       }
 
       static boolean goThroughAllColumns(char[][] matrix) {

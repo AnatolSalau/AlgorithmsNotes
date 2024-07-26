@@ -8,7 +8,7 @@ import java.util.stream.Stream;
  * https://habr.com/ru/articles/348536/
  */
 public class GroupingExamplesHabr {
-      static class Worker{
+      static class Worker {
             private String name;
             private int age;
             private int salary;
@@ -76,9 +76,11 @@ public class GroupingExamplesHabr {
             //Map<String, Integer> groupByProfessionWithMaxSalary = grouping.groupByProfessionWithMaxSalary(workerList);
             //Map<String, Integer> stringIntegerMap = grouping.groupByProfessionWithMaxSalaryByGrouping(workerList);
 
-            Map<String, List<Worker>> stringListMap = grouping.groupByPositionTest(workerList);
-            Map<String, Set<Worker>> stringSetMap = grouping.groupByPositionBySetTest(workerList);
-            Map<String, Long> positionCountMap = grouping.countingByPositionLongTest(workerList);
+            //Map<String, List<Worker>> stringListMap = grouping.groupByPositionTest(workerList);
+            //Map<String, Set<Worker>> stringSetMap = grouping.groupByPositionBySetTest(workerList);
+            //Map<String, Long> positionCountMap = grouping.countingByPositionLongTest(workerList);
+            Map<String, Integer> stringIntegerMap = grouping.countingByPositionIntegerTest(workerList);
+            Map<String, Set<String>> stringIntegerMap2 = grouping.groupNamesByPositionTest(workerList);
 
       }
 
@@ -108,6 +110,7 @@ public class GroupingExamplesHabr {
             System.out.println(result);
             return result;
       }
+
       Map<String, Set<Worker>> groupByPositionBySetTest(List<Worker> workerList) {
             return null;
       }
@@ -124,6 +127,7 @@ public class GroupingExamplesHabr {
             System.out.println(result);
             return result;
       }
+
       Map<String, Long> countingByPositionLongTest(List<Worker> workerList) {
             Map<String, Long> collect = workerList.stream()
                   .collect(
@@ -145,6 +149,18 @@ public class GroupingExamplesHabr {
             System.out.println(result);
             return result;
       }
+
+      Map<String, Integer> countingByPositionIntegerTest(List<Worker> workerList) {
+            Map<String, Integer> collect = workerList.stream()
+                  .collect(Collectors.groupingBy(Worker::getPosition,
+                              Collectors.collectingAndThen(
+                                    Collectors.counting(), Long::intValue
+                              )
+                        )
+                  );
+            return null;
+      }
+
       /**
        * 4. Группировка списка рабочих по их должности, при этом нас интересуют только имена
        */
@@ -158,6 +174,17 @@ public class GroupingExamplesHabr {
             System.out.println(collect);
             return collect;
       }
+
+      Map<String, Set<String>> groupNamesByPositionTest(List<Worker> workerList) {
+            Map<String, Set<String>> collect = workerList.stream()
+                  .collect(
+                        Collectors.groupingBy(Worker::getPosition,
+                              Collectors.mapping(Worker::getName, Collectors.toSet())
+
+                        ));
+            return collect;
+      }
+
       /**
        * 5. Расчет средней зарплаты для данной должности
        */
@@ -168,6 +195,7 @@ public class GroupingExamplesHabr {
             System.out.println(collect);
             return collect;
       }
+
       /**
        * 6. Группировка списка рабочих по их должности, рабочие представлены только именами единой строкой
        */
@@ -180,6 +208,7 @@ public class GroupingExamplesHabr {
                   ));
             return collect;
       }
+
       /**
        * 7. Группировка списка рабочих по их должности и по возрасту.
        */
@@ -190,8 +219,9 @@ public class GroupingExamplesHabr {
                   );
             return collect;
       }
+
       /**
-            8. Сгруппировать рабочих по профессиям и вывести максимальную заработную плату
+       * 8. Сгруппировать рабочих по профессиям и вывести максимальную заработную плату
        */
       Map<String, Integer> groupByProfessionWithMaxSalary(List<Worker> workerList) {
             Map<String, Optional<Worker>> collectOptionals = workerList.stream()
@@ -213,7 +243,7 @@ public class GroupingExamplesHabr {
       }
 
       /**
-       8.1 Сгруппировать рабочих по профессиям и вывести максимальную заработную плату с помощью GroupingBy
+       * 8.1 Сгруппировать рабочих по профессиям и вывести максимальную заработную плату с помощью GroupingBy
        */
       Map<String, Integer> groupByProfessionWithMaxSalaryByGrouping(List<Worker> workerList) {
             Map<String, Optional<Worker>> collectOptionals = workerList.stream()
