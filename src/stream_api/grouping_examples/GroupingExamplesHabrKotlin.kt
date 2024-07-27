@@ -2,12 +2,14 @@ package stream_api.grouping_examples
 
 import stream_api.grouping_examples.GroupingExamplesHabr.Worker
 import stream_api.grouping_examples.GroupingExamplesHabr.workerList
+import java.util.ListResourceBundle
 
 fun main(args: Array<String>) {
     //groupByPositionBySetTest(workerList)
     countingByPositionLongTest(workerList)
     countingByPositionIntegerTest(workerList)
     groupByPositionOnlyNames(workerList)
+    calculatePositionsWithAverageSalaryTest(workerList)
 }
 
 internal fun groupByPositionBySetTest(workers: List<Worker>): Map<String, Set<Worker>> {
@@ -41,11 +43,10 @@ internal fun groupByPositionOnlyNames(workers: List<Worker>): Map<String, Set<St
 }
 
 internal fun calculatePositionsWithAverageSalaryTest(workers: List<Worker>): Map<String, Double> {
-    workers
+    val mapStringInt: Map<String, List<Int>> =  workers
         .groupBy({it.position}, {it.salary})
-        .mapValues { it.value.average()
 
-        }
+    val mapValues: Map<String, Double> = mapStringInt.mapValues { it.value.average() }
 
-    return workers
+    return mapValues
 }
