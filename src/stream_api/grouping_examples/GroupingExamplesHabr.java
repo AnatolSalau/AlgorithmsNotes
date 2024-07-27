@@ -79,8 +79,8 @@ public class GroupingExamplesHabr {
             //Map<String, List<Worker>> stringListMap = grouping.groupByPositionTest(workerList);
             //Map<String, Set<Worker>> stringSetMap = grouping.groupByPositionBySetTest(workerList);
             //Map<String, Long> positionCountMap = grouping.countingByPositionLongTest(workerList);
-            Map<String, Integer> stringIntegerMap = grouping.countingByPositionIntegerTest(workerList);
-            Map<String, Set<String>> stringIntegerMap2 = grouping.groupNamesByPositionTest(workerList);
+            //Map<String, Integer> stringIntegerMap = grouping.countingByPositionIntegerTest(workerList);
+            //Map<String, Set<String>> stringIntegerMap2 = grouping.groupNamesByPositionTest(workerList);
 
       }
 
@@ -193,6 +193,19 @@ public class GroupingExamplesHabr {
                   .collect(Collectors.groupingBy(Worker::getPosition,
                         Collectors.averagingInt(Worker::getSalary)));
             System.out.println(collect);
+            return collect;
+      }
+
+      Map<String, Double> calculatePositionsWithAverageSalaryTest(List<Worker> workerList) {
+            HashMap<String, Double> collect = workerList
+                  .stream()
+                  .collect(
+                        Collectors.groupingBy(
+                              Worker::getPosition,
+                              HashMap::new,
+                              Collectors.averagingDouble(Worker::getSalary)
+                        )
+                  );
             return collect;
       }
 

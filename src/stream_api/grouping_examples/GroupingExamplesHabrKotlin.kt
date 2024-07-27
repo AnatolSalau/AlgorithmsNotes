@@ -7,6 +7,7 @@ fun main(args: Array<String>) {
     //groupByPositionBySetTest(workerList)
     countingByPositionLongTest(workerList)
     countingByPositionIntegerTest(workerList)
+    groupByPositionOnlyNames(workerList)
 }
 
 internal fun groupByPositionBySetTest(workers: List<Worker>): Map<String, Set<Worker>> {
@@ -32,7 +33,19 @@ internal fun countingByPositionIntegerTest(workers: List<Worker>): Map<List<Work
 }
 
 internal fun groupByPositionOnlyNames(workers: List<Worker>): Map<String, Set<String>> {
-    val result: Map<String, Set<String>> =
+    val mapValues = workers
+        .groupBy ( {it.position}, {it.name})
+        .mapValues { it.value.toSet() }
 
-    return mapOf()
+    return mapValues
+}
+
+internal fun calculatePositionsWithAverageSalaryTest(workers: List<Worker>): Map<String, Double> {
+    workers
+        .groupBy({it.position}, {it.salary})
+        .mapValues { it.value.average()
+
+        }
+
+    return workers
 }
