@@ -81,6 +81,7 @@ public class GroupingExamplesHabr {
             //Map<String, Long> positionCountMap = grouping.countingByPositionLongTest(workerList);
             //Map<String, Integer> stringIntegerMap = grouping.countingByPositionIntegerTest(workerList);
             //Map<String, Set<String>> stringIntegerMap2 = grouping.groupNamesByPositionTest(workerList);
+            Map<String, String> posBySingleStr = grouping.groupingPositionsBySingleStringTest(workerList);
 
       }
 
@@ -218,6 +219,14 @@ public class GroupingExamplesHabr {
                         Worker::getPosition, Collectors.mapping(
                               Worker::getName, Collectors.joining(", ", "{", "}")
                         )
+                  ));
+            return collect;
+      }
+
+      Map<String, String> groupingPositionsBySingleStringTest(List<Worker> workerList) {
+            Map<String, String> collect = workerList.stream()
+                  .collect(Collectors.groupingBy(Worker::getPosition,
+                        Collectors.mapping(Worker::getName, Collectors.joining(", "))
                   ));
             return collect;
       }
