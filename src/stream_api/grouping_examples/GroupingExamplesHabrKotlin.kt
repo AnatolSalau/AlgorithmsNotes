@@ -11,6 +11,7 @@ fun main(args: Array<String>) {
     groupByPositionOnlyNames(workerList)
     calculatePositionsWithAverageSalaryTest(workerList)
     groupingPositionsBySingleStringTest(workerList)
+    groupingByPositionAndAgeTest(workerList)
 }
 
 internal fun groupByPositionBySetTest(workers: List<Worker>): Map<String, Set<Worker>> {
@@ -58,4 +59,13 @@ internal fun groupingPositionsBySingleStringTest(workers: List<Worker>): Map<Str
         .groupBy(Worker::getPosition, Worker::getName)
         .mapValues { it.value.joinToString(",") }
     return join
+}
+
+internal fun groupingByPositionAndAgeTest(workers: List<Worker>): Map<String, Map<Int, List<Worker>>> {
+    val result:  Map<String, Map<Int, List<Worker>>> =
+    workers
+        .groupBy(Worker::getPosition)
+        .mapValues { it.value.groupBy(Worker::getAge) }
+
+    return result
 }

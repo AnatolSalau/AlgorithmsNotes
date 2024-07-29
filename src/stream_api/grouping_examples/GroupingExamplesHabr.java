@@ -242,6 +242,15 @@ public class GroupingExamplesHabr {
             return collect;
       }
 
+      Map<String, Map<Integer, List<Worker>>> groupingByPositionAndAgeTest(List<Worker> workerList) {
+            return workerList.stream()
+                  .collect(
+                        Collectors.groupingBy(
+                              Worker::getPosition, Collectors.groupingBy(Worker::getAge)
+                        )
+                  );
+      }
+
       /**
        * 8. Сгруппировать рабочих по профессиям и вывести максимальную заработную плату
        */
