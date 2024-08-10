@@ -2,7 +2,6 @@ package stream_api.grouping_examples
 
 import stream_api.grouping_examples.GroupingExamplesHabr.Worker
 import stream_api.grouping_examples.GroupingExamplesHabr.workerList
-import java.util.ListResourceBundle
 
 fun main(args: Array<String>) {
     //groupByPositionBySetTest(workerList)
@@ -68,4 +67,11 @@ internal fun groupingByPositionAndAgeTest(workers: List<Worker>): Map<String, Ma
         .mapValues { it.value.groupBy(Worker::getAge) }
 
     return result
+}
+
+internal fun groupByProfessionWithMaxSalaryTest(workers: List<Worker>): Map<String, Int> {
+    val result: Map<String, Int> =  workers
+        .groupBy(Worker::getPosition, Worker::getSalary)
+        .mapValues { it.value.max() }
+    return result;
 }

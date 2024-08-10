@@ -273,6 +273,24 @@ public class GroupingExamplesHabr {
             return result;
       }
 
+      Map<String, Integer> groupByProfessionWithMaxSalaryTest(List<Worker> workerList) {
+            Map<String, Optional<Worker>> collectWorkerWithMaxSalary = workerList.stream()
+                  .collect(Collectors.groupingBy(
+                        Worker::getPosition,
+                        Collectors
+                              .maxBy(Comparator.comparingInt(Worker::getSalary))
+                        )
+                  );
+            HashMap<String, Integer> result = collectWorkerWithMaxSalary.entrySet().stream()
+                  .collect(Collectors.toMap(
+                        key -> key.getKey(), value -> value.getValue().get().salary,
+                        (oldVal, newVal) -> oldVal, HashMap::new
+                  ));
+
+            return result;
+
+      }
+
       /**
        * 8.1 Сгруппировать рабочих по профессиям и вывести максимальную заработную плату с помощью GroupingBy
        */
