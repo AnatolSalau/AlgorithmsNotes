@@ -310,4 +310,17 @@ public class GroupingExamplesHabr {
             System.out.println(result);
             return result;
       }
+
+      Map<String, Integer> groupByProfessionWithMaxSalaryByGroupingTest(List<Worker> workerList) {
+            Map<String, Optional<Worker>> collectPositionMaxSalaryWorker = workerList.stream()
+                  .collect(Collectors.groupingBy(Worker::getPosition, Collectors.maxBy(
+                        Comparator.comparingInt(Worker::getSalary)
+                  )));
+
+            Map<String, Integer> result = collectPositionMaxSalaryWorker.entrySet().stream()
+                  .collect(Collectors.toMap(entry -> entry.getKey(), entry ->
+                        entry.getValue().get().salary
+                  ));
+            return result;
+      }
 }
