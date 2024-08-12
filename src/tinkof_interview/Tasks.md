@@ -25,7 +25,8 @@ Linked Lists
 Trees and Graphs
 [9. Invert Binary Tree](tree/invert_binary_tree/InvertBinaryTree.java)
 
-	Maximum Depth of Binary Tree (Easy) - Problem #104
+[10. Maximum Depth of Binary Tree](tree/maximum_depth_binary_tree/MaxDepthTree.java)
+
 	Binary Tree Inorder Traversal (Easy) - Problem #94
 
 	Lowest Common Ancestor of a Binary Tree (Medium) - Problem #236
