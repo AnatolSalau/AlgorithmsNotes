@@ -1,9 +1,13 @@
 package tinkof_interview.tree.maximum_depth_binary_tree;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.TreeSet;
+
 /*
       https://leetcode.com/problems/maximum-depth-of-binary-tree/
  */
-public class MaxDepthTree {
+public class MaxDepthTreeTreeHash {
       public class TreeNode {
             int val;
             TreeNode left;
@@ -24,27 +28,29 @@ public class MaxDepthTree {
       }
 
       public static void main(String[] args) {
-            MaxDepthTree maxDepthTree = new MaxDepthTree();
+            MaxDepthTreeTreeHash maxDepthTree = new MaxDepthTreeTreeHash();
             maxDepthTree.test1();
             maxDepthTree.test2();
       }
 
       public int maxDepth(TreeNode root) {
-            if (root == null) return 0;
-            int maxDepth = dfs(root);
-            return maxDepth;
+            TreeSet<Integer> leafQueue = new TreeSet<>();
+
+            dfs(root, leafQueue, 0);
+            if (leafQueue.isEmpty()) return 0;
+            return leafQueue.last();
       }
 
-      public int dfs(TreeNode root) {
-            if (root == null) return 0;
+      public void dfs(TreeNode root, TreeSet<Integer> leafQueue, int initialDepth) {
+            if (root == null) return;
 
-            int leftDepth = dfs(root.left);
+            int newDepth = initialDepth + 1;
 
-            int rightDepth = dfs(root.right);
-
-            int result = Math.max(leftDepth + 1, rightDepth + 1);
-
-            return result;
+            if (root.left == null && root.right == null) {
+                  leafQueue.add(newDepth);
+            }
+            dfs(root.left, leafQueue, newDepth);
+            dfs(root.right, leafQueue, newDepth);
       }
       /*
             3
