@@ -33,9 +33,12 @@ public class BinaryTreeInorderTraversal {
             solution through recursion
        */
       public List<Integer> inorderTraversal(TreeNode root) {
+            if (root == null) return new ArrayList<>();
+
             List<Integer> revertNodes = new ArrayList<>();
-            dfs(root.left, revertNodes);
-            dfs(root.right, revertNodes);
+            revertNodes.add(root.val);
+            if (root.left != null) dfs(root.left, revertNodes);
+            if (root.right != null)dfs(root.right, revertNodes);
             return revertNodes;
       }
 
