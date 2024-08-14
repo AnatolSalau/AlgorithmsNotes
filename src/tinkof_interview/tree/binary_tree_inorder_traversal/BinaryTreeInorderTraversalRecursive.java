@@ -5,7 +5,7 @@ import java.util.List;
 /*
 https://leetcode.com/problems/binary-tree-inorder-traversal/description/
  */
-public class BinaryTreeInorderTraversal {
+public class BinaryTreeInorderTraversalRecursive {
       public class TreeNode {
       int val;
       TreeNode left;
@@ -28,7 +28,7 @@ public class BinaryTreeInorderTraversal {
             https://leetcode.com/problems/binary-tree-inorder-traversal/description/
        */
       public static void main(String[] args) {
-            BinaryTreeInorderTraversal binaryTreeInorderTraversal = new BinaryTreeInorderTraversal();
+            BinaryTreeInorderTraversalRecursive binaryTreeInorderTraversal = new BinaryTreeInorderTraversalRecursive();
             binaryTreeInorderTraversal.test1();
       }
       /*
@@ -38,9 +38,7 @@ public class BinaryTreeInorderTraversal {
             if (root == null) return new ArrayList<>();
 
             List<Integer> revertNodes = new ArrayList<>();
-            revertNodes.add(root.val);
-            if (root.left != null) dfs(root.left, revertNodes);
-            if (root.right != null)dfs(root.right, revertNodes);
+            dfs(root, revertNodes);
             return revertNodes;
       }
 
@@ -48,17 +46,13 @@ public class BinaryTreeInorderTraversal {
             if(root == null) return;
 
             dfs(root.left, revertNodes);
+            revertNodes.add(root.val);
             dfs(root.right, revertNodes);
 
-            revertNodes.add(root.val);
       }
       /*
             solution through priority queue
        */
-      public List<Integer> inorderTraversalQueue(TreeNode root) {
-            return null;
-      }
-
       public void test1() {
             TreeNode left3 = new TreeNode(3, null, null );
             TreeNode right2 = new TreeNode(2, left3, null );
