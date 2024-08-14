@@ -27,9 +27,9 @@ Trees and Graphs
 
 [10. Maximum Depth of Binary Tree](tree/maximum_depth_binary_tree/MaxDepthTree.java)
 
-	Binary Tree Inorder Traversal (Easy) - Problem #94
+[11. BinaryTreeInorderTraversalRecursive](tree/binary_tree_inorder_traversal/BinaryTreeInorderTraversalRecursive.java)
 
-	Lowest Common Ancestor of a Binary Tree (Medium) - Problem #236
+[12. LowestCommonAncestor](tree/lowest_common_ancestor/LowestCommonAncestor.java)
 
 Sorting and Searching
 
