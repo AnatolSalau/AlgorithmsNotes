@@ -1,11 +1,12 @@
 package tinkof_interview.tree.binary_tree_inorder_traversal;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 /*
-https://leetcode.com/problems/binary-tree-inorder-traversal/description/
+      https://leetcode.com/problems/binary-tree-inorder-traversal/description/
+      https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/
  */
-public class BinaryTreeInorderTraversal {
+public class BinaryTreeInorderTraversalQueue {
       public class TreeNode {
       int val;
       TreeNode left;
@@ -23,12 +24,16 @@ public class BinaryTreeInorderTraversal {
                   return "TreeNode{" +
                         "val=" + val + "}";
             }
+
+            public int getVal() {
+                  return val;
+            }
       }
       /*
             https://leetcode.com/problems/binary-tree-inorder-traversal/description/
        */
       public static void main(String[] args) {
-            BinaryTreeInorderTraversal binaryTreeInorderTraversal = new BinaryTreeInorderTraversal();
+            BinaryTreeInorderTraversalQueue binaryTreeInorderTraversal = new BinaryTreeInorderTraversalQueue();
             binaryTreeInorderTraversal.test1();
       }
       /*
@@ -37,26 +42,22 @@ public class BinaryTreeInorderTraversal {
       public List<Integer> inorderTraversal(TreeNode root) {
             if (root == null) return new ArrayList<>();
 
-            List<Integer> revertNodes = new ArrayList<>();
-            revertNodes.add(root.val);
-            if (root.left != null) dfs(root.left, revertNodes);
-            if (root.right != null)dfs(root.right, revertNodes);
-            return revertNodes;
-      }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.add(root);
 
-      public void dfs(TreeNode root, List<Integer> revertNodes) {
-            if(root == null) return;
+            PriorityQueue<Integer> revertNodes = new PriorityQueue<>(
+                  Comparator.comparingInt(Integer::intValue).reversed()
+            );
+            while (!queue.isEmpty()) {
+                  if (root.left != null) queue.add(root.left);
+                  if (root.right != null) queue.add(root.right);
 
-            dfs(root.left, revertNodes);
-            dfs(root.right, revertNodes);
-
-            revertNodes.add(root.val);
-      }
-      /*
-            solution through priority queue
-       */
-      public List<Integer> inorderTraversalQueue(TreeNode root) {
-            return null;
+                  if (!queue.isEmpty() ) {
+                        TreeNode pollLeft = queue.poll();
+                        revertNodes.add(pollLeft.val);
+                  }
+            }
+            return new ArrayList<>(revertNodes);
       }
 
       public void test1() {
