@@ -1,9 +1,9 @@
 package stream_api.interviev_task;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import javafx.util.Pair;
+
+import java.util.*;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StackOverflowStream1 {
@@ -121,6 +121,10 @@ public class StackOverflowStream1 {
             StackOverflowStream1 stackOverflowStream1 = new StackOverflowStream1();
             stackOverflowStream1.findClientWithStationaryPhone(clients);
             stackOverflowStream1.findClientWithMaxAgeAndStationaryNumber(clients);
+            int[] arr = {5,6,1,8,9};
+            Pair<Integer, Integer> minNumberAndIndex = getMinNumberAndIndex(arr);
+            System.out.println("minNumberAndIndex : " + minNumberAndIndex);
+            System.out.println("Result : " + "8, 3");
       }
 
       /*
@@ -149,5 +153,17 @@ public class StackOverflowStream1 {
                   .max(Comparator.comparingInt(Client::getAge))
                   .orElseThrow(() -> new RuntimeException("Client not found"));
             return result;
+      }
+
+      /*
+            Напиши метод, который возвращает максимальное число в массиве и его позицию (индекс).
+       */
+      static Pair<Integer, Integer> getMinNumberAndIndex(int[] arr) {
+            Pair<Integer, Integer> array_is_empty = IntStream.range(0, arr.length - 1)
+                  .mapToObj(i -> new Pair<>(arr[i], i))
+                  .sorted(Comparator.comparing(Pair::getValue, Comparator.reverseOrder()))
+                  .findFirst()
+                  .orElseThrow(() -> new RuntimeException("Array is empty"));
+            return array_is_empty;
       }
 }
