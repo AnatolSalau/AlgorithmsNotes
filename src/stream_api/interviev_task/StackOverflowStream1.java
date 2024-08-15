@@ -156,7 +156,15 @@ public class StackOverflowStream1 {
       }
 
       /*
-            Напиши метод, который возвращает максимальное число в массиве и его позицию (индекс).
+      https://javarush.com/help/76118
+      Напиши метод, который возвращает минимальное число в массиве и его позицию (индекс).
+
+
+      Requirements:
+      1. Класс Solution должен содержать класс Pair.
+      2. Класс Solution должен содержать два метода.
+      3. Класс Solution должен содержать метод getMinimumAndIndex().
+      4. Метод getMinimumAndIndex() должен возвращать минимальное число в массиве и его позицию (индекс).
        */
       static Pair<Integer, Integer> getMinNumberAndIndex(int[] arr) {
             Pair<Integer, Integer> array_is_empty = IntStream.range(0, arr.length - 1)

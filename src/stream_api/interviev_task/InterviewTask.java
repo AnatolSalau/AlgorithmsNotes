@@ -25,6 +25,7 @@ public class InterviewTask {
             //findAllRepeatingElements();
             //dividedIntoPresentAndAbsent();
             //countPresentAndAbsent();
+            countLettersInStrings();
       }
 
       /**
@@ -430,7 +431,41 @@ public class InterviewTask {
       }
 
       /**
-       *
+       * 16 Дан набор строк, посчитать количество разных букв во всех строках с использованием StreamAPI
+       * реализовать два решения
+       * 1 - вывести мапу с количеством символ - количество
+       * 2 - вывести количество уникальных букв в символах
        */
+
+      public static void countLettersInStrings() {
+            /*    Result
+                  a - 2
+                  b - 2
+                  c - 2
+                  d - 1
+                  e - 1
+                  f - 2
+             */
+            List<String> strs = List.of("ABC", "abc", "DE", "F", "f");
+
+            Map<Character, Long> charQtyMap = strs.stream()
+                  .flatMapToInt(String::chars)
+                  .mapToObj(num -> (char) num)
+                  .map(Character::toLowerCase)
+                  .collect(Collectors.groupingBy(
+                        Function.identity(), Collectors.counting())
+                  );
+            System.out.println(charQtyMap);
+
+            /*подсчитать количество уникальных символов = 6 */
+
+            long count = strs.stream()
+                  .flatMapToInt(String::chars)
+                  .mapToObj(num -> (char) num)
+                  .map(Character::toUpperCase)
+                  .distinct()
+                  .count();
+            System.out.println(count);
+      }
 
 }
