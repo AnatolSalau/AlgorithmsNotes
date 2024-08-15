@@ -10,7 +10,30 @@ import java.util.*;
 public class MapMergerTest {
 
       public static <K, V> Map<K, Map.Entry<V, V>> mergeMaps(List<Map<K, V>> list1, List<Map<K, V>> list2) {
-            return Map.of();
+            Map<K, Map.Entry<K, V>> map1 = new HashMap<>();
+
+            for(Map<K, V> entry : list1) {
+                  entry.entrySet().forEach( kvEntry -> {
+                              map1.put(kvEntry.getKey(), kvEntry);
+                        }
+                  );
+            }
+
+            Map<K, Map.Entry<V, V>> result = new HashMap<>();
+
+            for (Map<K, V> entry : list2) {
+                  entry.entrySet().forEach(kvEntry -> {
+                        K key = kvEntry.getKey();
+                        if (map1.containsKey(key)) {
+                              V value1 = map1.get(key).getValue();
+                              V value2 = kvEntry.getValue();
+                              Map.Entry<V, V> entryRes = new AbstractMap.SimpleEntry<>(value1, value2);
+                                    result.put(key, entryRes);
+                              }
+                        }
+                  );
+            }
+            return result;
       }
 
       public static void main(String[] args) {

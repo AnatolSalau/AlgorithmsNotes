@@ -26,6 +26,7 @@ public class InterviewTask {
             //dividedIntoPresentAndAbsent();
             //countPresentAndAbsent();
             countLettersInStrings();
+            charsToString();
       }
 
       /**
@@ -468,4 +469,13 @@ public class InterviewTask {
             System.out.println(count);
       }
 
+      /*
+            17. Преобразовать набор символов в строку
+       */
+      public static void charsToString() {
+            Stream<Character> st = Stream.of('C','h','t');
+            String collect = st
+                  .map(ch -> ch.toString())
+                  .collect(Collectors.joining());
+      }
 }
