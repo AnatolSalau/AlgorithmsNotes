@@ -66,9 +66,41 @@ public class MergeIntervals {
        */
 
       public int[][] merge(int[][] intervals) {
-            List<List<Integer>> result = new LinkedList<>();
-            for (int i = 0; i < ; i++) {
-                  
+            if (intervals.length == 1) {
+                  return intervals;
             }
+            List<List<Integer>> result = new LinkedList<>();
+            int curr1 = intervals[0][0];
+            int curr2 = intervals[0][1];
+
+            for (int j = 1; j < intervals.length - 1; j++) {
+                  int second1 = intervals[j][0];
+                  int second2 = intervals[j][1];
+
+                  if (curr2 >= second1) { //interval is overlapping
+                       curr1 = curr1;
+                       curr2 = second2;
+
+                       List<Integer> interval = List.of(curr1, curr2);
+                       result.add(interval);
+                  } else {
+                        List<Integer> interval = List.of(second1, second2);
+                        result.add(interval);
+                        curr1 = second1;
+                        curr2 = second2;
+                  }
+            }
+
+
+            int[][] overlappInterval = new int[result.size()][2];
+
+            int i = 0;
+            for (List<Integer> list : result) {
+                  overlappInterval[i][0] = list.get(0);
+                  overlappInterval[i][1] = list.get(1);
+                  i++;
+            }
+
+            return overlappInterval;
       }
 }
