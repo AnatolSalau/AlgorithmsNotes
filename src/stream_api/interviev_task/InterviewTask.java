@@ -15,7 +15,7 @@ public class InterviewTask {
             //_3_removeEvenIndexes();
             //_4_animals();
             //deleteAllAnimalFromL();
-            personMapTask();
+            //personMapTask();
             //mapWithCountFromStr();
             //randomizeListTest();
             //findDuplicateElements();
@@ -25,8 +25,9 @@ public class InterviewTask {
             //findAllRepeatingElements();
             //dividedIntoPresentAndAbsent();
             //countPresentAndAbsent();
-            countLettersInStrings();
-            charsToString();
+            //countLettersInStrings();
+            //charsToString();
+            getAllWordsWithDuplicates();
       }
 
       /**
@@ -477,5 +478,34 @@ public class InterviewTask {
             String collect = st
                   .map(ch -> ch.toString())
                   .collect(Collectors.joining());
+      }
+
+      /*
+            18. Дано несколько списков слов. Получить список всех слов с этих списков
+            c дубликатами
+                  Hello World World wide Java Stream API Java one love
+            без дубликатов
+                  Hello World wide Java Stream API love
+       */
+      public static void getAllWordsWithDuplicates() {
+
+            List<String> sentences1 = Arrays.asList("Hello World", "World wide");
+            List<String> sentences2 = Arrays.asList("Java Stream API", "Java one love");
+
+            List<String> stringsWithDuplicates = Stream.of(sentences1, sentences2)
+                  .flatMap(Collection::stream)
+                  .map(str -> str.split(" "))
+                  .flatMap(Arrays::stream)
+                  .toList();
+            System.out.println(stringsWithDuplicates);
+
+            List<String> stringsWithoutDuplicates = Stream.of(sentences1, sentences2)
+                  .flatMap(Collection::stream)
+                  .map(str -> str.split(" "))
+                  .flatMap(Arrays::stream)
+                  .distinct()
+                  .toList();
+            System.out.println(stringsWithoutDuplicates);
+
       }
 }
