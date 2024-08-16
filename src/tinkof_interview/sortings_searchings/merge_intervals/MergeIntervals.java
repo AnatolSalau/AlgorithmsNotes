@@ -91,6 +91,14 @@ public class MergeIntervals {
                   }
             }
 
+            if(
+                  result.get(result.size() - 1).get(0) != intervals[intervals.length - 1][0]
+                  &&
+                  result.get(result.size() - 1).get(1) != intervals[intervals.length - 1][1]
+            ) {
+                  List<Integer> interval = List.of(intervals[intervals.length - 1][0], intervals[intervals.length - 1][1]);
+                  result.add(interval);
+            }
 
             int[][] overlappInterval = new int[result.size()][2];
 
