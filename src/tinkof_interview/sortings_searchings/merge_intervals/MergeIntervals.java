@@ -66,38 +66,27 @@ public class MergeIntervals {
        */
 
       public int[][] merge(int[][] intervals) {
-            if (intervals.length == 1) {
+            if (intervals.length <= 2) {
                   return intervals;
             }
             List<List<Integer>> result = new LinkedList<>();
-            int curr1 = intervals[0][0];
-            int curr2 = intervals[0][1];
 
-            for (int j = 1; j < intervals.length - 1; j++) {
-                  int second1 = intervals[j][0];
-                  int second2 = intervals[j][1];
+            int s = intervals[0][0];
+            int l = intervals[0][1];
 
-                  if (curr2 >= second1) { //interval is overlapping
-                       curr1 = curr1;
-                       curr2 = second2;
+            int r = intervals[1][0];
+            int e = intervals[1][1];
 
-                       List<Integer> interval = List.of(curr1, curr2);
-                       result.add(interval);
+            for (int i = 1; i < intervals.length; i++) {
+                  if ( l > r) {
+                        if (i + 1 < intervals.length) {
+                              l = intervals[i][1];
+                              r = intervals[i+1][0];
+                              e = intervals[1+1][1];
+                        }
                   } else {
-                        List<Integer> interval = List.of(second1, second2);
-                        result.add(interval);
-                        curr1 = second1;
-                        curr2 = second2;
-                  }
-            }
 
-            if(
-                  result.get(result.size() - 1).get(0) != intervals[intervals.length - 1][0]
-                  &&
-                  result.get(result.size() - 1).get(1) != intervals[intervals.length - 1][1]
-            ) {
-                  List<Integer> interval = List.of(intervals[intervals.length - 1][0], intervals[intervals.length - 1][1]);
-                  result.add(interval);
+                  }
             }
 
             int[][] overlappInterval = new int[result.size()][2];
