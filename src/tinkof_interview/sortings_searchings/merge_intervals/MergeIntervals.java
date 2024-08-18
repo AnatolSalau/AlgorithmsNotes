@@ -71,16 +71,17 @@ public class MergeIntervals {
             List<int[]> result = new LinkedList<>();
 
             int[] currInterval = intervals[0];
+            result.add(currInterval);
 
-            for (int i = 1; i < intervals.length; i++) {
+            for (int i = 0; i < intervals.length; i++) {
                   if (currInterval[1] >= intervals[i][0]) {//overlapping interval
                         int maxEnd = Math.max(currInterval[1], intervals[i][1]);
                         currInterval[1] = maxEnd;
-                        result.add(currInterval);
+
                   } else {
-                        result.add(currInterval);
                         currInterval[0] = intervals[i][0];
                         currInterval[1] = intervals[i][1];
+                        result.add(currInterval);
                   }
             }
 
