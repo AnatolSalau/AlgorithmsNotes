@@ -32,8 +32,9 @@ Trees and Graphs
 [12. LowestCommonAncestor](tree/lowest_common_ancestor/LowestCommonAncestor.java)
 
 Sorting and Searching
+[13. MergeIntervals](sortings_searchings/merge_intervals/MergeIntervals.java)
 
-	Merge Intervals (Medium) - Problem #56
+    
 	Search in Rotated Sorted Array (Medium) - Problem #33
 	Top K Frequent Elements (Medium) - Problem #347
 	Kth Largest Element in an Array (Medium) - Problem #215

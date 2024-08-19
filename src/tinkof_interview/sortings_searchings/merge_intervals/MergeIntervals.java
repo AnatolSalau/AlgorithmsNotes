@@ -70,18 +70,24 @@ public class MergeIntervals {
 
             List<int[]> result = new LinkedList<>();
 
-            int[] currInterval = intervals[0];
-            result.add(currInterval);
+            int[] previousInterval = new int[2];
+            int first = intervals[0][0];
+            int second = intervals[0][1];
+            previousInterval[0] = first;
+            previousInterval[1] = second;
+            result.add(previousInterval);
 
-            for (int i = 0; i < intervals.length; i++) {
-                  if (currInterval[1] >= intervals[i][0]) {//overlapping interval
-                        int maxEnd = Math.max(currInterval[1], intervals[i][1]);
-                        currInterval[1] = maxEnd;
+            for (int[] currInterval : intervals) {
+                  if (previousInterval[1] >= currInterval[0]) {//we have intersection
 
+                       previousInterval[1] = Math.max(currInterval[1], second);
                   } else {
-                        currInterval[0] = intervals[i][0];
-                        currInterval[1] = intervals[i][1];
-                        result.add(currInterval);
+                        int[] newInterval = new int[2];
+                        newInterval[0] = currInterval[0];
+                        newInterval[1] = currInterval[1];
+                        result.add(newInterval);
+                        first = currInterval[0];
+                        second = currInterval[1];
                   }
             }
 
