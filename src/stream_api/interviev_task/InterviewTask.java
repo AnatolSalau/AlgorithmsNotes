@@ -27,7 +27,8 @@ public class InterviewTask {
             //countPresentAndAbsent();
             //countLettersInStrings();
             //charsToString();
-            getAllWordsWithDuplicates();
+            //getAllWordsWithDuplicates();
+            _1_removeDuplicatesTest();
       }
 
       /**
@@ -41,6 +42,16 @@ public class InterviewTask {
                   .filter(s -> Collections.frequency(finalData, s) > 1)
                   .collect(Collectors.toCollection(ArrayList::new));
             System.out.println(data);
+      }
+
+      public static void _1_removeDuplicatesTest(){
+            ArrayList<Integer> data = new ArrayList<>();
+            Collections.addAll(data, 1, 2, 2, 3, 4);
+            ArrayList<Integer> finalData = data;
+            List<Integer> list = finalData.stream()
+                  .distinct()
+                  .toList();
+            System.out.println(list);
       }
 
       /**

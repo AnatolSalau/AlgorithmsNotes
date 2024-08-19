@@ -26,15 +26,24 @@ public class ArraysIntersection {
       }
 
       public int[] intersect(int[] nums1, int[] nums2) {
-            Set<Integer> set2 = Arrays.stream(nums2)
-                  .boxed()
-                  .collect(Collectors.toSet());
+            if (nums1.length > nums2.length) {
+                  Set<Integer> set1 = Arrays.stream(nums1)
+                        .boxed()
+                        .collect(Collectors.toSet());
+                  int[] ints = Arrays.stream(nums2)
+                        .filter(set1::contains)
+                        .toArray();
+                  return ints;
+            } else {
+                  Set<Integer> set2 = Arrays.stream(nums2)
+                        .boxed()
+                        .collect(Collectors.toSet());
+                  int[] ints = Arrays.stream(nums1)
+                        .filter(set2::contains)
+                        .toArray();
+                  return ints;
+            }
 
-            int[] intersection = Arrays.stream(nums1)
-                  .filter(set2::contains)
-                  .toArray();
-
-            return intersection;
       }
 
       static void test1() {
