@@ -1,6 +1,10 @@
 package tinkof_interview.sortings_searchings.search_in_rotated_sorted;
 
+
 public class SearchInRotatedSorted {
+      /*
+            https://leetcode.com/problems/search-in-rotated-sorted-array/description/
+       */
       public static void main(String[] args) {
             SearchInRotatedSorted searchInRotatedSorted = new SearchInRotatedSorted();
             searchInRotatedSorted.test1();
@@ -20,12 +24,19 @@ public class SearchInRotatedSorted {
 
                   if (middle == target) return middleIndex;
 
-                  if (target < middle) { // target less than middle do search in left half
-                        return doSearch(arr, startIndex, middleIndex - 1, target);
-                  } else {// target more than middle so do search in right half
-                        return doSearch(arr, middleIndex + 1, endIndex, target);
+                  int leftResult = doSearch(arr, startIndex, middleIndex - 1, target);
+
+                  int rightResult = doSearch(arr, middleIndex + 1, endIndex, target);
+
+                  if (leftResult != -1) {
+                        return leftResult;
                   }
+                  else if (rightResult != -1) {
+                        return rightResult;
+                  }
+                  else return -1;
             }
+
             return -1;
       }
 

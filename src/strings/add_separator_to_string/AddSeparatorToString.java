@@ -3,6 +3,7 @@ package strings.add_separator_to_string;
 /**
  * Create string from array with separator
  */
+
 public class AddSeparatorToString {
 
       public static void main(String[] args) {

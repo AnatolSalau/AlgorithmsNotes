@@ -34,8 +34,9 @@ Trees and Graphs
 Sorting and Searching
 [13. MergeIntervals](sortings_searchings/merge_intervals/MergeIntervals.java)
 
-    
-	Search in Rotated Sorted Array (Medium) - Problem #33
+[14. Search in Rotated Sorted Array](sortings_searchings/search_in_rotated_sorted/SearchInRotatedSorted.java)    
+
+
 	Top K Frequent Elements (Medium) - Problem #347
 	Kth Largest Element in an Array (Medium) - Problem #215
 
