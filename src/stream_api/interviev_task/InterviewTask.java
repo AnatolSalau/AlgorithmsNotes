@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
 public class InterviewTask {
       public static void main(String[] args) {
 
@@ -29,6 +28,7 @@ public class InterviewTask {
             //charsToString();
             //getAllWordsWithDuplicates();
             _1_removeDuplicatesTest();
+            concatAnimalNamesByConcatTest();
       }
 
       /**
@@ -106,6 +106,15 @@ public class InterviewTask {
                   .collect(Collectors.joining(", "))
                   +".";
             return collect;
+      }
+
+      public static void concatAnimalNamesByConcatTest() {
+            List<String> animals = List.of("Тигр", "Лев", "Горилла");
+
+            String collect = animals.stream()
+                  .collect(Collectors.joining(","));
+            collect = collect + ".";
+            System.out.println(collect);
       }
 
       public static String concatAnimalNamesByJoining(List<String> animals) {

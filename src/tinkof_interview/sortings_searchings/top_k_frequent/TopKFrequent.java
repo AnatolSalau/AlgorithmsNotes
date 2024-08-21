@@ -1,7 +1,6 @@
 package tinkof_interview.sortings_searchings.top_k_frequent;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class TopKFrequent {
       public static void main(String[] args) {
@@ -11,7 +10,29 @@ public class TopKFrequent {
       }
 
       public static int[] topKFrequent(int[] nums, int k) {
-            return null;
+            TreeMap<Integer, Integer> freqNumMap = new TreeMap<>();
+
+            for(int i = 0; i < nums.length; i++) {                                                    //O(n)
+                  int curr = nums[i];
+
+                  if (freqNumMap.containsKey(curr)) {
+                        Integer count = freqNumMap.get(curr);
+                        count++;
+                        freqNumMap.put(curr, count);
+                  } else {
+                        freqNumMap.put(curr, 1);
+                  }
+            }
+            PriorityQueue<Map.Entry<Integer, Integer>> heapEntrySortedByValue = new PriorityQueue<>(
+                  Comparator.comparingInt(Map.Entry<Integer, Integer>::getValue).reversed()
+            );
+            heapEntrySortedByValue.addAll(freqNumMap.entrySet());                                     //O(n)
+            int[] result = new int[k];
+            for (int j = 0; j < result.length; j++) {
+                  Integer num = heapEntrySortedByValue.poll().getKey();
+                  result[j] = num;
+            }
+            return result;                                                                            //O(n^2)
       }
 
       static void test1() {
