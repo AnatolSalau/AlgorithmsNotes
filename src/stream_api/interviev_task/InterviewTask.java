@@ -29,6 +29,8 @@ public class InterviewTask {
             //getAllWordsWithDuplicates();
             _1_removeDuplicatesTest();
             concatAnimalNamesByConcatTest();
+            deleteAllAnimalFromL();
+            personMapTask();
       }
 
       /**
@@ -141,7 +143,7 @@ public class InterviewTask {
             System.out.println("Animals before modifying");
             System.out.println(animals);
             //removeByRemoveAll(animals);
-            animals = removeByStreamSubstract(animals);
+            animals = removeByStreamSubstractTest(animals);
             System.out.println("Animals after modifying");
             System.out.println(animals);
       }
@@ -169,6 +171,14 @@ public class InterviewTask {
             return result;
       }
 
+      public static List<String> removeByStreamSubstractTest(List<String> animals) {
+            List<String> result = animals.stream()
+                  .filter(str -> !str.startsWith("Л"))
+                  .toList();
+            animals = result;
+            return animals;
+      }
+
       /**
        * 6.
        * Из листа, хранящих Person, создать мапу, где ключ - язык Person (у Person есть
@@ -193,7 +203,7 @@ public class InterviewTask {
                   new Person(7L, "Seven", "French")
             );
             System.out.println(personList);
-            Map<String, List<Person>> personMap = getPersonMap(personList, "English");
+            Map<String, List<Person>> personMap = getPersonMapTest(personList, "English");
             System.out.println("All persons with english");
             System.out.println(personMap);
       }
@@ -205,6 +215,12 @@ public class InterviewTask {
                   .collect(Collectors.groupingBy(Person::language, Collectors.toList()));
 
             return personMap;
+      }
+
+      public static Map<String, List<Person>> getPersonMapTest(List<Person> personList, String languageName) {
+            Map<String, List<Person>> groupByLanguage = personList.stream()
+                  .collect(Collectors.groupingBy(Person::language));
+            return Map.of(languageName, groupByLanguage.get(languageName));
       }
 
       /**
