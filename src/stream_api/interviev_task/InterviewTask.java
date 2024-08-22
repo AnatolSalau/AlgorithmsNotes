@@ -31,6 +31,7 @@ public class InterviewTask {
             concatAnimalNamesByConcatTest();
             deleteAllAnimalFromL();
             personMapTask();
+            mapWithCountFromStr();
       }
 
       /**
@@ -231,7 +232,7 @@ public class InterviewTask {
       public static void mapWithCountFromStr() {
             String str = "Count words in this string with some words";
             System.out.println(str);
-            HashMap<String, Long> mapFreq = getMapFreq(str);
+            HashMap<String, Long> mapFreq = getMapFreqTest(str);
             System.out.println(mapFreq);
 
       }
@@ -245,6 +246,15 @@ public class InterviewTask {
                               HashMap::new,
                               Collectors.counting()));
             return freqMap;
+      }
+
+      public static HashMap<String, Long> getMapFreqTest(String str) {
+            HashMap<String, Long> collect = Arrays.stream(str.split(" "))
+                  .collect(
+                        Collectors.groupingBy(Function.identity(),HashMap::new, Collectors.counting())
+                  );
+
+            return collect;
       }
 
       /**
