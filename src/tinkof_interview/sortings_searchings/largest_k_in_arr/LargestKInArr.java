@@ -1,6 +1,9 @@
 package tinkof_interview.sortings_searchings.largest_k_in_arr;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 /*
       `https://leetcode.com/problems/kth-largest-element-in-an-array/description/
  */
@@ -12,6 +15,19 @@ public class LargestKInArr {
       }
 
       public int findKthLargest(int[] nums, int k) {
+            PriorityQueue<Integer> heap = new PriorityQueue<>(
+                  Comparator.comparingInt(Integer::intValue).reversed()
+            );
+            for (int i = 0; i < k; i++) {
+                  heap.add(nums[i]);
+            }
+
+            for (int i = 1; i <= k; i++) {
+                  if (!heap.isEmpty()) {
+                        Integer curr = heap.poll();
+                        if (i == k) return curr;
+                  }
+            }
             return -1;
       }
 
