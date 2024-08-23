@@ -4,9 +4,10 @@ import stream_api.interviev_task.InterviewTask.Person
 
 
 fun main() {
-    getAllWordsWithDuplicates()
-    removeAllAnimalsFromL()
-    personMapTask()
+    //getAllWordsWithDuplicates()
+    //removeAllAnimalsFromL()
+    //personMapTask()
+    mapWithCountFromStrKotlin()
 }
 
 /*
@@ -73,4 +74,20 @@ fun personMapTask() {
     val personMap = getPersonMapTest(personList, "English")
     println("All persons with english")
     println(personMap)
+}
+
+fun mapWithCountFromStrKotlin() {
+    val str: String = "Count words in this string with some words"
+
+    val split: List<String> = str.split(" ")
+    val groupBy: Map<String, List<String>> =
+        split.groupBy { it }
+
+    val mapValues: Map<String, Int> = groupBy.mapValues { it.value.size }
+    println(mapValues)
+
+    val eachCount:Map<String, Int>  = split
+        .groupingBy { it }
+        .eachCount()
+    println(eachCount)
 }
