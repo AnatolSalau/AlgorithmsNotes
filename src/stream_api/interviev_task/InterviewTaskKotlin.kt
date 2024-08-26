@@ -8,6 +8,7 @@ fun main() {
     //removeAllAnimalsFromL()
     //personMapTask()
     mapWithCountFromStrKotlin()
+    randomizeListLearningTestKotlin()
 }
 
 /*
@@ -90,4 +91,20 @@ fun mapWithCountFromStrKotlin() {
         .groupingBy { it }
         .eachCount()
     println(eachCount)
+}
+
+fun randomizeListLearningTestKotlin() {
+
+    val list = listOf("One", "Two", "Three")
+
+    fun getRandomizeList(list: List<String>, outputSize: Int): List<String> {
+        val mutable: MutableList<String> = mutableListOf()
+        val indexRange = 0..list.size
+        repeat(outputSize) {
+            mutable.add(list[indexRange.random()])
+        }
+        return mutable.toList()
+    }
+
+    println(getRandomizeList(list, 3))
 }

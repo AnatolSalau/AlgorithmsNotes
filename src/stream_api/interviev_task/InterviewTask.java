@@ -268,7 +268,7 @@ public class InterviewTask {
        *  */
       public static void randomizeListTest() {
             List<String> input = List.of("One", "Two", "Three");
-            List<String> strings = randomizeList(input, 10);
+            List<String> strings = randomizeListLearningTest(input, 10);
             System.out.println(strings);
       }
       public static  List<String> randomizeList(List<String> input, int outputSize) {
@@ -282,6 +282,14 @@ public class InterviewTask {
 
             return strings;
       };
+
+      public static  List<String> randomizeListLearningTest(List<String> input, int outputSize) {
+            Random random = new Random();
+            List<String> strings = IntStream.range(0, outputSize)
+                  .mapToObj(num -> input.get(random.nextInt(input.size())))
+                  .toList();
+            return strings;
+      }
 
       /**
        * 9.
