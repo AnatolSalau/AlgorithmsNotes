@@ -27,11 +27,8 @@ public class InterviewTask {
             //countLettersInStrings();
             //charsToString();
             //getAllWordsWithDuplicates();
-            _1_removeDuplicatesTest();
-            concatAnimalNamesByConcatTest();
-            deleteAllAnimalFromL();
-            personMapTask();
-            mapWithCountFromStr();
+
+            findDuplicateElements();
       }
 
       /**
@@ -306,14 +303,14 @@ public class InterviewTask {
       public static void findDuplicateElements() {
             int[] arr1 = {1,2,2,1};
             int[] arr2 = {2,2};
-            int[] answer1 = findDuplicate(arr1, arr2);
+            int[] answer1 = findDuplicateTest(arr1, arr2);
             System.out.println("Answer 1 : " + Arrays.toString(answer1));
             System.out.println("Expected 1 : " + "[2]");
             System.out.println();
 
             int[] arr3 = {4,9,5};
             int[] arr4 = {9,4,9,8,4};
-            int[] answer2 = findDuplicate(arr3, arr4);
+            int[] answer2 = findDuplicateTest(arr3, arr4);
             System.out.println("Answer 2 : " + Arrays.toString(answer2));
             System.out.println("Expected 2 : " + "[9,4]");
             System.out.println("");
@@ -329,6 +326,18 @@ public class InterviewTask {
                   .filter(set1::contains)
                   .distinct()
                   .mapToInt(Integer::intValue)
+                  .toArray();
+            return result;
+      }
+
+      public static int[] findDuplicateTest(int[] arr1, int[] arr2) {
+            IntStream stream1 = Arrays.stream(arr1);
+            IntStream stream2 = Arrays.stream(arr2);
+
+            Set<Integer> set1 = stream1.boxed().collect(Collectors.toSet());
+            int[] result = stream2
+                  .distinct()
+                  .filter(set1::contains)
                   .toArray();
             return result;
       }
