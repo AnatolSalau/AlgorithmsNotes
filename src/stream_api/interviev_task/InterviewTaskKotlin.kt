@@ -1,6 +1,7 @@
 package stream_api.interviev_task
 
 import stream_api.interviev_task.InterviewTask.Person
+import java.util.*
 
 
 fun main() {
@@ -9,6 +10,7 @@ fun main() {
     //personMapTask()
     mapWithCountFromStrKotlin()
     randomizeListLearningTestKotlin()
+    findDuplicateElementsKotlin()
 }
 
 /*
@@ -93,13 +95,14 @@ fun mapWithCountFromStrKotlin() {
     println(eachCount)
 }
 
+@OptIn(ExperimentalStdlibApi::class)
 fun randomizeListLearningTestKotlin() {
 
     val list = listOf("One", "Two", "Three")
 
     fun getRandomizeList(list: List<String>, outputSize: Int): List<String> {
         val mutable: MutableList<String> = mutableListOf()
-        val indexRange = 0..list.size
+        val indexRange = 0..<list.size
         repeat(outputSize) {
             mutable.add(list[indexRange.random()])
         }
@@ -107,4 +110,26 @@ fun randomizeListLearningTestKotlin() {
     }
 
     println(getRandomizeList(list, 3))
+}
+
+fun findDuplicateElementsKotlin() {
+    fun findDuplicateTestKotlin(arr1: IntArray, arr2: IntArray): IntArray {
+        val intersect = arr1.intersect(arr2.toSet())
+        return intersect.toIntArray();
+    }
+    val arr1 = intArrayOf(1, 2, 2, 1)
+    val arr2 = intArrayOf(2, 2)
+    val answer1 = findDuplicateTestKotlin(arr1, arr2)
+    println("Answer 1 : " + answer1.joinToString(" "))
+    println("Expected 1 : " + "[2]")
+    println()
+
+    val arr3 = intArrayOf(4, 9, 5)
+    val arr4 = intArrayOf(9, 4, 9, 8, 4)
+    val answer2 = findDuplicateTestKotlin(arr3, arr4)
+    println("Answer 2 : " + answer2.joinToString(" "))
+    println("Expected 2 : " + "[9,4]")
+    println("")
+
+
 }
