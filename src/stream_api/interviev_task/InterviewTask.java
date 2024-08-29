@@ -2,7 +2,6 @@ package stream_api.interviev_task;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -29,6 +28,7 @@ public class InterviewTask {
             //getAllWordsWithDuplicates();
 
             findDuplicateElements();
+            findFirstUniqueInArr();
       }
 
       /**
@@ -367,11 +367,11 @@ public class InterviewTask {
        * //9, 4, 9, 9, 6, 7, 4, 5, 5 -> 6
        * //5, 9, 8, 5, 7, 9, 8, 7, 1 -> 1
        */
-      public static void findUniqueInArr() {
-            int[] nums1 = {9, 4, 9, 9, 6, 7, 4, 5, 5};
-            int[] nums2 = {5, 9, 8, 5, 7, 9, 8, 7, 1};
-            System.out.println(findFirstUnique(nums1));
-            System.out.println(findFirstUnique(nums2));
+      public static void findFirstUniqueInArr() {
+            int[] nums1 = {9, 4, 9, 9, 6, 7, 5, 5};
+            int[] nums2 = {5, 9, 8, 5, 7, 9, 8, 1};
+            System.out.println(findFirstUniqueTest(nums1));
+            System.out.println(findFirstUniqueTest(nums2));
       }
 
       public static int findFirstUnique(int[] nums) {
@@ -390,6 +390,20 @@ public class InterviewTask {
                   })
                   .getKey();
             return firstUnique;
+      }
+
+      public static int findFirstUniqueTest(int[] nums) {
+
+            LinkedHashMap<Integer, Long> collect = Arrays.stream(nums)
+                  .boxed()
+                  .collect(Collectors.groupingBy(
+                        Function.identity(), LinkedHashMap::new, Collectors.counting()
+                  ));
+            return collect.entrySet().stream()
+                  .filter(entry -> entry.getValue() < 2)
+                  .map(Map.Entry::getKey)
+                  .findFirst()
+                  .orElseThrow(() -> new RuntimeException("Element nor found"));
       }
 
       /** 12

@@ -11,7 +11,10 @@ fun main() {
     mapWithCountFromStrKotlin()
     randomizeListLearningTestKotlin()
     findDuplicateElementsKotlin()
+    findFirstUniqueTestKotlin()
 }
+
+
 
 /*
       18. Дано несколько списков слов. Получить список всех слов с этих списков
@@ -132,4 +135,18 @@ fun findDuplicateElementsKotlin() {
     println("")
 
 
+}
+
+fun findFirstUniqueTestKotlin() {
+    val nums1 = intArrayOf(9, 4, 9, 9, 6, 7, 5, 5)
+    val nums2 = intArrayOf( 9, 8, 5, 7, 9, 8, 7, 1)
+    fun findFirstUnique(nums: IntArray): Int {
+        return nums
+            .groupBy { it }  // Group elements by their values
+            .filter { it.value.size == 1 }  // Keep only the groups with one element
+            .keys  // Get the keys (unique elements)
+            .firstOrNull() ?: throw NoSuchElementException("No unique element found")  // Return the first or throw an exception
+    }
+    println(findFirstUnique(nums1))
+    println(findFirstUnique(nums2))
 }
