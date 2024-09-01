@@ -27,15 +27,15 @@ public class ITQGroupTasks {
             System.out.println(animalsList);
       }
 
-      /*
+      /**
        * It is necessary to modify the list - remove all animals starting with the Russian letter "L"
        * @param animals list of animals
+       * @return a list of animals without animals starting with the Russian letter "L"
        */
-      private static List<String> removeByStreamSubstract1(List<String> animals2) {
-            List<String> result = animals2.stream()
+      private static List<String> removeByStreamSubstract1(List<String> animals) {
+            return animals.stream()
                   .filter(s -> !s.startsWith("L"))
                   .toList();
-            return result;
       }
 
       private static void modifyCurrentCollection(List<String> animals2) {

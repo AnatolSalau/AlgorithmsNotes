@@ -1,5 +1,6 @@
 package dynamic_programming._2_fibonachi_number;
 
+
 public class FibonachiNumberRecursive {
       public static void main(String[] args) {
             FibonachiNumberRecursive fibonachiNumber = new FibonachiNumberRecursive();
@@ -29,6 +30,14 @@ public class FibonachiNumberRecursive {
             System.out.println();
       }
 
+      /**
+       * Calculates the nth Fibonacci number recursively.
+       *
+       * The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, usually starting with 0 and 1. This method calculates the nth number in the sequence by recursively calling itself with the n-1 and n-2 values.
+       *
+       * @param n the index of the Fibonacci number to calculate, where 0 represents the first number in the sequence (0)
+       * @return the nth Fibonacci number
+       */
       public int fib(int n) {
             if (n == 0)
                   return 0;

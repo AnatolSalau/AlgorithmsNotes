@@ -2,6 +2,8 @@ package stream_api.interviev_task
 
 import stream_api.interviev_task.InterviewTask.Person
 import java.util.*
+import java.util.function.Function
+import java.util.stream.Collectors
 
 
 fun main() {
@@ -12,6 +14,7 @@ fun main() {
     randomizeListLearningTestKotlin()
     findDuplicateElementsKotlin()
     findFirstUniqueTestKotlin()
+    dividedIntoPresentAndAbsentTest()
 }
 
 
@@ -149,4 +152,14 @@ fun findFirstUniqueTestKotlin() {
     }
     println(findFirstUnique(nums1))
     println(findFirstUnique(nums2))
+}
+
+fun dividedIntoPresentAndAbsentTest() {
+    val first = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    val second = intArrayOf(10, 1, 5, 8, 9, 6, 3)
+    val result = mapOf(
+        "Present" to first.filter { it in second.toSet() },
+        "Absent" to first.filter { it !in second.toSet() }
+    )
+    println(result)
 }

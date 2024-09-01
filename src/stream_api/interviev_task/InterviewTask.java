@@ -29,6 +29,7 @@ public class InterviewTask {
 
             findDuplicateElements();
             findFirstUniqueInArr();
+            dividedIntoPresentAndAbsentTest();
       }
 
       /**
@@ -183,7 +184,7 @@ public class InterviewTask {
        * поле language), а значение - коллекция Person с этим языком.
        * *Язык у каждого Person только один, это нативный язык.*
        */
-      record Person(Long id, String name, String language) {}
+      record Person(long id, String name, String language) {}
       public static void personMapTask() {
             String one = new String("English");
             String two = new String("English");
@@ -452,7 +453,7 @@ public class InterviewTask {
                   .collect(Collectors.toSet());
 
             int result = Arrays.stream(first)
-                  .filter(e -> !set2.contains(e))
+                  .filter(e -> !set2.contains(Optional.of(e)))
                   .findFirst()
                   .orElse(-99);
 
@@ -480,6 +481,18 @@ public class InterviewTask {
                         .boxed()
                         .collect(Collectors.partitioningBy(collectSecond::contains));
             System.out.println(partition);
+      }
+      public static void dividedIntoPresentAndAbsentTest() {
+            int[] first = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            int[] second = {10, 1, 5, 8, 9, 6, 3};
+
+            Set<Integer> secondSet = Arrays.stream(second).boxed().collect(Collectors.toSet());
+
+            Map<String, List<Integer>> collect = Arrays.stream(first)
+                  .boxed()
+                  .collect(Collectors.groupingBy((num) -> secondSet.contains(num) ? "Present" : "Absent"
+                   ));
+            System.out.println(collect);
       }
 
       /**
@@ -586,3 +599,4 @@ public class InterviewTask {
 
       }
 }
+

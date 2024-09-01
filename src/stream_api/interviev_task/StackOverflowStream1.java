@@ -1,13 +1,14 @@
 package stream_api.interviev_task;
 
 import javafx.util.Pair;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StackOverflowStream1 {
-      static class Client {
+      public static class Client {
             Integer id;
             String name;
             Integer age;
@@ -48,7 +49,7 @@ public class StackOverflowStream1 {
             }
       }
 
-      static class Phone {
+      public static class Phone {
             Long number;
             PhoneType type;
 
@@ -132,7 +133,7 @@ public class StackOverflowStream1 {
             и сохранить клиента в потоке для дальнейшего поиска максимального возраста?
        */
 
-      Stream<Client> findClientWithStationaryPhone(List<Client> clients) {
+      Stream<Client> findClientWithStationaryPhone( @NotNull List<Client> clients) {
             List<Client> result = clients.stream()
                   .filter(client -> client.phones.stream()
                         .anyMatch(phone -> phone.type.equals(Phone.PhoneType.STATIONARY))
@@ -140,7 +141,13 @@ public class StackOverflowStream1 {
                   .toList();
             return result.stream();
       }
-
+      Stream<Client> findClientWithStationaryPhoneTest( @NotNull List<Client> clients) {
+            List<Client> result = clients.stream()
+                  .filter(client -> client.phones.stream()
+                          .anyMatch(phone -> phone.type.equals(Phone.PhoneType.STATIONARY))
+                  ).toList();
+            return result.stream();
+      }
       /*
             Найти самого возрастного клиента, которой пользуется стационарным телефоном
        */
