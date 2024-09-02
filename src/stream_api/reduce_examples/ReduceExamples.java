@@ -6,14 +6,16 @@ import java.util.List;
 public class ReduceExamples {
       public static void main(String[] args) {
 
-            sumElements(List.of(1,2,3));
+            sumElementsTest(List.of(1,2,3));
             joinStrings(List.of("one", "two", "three"));
             toUpperCase(List.of("one", "two", "three"));
             sumParallel(List.of(1,2,3));
             sumUserAges(List.of(new User("John", 30), new User("Julie", 35)));
 
       }
-
+      /*
+       * Sum elements by reducing them
+       */
       public static void sumElements(List<Integer> numbers) {
             System.out.println("Numbers : " + numbers);
             int result = numbers.stream()
@@ -22,7 +24,14 @@ public class ReduceExamples {
             System.out.println(result);
             System.out.println();
       }
-
+      public static void sumElementsTest(List<Integer> numbers) {
+            Integer reduce = numbers.stream()
+                  .reduce(0, Integer::sum);
+            System.out.println(reduce);
+      }
+      /*
+       * Join strings by reducing them
+       */
       public static void joinStrings(List<String> stringList) {
             System.out.println("Strings : " + stringList);
             String result = stringList.stream()
@@ -31,11 +40,15 @@ public class ReduceExamples {
             System.out.println(result);
             System.out.println();
       }
+      public static void joinStringsTest(List<String> stringList) {
+            String reduce = stringList.stream()
+                    .reduce("", (subtotal, element) -> subtotal + element);
+            System.out.println(reduce);
+      }
 
       public static void toUpperCase(List<String> stringList) {
             System.out.println("Strings : " + stringList);
             String result = stringList.stream()
-                  //.reduce("", String::concat)
                   .reduce("", (subtotal, element) -> subtotal.toUpperCase() + element.toUpperCase());
             System.out.println(result);
             System.out.println();
@@ -51,7 +64,7 @@ public class ReduceExamples {
             System.out.println();
       }
 
-      static record User(String name, Integer age){};
+      public static record User(String name, Integer age){};
 
       public static void sumUserAges(List<User> users) {
             Integer result = users.stream()
