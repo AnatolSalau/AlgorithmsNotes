@@ -3,6 +3,7 @@ package stream_api.reduce_examples;
 import java.lang.module.FindException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -15,7 +16,7 @@ public class ReduceExamples {
             //toUpperCase(List.of("one", "two", "three"));
             //sumParallel(List.of(1,2,3));
             //sumUserAges(List.of(new User("John", 30), new User("Julie", 35)));
-            joinStringsStringBuilderByComma(generateStringList(1_000_000));
+            joinStringsStringBuilderByComma(generateStringList(1000000));
 
       }
       /*
@@ -85,7 +86,7 @@ public class ReduceExamples {
             long end = System.currentTimeMillis();
             System.out.println("joinStringsStringBuilder");
             System.out.println("time : " + (end - start));
-            System.out.println(reduce);
+            //System.out.println(reduce);
       }
 
 
@@ -95,6 +96,13 @@ public class ReduceExamples {
                   .reduce("", (subtotal, element) -> subtotal.toUpperCase() + element.toUpperCase());
             System.out.println(result);
             System.out.println();
+      }
+
+      public static void toUpperCaseTest(List<String> stringList) {
+            Objects.requireNonNull(stringList);
+            String reduce = stringList.stream()
+                    .reduce("", (prev, curr) -> prev.toUpperCase() + curr.toUpperCase());
+            System.out.println(reduce);
       }
 
 
