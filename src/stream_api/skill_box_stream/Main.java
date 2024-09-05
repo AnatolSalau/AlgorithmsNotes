@@ -6,11 +6,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
       public static void main(String[] args) {
             Main main = new Main();
-            main.task1();
+            main.task1Test();
             main.task2();
             main.task3();
             main.task4();
@@ -29,6 +30,14 @@ public class Main {
             System.out.println(list);
       }
 
+      public void task1Test() {
+            Library library = new Library();
+            List<Book> list = library.getBooks().stream()
+                    .sorted(Comparator.comparingInt(Book::getIssueYear))
+                    .toList();
+            System.out.println(list);
+      }
+
       /*
             Требуется создать список рассылки (объекты типа EmailAddress) из адресов всех читателей библиотеки.
             При этом флаг согласия на рассылку учитывать не будем: библиотека закрывается, так что хотим оповестить всех.
@@ -41,6 +50,15 @@ public class Main {
                   .map(reader -> new EmailAddress(reader.getEmail()))
                   .toList();
             System.out.println(emailAddresses);
+      }
+
+      public void task2Test() {
+            Library library = new Library();
+            List<Reader> readers = library.getReaders();
+
+            List<EmailAddress> list = readers.stream()
+                    .map(reader -> new EmailAddress(reader.getEmail()))
+                    .toList();
       }
       /*
             Снова нужно получить список рассылки. Но на этот раз включаем в него только адреса читателей,
@@ -58,6 +76,17 @@ public class Main {
                   .map(EmailAddress::new)
                   .toList();
             System.out.println();
+      }
+
+      public void task4Test() {
+            Library library = new Library();
+            Stream<Reader> readerStream = library.getReaders().stream();
+
+            List<EmailAddress> list = readerStream
+                    .filter(reader -> reader.getBooks().size() > 1)
+                    .filter(Reader::isSubscriber)
+                    .map(reader -> new EmailAddress(reader.getEmail()))
+                    .toList();
       }
       /*
             Получить список всех книг, взятых читателями.
