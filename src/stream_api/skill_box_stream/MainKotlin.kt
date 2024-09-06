@@ -4,6 +4,7 @@ fun main() {
     task1()
     task2()
     task3()
+    task5Test()
 }
 
 /*
@@ -46,6 +47,13 @@ private fun task3() {
         .map { it.email }
         .map { EmailAddress(it) }
     println(emailAddress)
+}
+
+private fun task5Test() {
+    val library = Library()
+    val readers = library.readers.toList()
+    val filter = readers.filter { it.books.any { it.author == "Оруэлл1" } }
+    println(filter)
 }
 
 

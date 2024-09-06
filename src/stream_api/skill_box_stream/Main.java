@@ -15,6 +15,7 @@ public class Main {
             main.task2();
             main.task3();
             main.task4();
+            main.task5Test();
             main.task6();
             main.task7();
             main.task8();
@@ -114,6 +115,15 @@ public class Main {
                   .flatMap(reader -> reader.getBooks().stream())
                   .anyMatch(book -> book.getAuthor().equals("Оруэлл1"));
 
+      }
+
+      public void task5Test() {
+            Library library = new Library();
+            List<Reader> readers = library.getReaders();
+            List<Reader> readerList = readers.stream()
+                    .filter(reader -> reader.getBooks().stream().anyMatch(book -> book.getAuthor().equals("Оруэлл1")))
+                    .toList();
+            System.out.println(readerList);
       }
       /*
             Вурнуть читателей кто, взял из  библиотеки какие-нибудь книги написанные Оруэлл1.
