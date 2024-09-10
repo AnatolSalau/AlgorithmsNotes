@@ -1,11 +1,12 @@
 package dynamic_programming._2_fibonachi_number;
 
 /**
- * https://xn--80a2ac.xn--p1ai/%D0%BC%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D1%8B/%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/
+ * <a href="https://xn--80a2ac.xn--p1ai/%D0%BC%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D1%8B/%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/">...</a>
+ * <a href="https://www.youtube.com/watch?v=tHqTq-H5utI&t=0s&ab_channel=NikhilLohia">...</a>
  */
-public class FibonachiNumIterative {
+public class FibonachiNumIterativeDynamicProgramming {
       public static void main(String[] args) {
-            FibonachiNumIterative fibonachiNumber = new FibonachiNumIterative();
+            FibonachiNumIterativeDynamicProgramming fibonachiNumber = new FibonachiNumIterativeDynamicProgramming();
             System.out.println("Fibonachi sum from 0 to 4( 5 numbers) = 7");
             System.out.println(fibonachiNumber.fib(4));
             System.out.println();
