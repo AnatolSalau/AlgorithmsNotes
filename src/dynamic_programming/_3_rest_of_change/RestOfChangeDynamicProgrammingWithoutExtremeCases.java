@@ -16,14 +16,13 @@ public class RestOfChangeDynamicProgrammingWithoutExtremeCases {
         restOfChangeGreedyApproach.test2();
     }
 
-    /*
-
-     */
     public int coinChange(int[] coins, int amount) {
         Arrays.sort(coins);
         if (amount == 0) return 0;
         if (amount == 1) return 1;
-        if (amount == coins[coins.length - 1]) { return 1; }
+        if (amount == coins[coins.length - 1]) {
+            return 1;
+        }
         //create progression for all amounts before our amount
         int[] dynamic = new int[amount + 1];
         dynamic[0] = 0;
@@ -32,32 +31,57 @@ public class RestOfChangeDynamicProgrammingWithoutExtremeCases {
         for (int i = 2; i < dynamic.length; i++) {
             int curAmount = i;
 
-            PriorityQueue<Integer> currAmounts = new PriorityQueue<>();
+            PriorityQueue<Integer> allCoinQtyForCurrAmountHeap = new PriorityQueue<>();
+            int[] allCoinsThatEqualOrLessCurrAmount = getAllCoinsThatEqualOrLessCurrAmount(coins, curAmount);
 
-            int remainder = 0;
-            //reduce current coin before it bigger then current amount
-            for (int j = coins.length-1; j >= 0; j--) {
-
-                int curCoin = coins[j];
-                int currCoinQty = 0;
-                if (curCoin <= curAmount) {
-                    remainder = curAmount - curCoin;
-                    int qtyFromDynamic = dynamic[remainder];
-                    currCoinQty = qtyFromDynamic + 1;
-                    currAmounts.add(currCoinQty);
-                }
+            for (int j = 0; j < allCoinsThatEqualOrLessCurrAmount.length; j++) {
+                int currCoin = allCoinsThatEqualOrLessCurrAmount[j];
+                int currQty = getCoinQtyForCurrAmount(currCoin, curAmount, dynamic);
+                allCoinQtyForCurrAmountHeap.add(currQty);
             }
-            System.out.println();
-            //get min coins qty for current amount
+            int minQtyForCurrAmount = allCoinQtyForCurrAmountHeap.poll();
+            dynamic[curAmount] = minQtyForCurrAmount;
 
-            int miniCoinsQtyForCurAmount = currAmounts.poll();
-            dynamic[i] = miniCoinsQtyForCurAmount;
         }
-
+        System.out.println();
         int result = dynamic[amount];
-
         return result;
     }
+
+    private int[] getAllCoinsThatEqualOrLessCurrAmount(int[] coins, int currAmount) {
+        int lastIndexThatLessOrEqualAmount = -1;
+
+        for (int i = 0; i < coins.length; i++) {
+            int curr = coins[i];
+            if (curr <= currAmount) {
+                lastIndexThatLessOrEqualAmount++;
+            }
+        }
+        int[] result = new int[lastIndexThatLessOrEqualAmount + 1];
+
+        for (int i = 0; i < result.length; i++) {
+            int curr = coins[i];
+            result[i] = curr;
+        }
+        return result;
+    }
+
+    private int getCoinQtyForCurrAmount(int coin, int currAmount, int[] dynamic) {
+        if (coin == currAmount) return 1;
+
+        int remainder = 0;
+        int qty = 0;
+        while (remainder > -1) {
+            remainder = currAmount - coin;
+            qty++;
+            if (remainder < dynamic.length && remainder >= 0) {
+                int qtyFromDynamic = dynamic[remainder];
+                return qtyFromDynamic + qty;
+            }
+        }
+        return qty;
+    }
+
 
     public void test1() {
         System.out.println("Test 1");
