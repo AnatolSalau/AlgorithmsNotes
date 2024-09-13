@@ -31,15 +31,20 @@ public class KnapsackProblem {
         for (int i = 1; i < qtyRows; i++) {
             int[] currRow = memorization[i];
             int indexLastDishForCurrRow = i - 1;
-            Pair<Integer, Integer> lastDish = dishes[indexLastDishForCurrRow];
+
             for (int j = 1; j < qtyColumns; j++) {
                 int currCalories = memorization[0][j];
-
+                Pair<Integer, Integer> lastDish = getLastDish(dishes, indexLastDishForCurrRow, currCalories);
                 int dishCalories = lastDish.getKey();
                 int dishFulness = lastDish.getValue();
                 int remainder = currCalories - dishCalories;
                 int maxFulnessFromColumn = getMaxFulnessFromColumn(memorization, remainder);
-                int currMaxFullness =  maxFulnessFromColumn + dishFulness;
+                int currMaxFullness = 0;
+                if( i == 1 ) {
+                    currMaxFullness =  dishFulness;
+                } else {
+                    currMaxFullness =  dishFulness + maxFulnessFromColumn;
+                }
                 currRow[j] = currMaxFullness;
             }
         }
@@ -72,6 +77,17 @@ public class KnapsackProblem {
             }
         }
         return maxFulness;
+    }
+
+    private static Pair<Integer, Integer> getLastDish(Pair<Integer, Integer>[] dishes, int indexLastDishForCurrRow, int maxCalories) {
+        Pair<Integer, Integer> lastDish = dishes[indexLastDishForCurrRow];
+        if (lastDish.getKey() > maxCalories) {
+            while (lastDish.getKey() > maxCalories) {
+                indexLastDishForCurrRow--;
+                lastDish = dishes[indexLastDishForCurrRow];
+            }
+        }
+        return lastDish;
     }
 
     /*
