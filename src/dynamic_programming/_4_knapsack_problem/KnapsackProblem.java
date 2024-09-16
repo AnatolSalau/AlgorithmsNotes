@@ -16,8 +16,8 @@ public class KnapsackProblem {
         Pair<Integer, Integer> broccoli = new Pair<>(200, 350);
         Pair<Integer, Integer> soup = new Pair<>(250, 400);
 
-        test1();
-        test2();
+        //test1();
+        //test2();
         test3();
 
     }
@@ -37,15 +37,20 @@ public class KnapsackProblem {
                 Pair<Integer, Integer> lastDish = getLastDish(dishes, indexLastDishForCurrRow, currCalories);
                 int dishCalories = lastDish.getKey();
                 int dishFulness = lastDish.getValue();
+
                 int remainder = currCalories - dishCalories;
-                int maxFulnessFromColumn = getMaxFulnessFromColumn(memorization, remainder);
-                int currMaxFullness = 0;
-                if( i == 1 ) {
-                    currMaxFullness =  dishFulness;
+
+                int maxFulnessFromColumn = getMaxFulnessFromColumn(memorization, i, j);
+
+                if (remainder > 0) {
+                    int currMaxFullness =  dishFulness + maxFulnessFromColumn;
+                    currRow[j] = currMaxFullness;
                 } else {
-                    currMaxFullness =  dishFulness + maxFulnessFromColumn;
+                    currRow[j] = dishFulness;
                 }
-                currRow[j] = currMaxFullness;
+
+
+
             }
         }
         System.out.println();
@@ -65,15 +70,13 @@ public class KnapsackProblem {
         }
     }
 
-    private static int getMaxFulnessFromColumn(int[][] memorization, int calories) {
+    private static int getMaxFulnessFromColumn(int[][] memorization, int rowIndex, int columnIndex) {
         int maxFulness = 0;
-        for (int i = 1; i < memorization.length-1; i++) {
+        for (int i = 1; i < rowIndex; i++) {
             int[] row = memorization[i];
-            for (int j = 0; j < row.length; j++) {
-                int currFulness = row[j];
-                if (memorization[0][j] == calories) {
+            for (int j = 0; j <= columnIndex; j++) {
+                    int currFulness = row[j];
                     maxFulness = Math.max(currFulness, maxFulness);
-                }
             }
         }
         return maxFulness;
