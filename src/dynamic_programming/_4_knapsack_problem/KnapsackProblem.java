@@ -2,8 +2,6 @@ package dynamic_programming._4_knapsack_problem;
 
 import javafx.util.Pair;
 
-import java.util.stream.IntStream;
-
 /**
  * <a href="https://www.youtube.com/watch?v=fqvwVE0Ds94&ab_channel=NikhilLohia">...</a>
  */
@@ -16,8 +14,8 @@ public class KnapsackProblem {
         Pair<Integer, Integer> broccoli = new Pair<>(200, 350);
         Pair<Integer, Integer> soup = new Pair<>(250, 400);
 
-        //test1();
-        //test2();
+        test1();
+        test2();
         test3();
 
     }
@@ -39,26 +37,27 @@ public class KnapsackProblem {
                 int dishFulness = lastDish.getValue();
 
                 int remainder = currCalories - dishCalories;
-
-                int maxFulnessFromColumn = getMaxFulnessFromColumn(memorization, i, j);
-
+                int maxFulnessFromColumn = getMaxFromColumn(memorization, i, j);
                 if (remainder > 0) {
-                    int currMaxFullness =  dishFulness + maxFulnessFromColumn;
-                    currRow[j] = currMaxFullness;
+                    int maxFulnessForRemainder = getMaxFulnessForRemainder(memorization, i, j, remainder);
+                    int currMaxFullness =  dishFulness + maxFulnessForRemainder;
+                    currRow[j] = Math.max(currMaxFullness, maxFulnessFromColumn);
                 } else {
-                    currRow[j] = dishFulness;
+                    currRow[j] = Math.max(dishFulness, maxFulnessFromColumn);
                 }
-
-
-
             }
         }
-        System.out.println();
+
         /*
          * Matrix i x j : i - rows（dishes）, j - columns (calories: 50,100,150,200,250,300,350,400,450,500)
          */
 
-        return 0;
+        for (int i = 0; i < qtyColumns; i++) {
+            if (memorization[0][i] == caloriesAmount) {
+                return memorization[memorization.length - 1][i];
+            }
+        }
+        return -1;
     }
 
     private static void fillZeroRow(int[][] memorization) {
@@ -70,16 +69,28 @@ public class KnapsackProblem {
         }
     }
 
-    private static int getMaxFulnessFromColumn(int[][] memorization, int rowIndex, int columnIndex) {
+    private static int getMaxFulnessForRemainder(int[][] memorization, int rowIndex, int columnIndex, int remainder) {
         int maxFulness = 0;
         for (int i = 1; i < rowIndex; i++) {
             int[] row = memorization[i];
             for (int j = 0; j <= columnIndex; j++) {
+                if (memorization[0][j] == remainder) {
                     int currFulness = row[j];
                     maxFulness = Math.max(currFulness, maxFulness);
+                    break;
+                }
             }
         }
         return maxFulness;
+    }
+
+    private static int getMaxFromColumn(int[][] memorization, int rowIndex, int columnIndex) {
+        int max = 0;
+        for (int i = 1; i < rowIndex; i++) {
+            int currFulness = memorization[i][columnIndex];
+            max = Math.max(currFulness, max);
+        }
+        return max;
     }
 
     private static Pair<Integer, Integer> getLastDish(Pair<Integer, Integer>[] dishes, int indexLastDishForCurrRow, int maxCalories) {
