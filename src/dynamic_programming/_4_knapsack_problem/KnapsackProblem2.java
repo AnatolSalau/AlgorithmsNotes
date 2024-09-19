@@ -26,20 +26,47 @@ public class KnapsackProblem2 {
 
         for (int i = 1; i < qty + 1; i++) {
             int[] currRow = memorization[i];
-            for (int j = startColumn; j < capacityOfKnapsack; j++) {
+            for (int j = startColumn; j < capacityOfKnapsack + 1; j++) {
                 int colMaxCapacity = j;
-                int thingCapacity = getThingCapacity(capacities, i - 1);
-                int thingPrice = getThingPrice(prices, i - 1);
-                int remainder = thingCapacity - colMaxCapacity;
-                int maxCapacityFromColumn = getMaxCapacityFromColumn(memorization, remainder, i);
+                int indexForCapacityAndPrice = i - 1;
+                int thingCapacity = getThingCapacity(capacities, indexForCapacityAndPrice);
+
+                while (thingCapacity > colMaxCapacity) {
+                    indexForCapacityAndPrice--;
+                    thingCapacity = getThingCapacity(capacities, indexForCapacityAndPrice);
+                }
+                int remainder = colMaxCapacity - thingCapacity;
+
+                int maxPriceForRemainder = getMaxPriceForRemainder(memorization, remainder, i);
+                int maxPriceForCurrColumn = getMaxPriceForCurrColumn(memorization, i, j);
+
+                int thingPrice = getThingPrice(prices, indexForCapacityAndPrice);
+                if (i == 1) {
+                    saveMaxPrice(memorization, i, j, thingPrice, thingPrice);
+                } else {
+                    saveMaxPrice(memorization, i, j, maxPriceForCurrColumn, thingPrice + maxPriceForRemainder);
+                }
+
+
                 System.out.println();
             }
         }
         return 0;
     }
 
-    private static int getMaxCapacityFromColumn(int[][] memorization, int remainder, int currRowIndex) {
-        return memorization[currRowIndex - 1][remainder];
+    private static void saveMaxPrice(int[][] memorization, int i, int j, int maxPriceForCurrColumn, int thingPrice) {
+         int max = Math.max(maxPriceForCurrColumn, thingPrice);
+        memorization[i][j] = max;
+    }
+
+    private static int getMaxPriceForRemainder(int[][] memorization, int remainder, int currRowIndex) {
+        int max = memorization[currRowIndex][remainder];
+        return max;
+    }
+
+    private static int getMaxPriceForCurrColumn(int[][] memorization, int currRowIndex, int currColumnIndex) {
+        int max = memorization[currRowIndex-1][currColumnIndex];
+        return max;
     }
 
     private static int getThingPrice(int[] prices, int thingIndex) {
