@@ -26,12 +26,12 @@ public class KnapsackProblem2 {
 
         for (int i = 1; i < qty + 1; i++) {
             int[] currRow = memorization[i];
-            for (int j = startColumn; j < capacityOfKnapsack + 1; j++) {
+            for (int j = startColumn; j < currRow.length; j++) {
                 int colMaxCapacity = j;
                 int indexForCapacityAndPrice = i - 1;
                 int thingCapacity = getThingCapacity(capacities, indexForCapacityAndPrice);
 
-                while (thingCapacity > colMaxCapacity) {
+                while (thingCapacity > colMaxCapacity) {// find thing with max capacity for current column max capacity
                     indexForCapacityAndPrice--;
                     thingCapacity = getThingCapacity(capacities, indexForCapacityAndPrice);
                 }
@@ -42,13 +42,11 @@ public class KnapsackProblem2 {
 
                 int thingPrice = getThingPrice(prices, indexForCapacityAndPrice);
                 if (i == 1) {
-                    saveMaxPrice(memorization, i, j, thingPrice, thingPrice);
+                    saveMaxPrice(memorization, i, j, maxPriceForCurrColumn, thingPrice);
                 } else {
                     saveMaxPrice(memorization, i, j, maxPriceForCurrColumn, thingPrice + maxPriceForRemainder);
                 }
 
-
-                System.out.println();
             }
         }
         return 0;
@@ -60,7 +58,7 @@ public class KnapsackProblem2 {
     }
 
     private static int getMaxPriceForRemainder(int[][] memorization, int remainder, int currRowIndex) {
-        int max = memorization[currRowIndex][remainder];
+        int max = memorization[currRowIndex-1][remainder];
         return max;
     }
 
