@@ -14,9 +14,37 @@ public class Triangle {
     }
 
     public int minimumTotal(List<List<Integer>> triangle) {
-        return 0;
-    }
+        int[][] memorization = new int[triangle.size()][triangle.size()];
 
+        for (int j = 0, )
+        for (int level = triangle.size() - 2; level >= 0; level--) { // - 2 start from 2 level
+            List<Integer> topFloor = triangle.get(level);
+            int[] bottomFloor = memorization[level + 1];
+            for (int i = 0; i < topFloor.size(); i++) {
+                int curr = topFloor.get(i);
+                int leftBottom = bottomFloor[i];
+                int rightBottom = bottomFloor[i + 1];
+                int leftSum = curr + leftBottom;
+                int rightSum = curr + rightBottom;
+                int minSum = Math.min(leftSum, rightSum);
+
+                memorization[level][i] = minSum;
+            }
+        }
+        return memorization[0][0];
+    }
+    /* condition
+     *    2
+     *   3 4
+     *  6 5 7
+     * 4 1 8 3
+     * expected = 11 (2 + 3 + 5 + 1 = 11)
+     * memorization (bottom -> top)
+     * 11           0
+     * 9  10         1
+     * 7  6  10      2 -start level (-2)
+     * 4  1  8  3      3
+     */
     public void testOne() {
         List<List<Integer>> triangle = List.of(List.of(2), List.of(3, 4), List.of(6, 5, 7), List.of(4, 1, 8, 3));
         int result = minimumTotal(triangle);
