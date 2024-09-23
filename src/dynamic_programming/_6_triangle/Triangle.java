@@ -16,7 +16,14 @@ public class Triangle {
     public int minimumTotal(List<List<Integer>> triangle) {
         int[][] memorization = new int[triangle.size()][triangle.size()];
 
-        for (int j = 0, )
+        //set bottom floor in memorization
+        List<Integer> lastLevelTriangle = triangle.get(triangle.size() - 1);
+        int[] lastLevelMemorization = memorization[memorization.length - 1];
+
+        for (int j = 0; j < lastLevelTriangle.size(); j++) {
+            lastLevelMemorization[j] = lastLevelTriangle.get(j);
+        }
+        //fill memo
         for (int level = triangle.size() - 2; level >= 0; level--) { // - 2 start from 2 level
             List<Integer> topFloor = triangle.get(level);
             int[] bottomFloor = memorization[level + 1];
