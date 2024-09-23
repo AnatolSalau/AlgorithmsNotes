@@ -10,6 +10,7 @@ public class HouseRobber {
         HouseRobber houseRobber = new HouseRobber();
         houseRobber.test1();
         houseRobber.test2();
+        houseRobber.test3();
     }
     public int rob(int[] nums) {
         return 0;
@@ -36,6 +37,22 @@ public class HouseRobber {
     public void test2() {
         int[] nums = new int[]{2, 7, 9, 3, 1};
         int expect = 12;
+        int result = rob(nums);
+
+        System.out.println("Test 2");
+        System.out.println("Arr: " + Arrays.toString(nums));
+        System.out.println("Result : " + result);
+        System.out.println("Expect : " + expect);
+        System.out.println();
+    }
+    /*
+        Total amount you can rob = 7 + 4 + 8 = 19.
+        10；47
+
+    */
+    public void test3() {
+        int[] nums = new int[]{2,7,3,1,4,2,1,8};
+        int expect = 19;
         int result = rob(nums);
 
         System.out.println("Test 2");
