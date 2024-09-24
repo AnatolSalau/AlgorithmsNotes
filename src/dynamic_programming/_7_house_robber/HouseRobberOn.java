@@ -5,15 +5,27 @@ import java.util.Arrays;
 /**
  * https://leetcode.com/problems/house-robber/description/
  */
-public class HouseRobber {
+public class HouseRobberOn {
     public static void main(String[] args) {
-        HouseRobber houseRobber = new HouseRobber();
+        HouseRobberOn houseRobber = new HouseRobberOn();
         houseRobber.test1();
         houseRobber.test2();
         houseRobber.test3();
     }
     public int rob(int[] nums) {
-        return 0;
+        int[] memorization = new int[nums.length];
+        memorization[0] = nums[0];
+        memorization[1] = Math.max(nums[0], nums[1]);
+
+        for (int i = 2; i < nums.length; i++) { //start loop from third element
+            int curr = nums[i];
+            int maxProfitIfRobThisHouse = memorization[i - 2] + curr;
+            int maxProfitIfNotRobThisHouse = memorization[i - 1];
+            int max = Math.max(maxProfitIfNotRobThisHouse, maxProfitIfRobThisHouse);
+            memorization[i] = max;
+        }
+        int result = memorization[memorization.length - 1];
+        return result;
     }
     /*
         Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
