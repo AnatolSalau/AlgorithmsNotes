@@ -11,24 +11,7 @@ import java.util.stream.Stream;
  */
 public class StreamTutorial {
       public static void main(String[] args) {
-            //findAllEven();
-            //findAllStartFromZero();
-            //findDuplicates();
-            //findFirst();
-            //findQtyInList();
-            //findMaxBySort();
-            //firstFirstNonRepeatingCharacter();
-            //firstFirstRepeatingCharacter();
-            //sortArrDecreasing();
-            //isEveryDistinct();
-            //concatStreams();
-            //sortArrReturnStream();
-            //toUppercase();
-            //listObjToMap();
-            //listToMapWithCount();
-            //findDuplicateByFrequency();
-            //checkNotEmptyByOptional();
-            findCountOfChars();
+            findAllEvenTest();
       }
       /**
        1. Given a list of integers, find out all the even numbers that exist in the list using Stream functions?
@@ -39,6 +22,13 @@ public class StreamTutorial {
                   .filter(num -> num % 2 == 0)
                   .toList();
             System.out.println(allEven);
+      }
+      private static void findAllEvenTest() {
+            List<Integer> nums = List.of(1,2,3,4,5,6,7,8,9,10);
+            List<Integer> res = nums.stream()
+                    .filter(num -> num % 2 == 0)
+                    .toList();
+            System.out.println(res);
       }
       /**
        * 2. Given a list of integers, find out all the numbers starting with 1 using Stream functions?
