@@ -7,6 +7,15 @@ fun main(args: Array<String>) {
         println(filter)
     }
 
+    fun findAllStartFromZeroKotlin() {
+        val nums: List<Int> = listOf(10,15,8,49,25,98,32)
+        val res = nums
+            .map { it.toString() }
+            .filter { it.startsWith("1") }
+        println(res)
+    }
+
     findAllEvenKotlin()
+    findAllStartFromZeroKotlin()
 }
 

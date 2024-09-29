@@ -34,10 +34,35 @@ public class HouseRobber3 {
         houseRobber3.test2();
         houseRobber3.test3();
     }
-
+    /*
+        1. First of all we need to go down to the bottom of tree by recursion
+        2. All computes we will do on reverse movement from bottom to top
+     */
     public int rob(TreeNode root) {
-        return 0;
+        int[] memorization = dfsRecursion(root);
+
+        int result = Math.max(memorization[0], memorization[1]);
+
+        return result;
     }
+
+    public int[] dfsRecursion(TreeNode root) {
+        if(root == null) return new int[2];
+
+        int[] leftMemo = dfsRecursion(root.left);
+        int[] rightMemo = dfsRecursion(root.right);
+
+        int[] memorization = new int[2];
+
+        int ifRob = root.val + leftMemo[1] + rightMemo[1]; // curr val + if not rob left node + if not rob right node
+        int ifNotRob = Math.max(leftMemo[0], leftMemo[1]) + Math.max(rightMemo[0], rightMemo[1]);
+
+        memorization[0] = ifRob;
+        memorization[1] = ifNotRob;
+
+        return memorization;
+    }
+
 
     public void test1() {
         TreeNode root = makeRoot(3, 2, 3, null, 3, null, 1);
@@ -61,8 +86,8 @@ public class HouseRobber3 {
         TreeNode root = makeRoot(1,9,2,3,null,8,7);
         int answer = rob(root);
         System.out.println("Test 3: " + answer);
-        System.out.println("Expected: 7");
-        System.out.println("Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.");
+        System.out.println("Expected: 24");
+        System.out.println("Maximum amount of money the thief can rob = 9 + 8 + 7 = 24");
         System.out.println();
     }
 

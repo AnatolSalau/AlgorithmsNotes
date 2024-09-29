@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 public class StreamTutorial {
       public static void main(String[] args) {
             findAllEvenTest();
+            findAllStartFromZeroTest();
       }
       /**
        1. Given a list of integers, find out all the even numbers that exist in the list using Stream functions?
@@ -41,6 +42,15 @@ public class StreamTutorial {
                   .map(Integer::parseInt)
                   .toList();
             System.out.println(allFromZero);
+      }
+
+      private static void findAllStartFromZeroTest() {
+            List<Integer> list = Arrays.asList(10,15,8,49,25,98,32);
+            List<String> res = list.stream()
+                    .map(String::valueOf)
+                    .filter(it -> it.startsWith("1"))
+                    .toList();
+            System.out.println(res);
       }
       /**
        * 3. How to find duplicate elements in a given integers list in java using Stream functions?
