@@ -31,21 +31,26 @@ public class RestOfChangeDynamicProgrammingWithoutExtremeCases {
         for (int i = 2; i < dynamic.length; i++) {
             int curAmount = i;
 
-            PriorityQueue<Integer> allCoinQtyForCurrAmountHeap = new PriorityQueue<>();
-            int[] allCoinsThatEqualOrLessCurrAmount = getAllCoinsThatEqualOrLessCurrAmount(coins, curAmount);
-
-            for (int j = 0; j < allCoinsThatEqualOrLessCurrAmount.length; j++) {
-                int currCoin = allCoinsThatEqualOrLessCurrAmount[j];
-                int currQty = getCoinQtyForCurrAmount(currCoin, curAmount, dynamic);
-                allCoinQtyForCurrAmountHeap.add(currQty);
-            }
-            int minQtyForCurrAmount = allCoinQtyForCurrAmountHeap.poll();
+            int minQtyForCurrAmount = getMinQtyForCurrAmount(coins, curAmount, dynamic);
             dynamic[curAmount] = minQtyForCurrAmount;
 
         }
         System.out.println();
         int result = dynamic[amount];
         return result;
+    }
+
+    private int getMinQtyForCurrAmount(int[] coins, int curAmount, int[] dynamic) {
+        PriorityQueue<Integer> allCoinQtyForCurrAmountHeap = new PriorityQueue<>();
+        int[] allCoinsThatEqualOrLessCurrAmount = getAllCoinsThatEqualOrLessCurrAmount(coins, curAmount);
+
+        for (int j = 0; j < allCoinsThatEqualOrLessCurrAmount.length; j++) {
+            int currCoin = allCoinsThatEqualOrLessCurrAmount[j];
+            int currQty = getCoinQtyForCurrAmount(currCoin, curAmount, dynamic);
+            allCoinQtyForCurrAmountHeap.add(currQty);
+        }
+        int minQtyForCurrAmount = allCoinQtyForCurrAmountHeap.poll();
+        return minQtyForCurrAmount;
     }
 
     private int[] getAllCoinsThatEqualOrLessCurrAmount(int[] coins, int currAmount) {
