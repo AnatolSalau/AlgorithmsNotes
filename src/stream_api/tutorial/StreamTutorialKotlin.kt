@@ -25,8 +25,13 @@ fun main(args: Array<String>) {
             .toList()
         println(res)
     }
-    findAllEvenKotlin()
-    findAllStartFromZeroKotlin()
-    findDuplicates()
+
+    fun findFirstTest() {
+        val list: List<Int> = listOf(10, 15, 8, 49, 25, 98, 98, 32, 15);
+        val first = list.first()
+        println(first)
+    }
+
+    findFirstTest()
 }
 

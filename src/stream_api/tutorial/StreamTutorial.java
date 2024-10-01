@@ -93,6 +93,13 @@ public class StreamTutorial {
             .ifPresent(System.out::println);
     }
 
+    private static void findFirstTest() {
+        List<Integer> list = Arrays.asList(10, 15, 8, 49, 25, 98, 98, 32, 15);
+        Integer notFound = list.stream()
+            .findFirst()
+            .orElseThrow( () -> new RuntimeException("Not found"));
+    }
+
     /**
      * 5. Given a list of integers, find the total number of elements present in the list using Stream functions?
      */
