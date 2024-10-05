@@ -45,7 +45,7 @@ fun getAllWordsWithDuplicates() {
 }
 
 fun removeAllAnimalsFromL() {
-    var animals: List<String> = ArrayList(List.of("Тигр", "Лев", "Горилла", "Лось"))
+    var animals: List<String> = listOf("Тигр", "Лев", "Горилла", "Лось")
     println("Animals before modifying")
     println(animals)
 
@@ -62,7 +62,7 @@ fun removeAllAnimalsFromL() {
 
 fun personMapTask() {
 
-    val personList = List.of(
+    val personList = listOf(
         Person(1L, "One", "English"),
         Person(2L, "Two", "Russian"),
         Person(3L, "Three", "French"),
