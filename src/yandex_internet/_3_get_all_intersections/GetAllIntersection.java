@@ -73,7 +73,6 @@ public class GetAllIntersection {
             System.out.println(Arrays.toString(arr2));
             System.out.println("Result : " + allIntersections);
             System.out.println("Expect : " + "[1, 2, 2, 3" +
-                  "" +
                   "]");
       }
 }

@@ -17,5 +17,5 @@ internal fun groupByType(posts: List<BlogPost>): Map<GroupingExamplesBaeldung.Bl
     val authorBlogMap: Map<GroupingExamplesBaeldung.BlogPostType, List<BlogPost>> = posts
         .groupBy { it.type }
         .toMap()
-    return authorBlogMap;
+    return authorBlogMap
 }

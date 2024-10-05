@@ -145,7 +145,7 @@ public class SubArraysEqualK {
             return count;
       }
 
-      List<List<Integer>> hashMapApproach(int arr[], int k)
+      List<List<Integer>> hashMapApproach(int[] arr, int k)
       {
             HashMap<Integer, Integer> prefSum = new HashMap<>(); // prefix sum map
 

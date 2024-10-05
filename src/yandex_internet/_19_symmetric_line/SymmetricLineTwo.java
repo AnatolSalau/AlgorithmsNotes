@@ -69,7 +69,7 @@ public class SymmetricLineTwo {
             int avgX = sumX / points.length;
 
             for (Point point : points) {//go through all points
-                  int newX = (int) (2 * avgX - point.x);
+                  int newX = 2 * avgX - point.x;
                   if (!pointSet.contains(new Point(newX, point.y))) {
                         return false;
                   }

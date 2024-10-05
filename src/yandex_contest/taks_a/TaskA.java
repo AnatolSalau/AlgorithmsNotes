@@ -1,6 +1,7 @@
 package yandex_contest.taks_a;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,9 +28,7 @@ public class TaskA {
             int count = 0;
             //create set from jewels
             Set<String> jewelsSet = new HashSet<>();
-            for (int i = 0; i < jewels.length; i++) {
-                  jewelsSet.add(jewels[i]);
-            }
+          Collections.addAll(jewelsSet, jewels);
             //check stones
             for (int i = 0; i < stones.length; i++) {
                   if (jewelsSet.contains(stones[i])) count++;

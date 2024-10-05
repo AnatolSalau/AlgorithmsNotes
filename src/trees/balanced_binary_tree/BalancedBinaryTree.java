@@ -46,10 +46,7 @@ public class BalancedBinaryTree {
             int leftHeight = getMaxHeightSubTree(left, height);
             int rightHeight = getMaxHeightSubTree(right, height);
 
-            if (  Math.abs(leftHeight - rightHeight) > 1 || leftHeight == -1 || rightHeight == - 1)
-                  return false;
-
-            return true;
+          return Math.abs(leftHeight - rightHeight) <= 1 && leftHeight != -1 && rightHeight != -1;
       }
 
       int getMaxHeightSubTree(TreeNode node, int height) {

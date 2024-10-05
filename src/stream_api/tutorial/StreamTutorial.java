@@ -66,7 +66,7 @@ public class StreamTutorial {
         List<Integer> list = Arrays.asList(10, 15, 8, 49, 25, 98, 98, 32, 15);
         Set<Integer> set = new HashSet<>();
         List<Integer> allNotUniques = list.stream()
-            .filter(integer -> set.add(integer) == false)
+            .filter(integer -> !set.add(integer))
             .toList();
         System.out.println(allNotUniques);
     }
@@ -251,7 +251,7 @@ public class StreamTutorial {
      * 15. Write a Java 8 program to sort an array and then convert the sorted array into Stream?
      */
     private static void sortArrReturnStream() {
-        int arr[] = {99, 55, 203, 99, 4, 91};
+        int[] arr = {99, 55, 203, 99, 4, 91};
         IntStream parallelSorted = Arrays.stream(arr)
             .parallel()
             .sorted();
@@ -277,8 +277,6 @@ public class StreamTutorial {
      * 17. How to convert a List of objects into a Map by considering duplicated keys and store them in sorted order?
      */
     private record Notes(Long tagId, String tagName, Integer number) {}
-
-    ;
 
     private static void listObjToMap() {
         List<Notes> noteLst = new ArrayList<>();

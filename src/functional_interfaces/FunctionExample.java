@@ -33,7 +33,7 @@ public class FunctionExample {
             String result = quoteIntToString.apply(5);
             System.out.println(result);
 
-            BiFunction<Integer, Integer, String> concatIntegersInQuotedStr = (i1, i2) -> "'" + i1 + "" + i2 + "'";
+            BiFunction<Integer, Integer, String> concatIntegersInQuotedStr = (i1, i2) -> "'" + i1 + i2 + "'";
             String result2 = concatIntegersInQuotedStr.apply(1, 0);
             System.out.println(result2);
 

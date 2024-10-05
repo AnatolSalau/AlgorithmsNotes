@@ -115,9 +115,9 @@ public class ReduceExamples {
             System.out.println();
       }
 
-      public static record User(String name, Integer age){};
+      public record User(String name, Integer age){}
 
-      public static void sumUserAges(List<User> users) {
+    public static void sumUserAges(List<User> users) {
             Integer result = users.stream()
                   .reduce(0, (partialAgeResult, user) -> partialAgeResult + user.age(),
                         Integer::sum);

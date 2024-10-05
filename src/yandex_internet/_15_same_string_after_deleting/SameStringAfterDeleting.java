@@ -228,9 +228,7 @@ public class SameStringAfterDeleting {
             }
             // if count changes = 0 and length the same-> strings are equal and we
             //cannot to change this string -> so answer is false
-            if (countChanges == 0 && s1.length() == s2.length()) return false;
-
-            return true;                                   //O(n) + O(n) + O(m) + O(m) = O(2n) + O(2m) = O(n + m)
+          return countChanges != 0 || s1.length() != s2.length();//O(n) + O(n) + O(m) + O(m) = O(2n) + O(2m) = O(n + m)
       }
 }
 

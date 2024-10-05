@@ -31,10 +31,8 @@ public class SearchInRotatedSorted {
                   if (leftResult != -1) {
                         return leftResult;
                   }
-                  else if (rightResult != -1) {
-                        return rightResult;
-                  }
-                  else return -1;
+                  else
+                      return rightResult;
             }
 
             return -1;

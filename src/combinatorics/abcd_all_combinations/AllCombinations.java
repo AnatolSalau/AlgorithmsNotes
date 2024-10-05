@@ -27,7 +27,7 @@ public class AllCombinations {
 
             for (int i = 0; i < str.length(); i++) {
                   String left = str.substring(0, i );
-                  String right = str.substring(i + 1, str.length());
+                  String right = str.substring(i + 1);
                   String newStr = left + right;
 
                   char currChar = str.charAt(i);

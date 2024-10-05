@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
     }
 
     fun findDuplicates() {
-        val nums: List<Int> = listOf(10, 15, 8, 49, 25, 98, 98, 32, 15);
+        val nums: List<Int> = listOf(10, 15, 8, 49, 25, 98, 98, 32, 15)
         val res = nums
             .groupBy { it }
             .mapValues { it.value.count() }
@@ -27,7 +27,7 @@ fun main(args: Array<String>) {
     }
 
     fun findFirstTest() {
-        val list: List<Int> = listOf(10, 15, 8, 49, 25, 98, 98, 32, 15);
+        val list: List<Int> = listOf(10, 15, 8, 49, 25, 98, 98, 32, 15)
         val first = list.first()
         println(first)
     }

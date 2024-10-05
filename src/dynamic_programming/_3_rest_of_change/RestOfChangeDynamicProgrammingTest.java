@@ -1,50 +1,53 @@
 package dynamic_programming._3_rest_of_change;
 
-import java.time.chrono.MinguoChronology;
 import java.util.Arrays;
-import java.util.PriorityQueue;
 
 
 /**
  * <a href="https://leetcode.com/problems/coin-change/description/">...</a>
- *
  * <a href="https://www.youtube.com/watch?v=-apNZkl_yPI&list=PLUfHxBkkFMScK6mOOWp5s6LgbzmtfwmYQ&index=7">...</a> Theory
- *
  * <a href="https://www.youtube.com/watch?v=NNcN5X1wsaw">...</a> Java
  */
 public class RestOfChangeDynamicProgrammingTest {
+
     public static void main(String[] args) {
         RestOfChangeDynamicProgrammingTest restOfChangeGreedyApproach = new RestOfChangeDynamicProgrammingTest();
-        //restOfChangeGreedyApproach.test1();
+        restOfChangeGreedyApproach.test1();
+        restOfChangeGreedyApproach.test2();
+        restOfChangeGreedyApproach.test3();
         restOfChangeGreedyApproach.test4();
+        restOfChangeGreedyApproach.test5();
+        restOfChangeGreedyApproach.test6();
+
     }
 
     public int coinChange(int[] coins, int amount) {
-        if (amount == 0) return 0;
-
-        if (amount == coins[coins.length - 1]) { return 1; }
-
-        if (coins.length == 1 && amount%coins[0] != 0 ) return -1;
-
-        int[] memorization = new int[amount + 1];
-        memorization[0] = 0;
-        memorization[1] = 1;
-
-        for (int currAmount = 2; currAmount < memorization.length; currAmount++) { // start from index 2
-            int min = Integer.MAX_VALUE;
-            for (int j = 0; j < coins.length; j++) {
-               int coin = coins[j];
-                int remainder = currAmount - coin;
-               if (coin <= currAmount && memorization[remainder] != Integer.MAX_VALUE) {
-
-                   int fromMemo = memorization[remainder];
-                   min = Math.min(min, fromMemo + 1);
-               }
-            }
-            memorization[currAmount] = min;
+        Arrays.sort(coins);
+        if (amount <= 0) {
+            return 0;
         }
-        if(memorization[memorization.length - 1] == Integer.MAX_VALUE) return - 1;
+        if (amount == 1) {
+            if (coins[0] > amount) return -1;
+            return 1;
+        }
+        int[] memorization = new int[amount + 1];
+        memorization[1] = 1;
+        memorization[2] = 2;
 
+        for (int curr = 1; curr <= amount; curr++) {
+            memorization[curr] = Integer.MAX_VALUE;
+
+            for (int coin : coins) {
+                int remainder = curr - coin;
+                if (coin <= curr &&  memorization[remainder] != Integer.MAX_VALUE) {
+                    memorization[curr] = Math.min(memorization[curr], memorization[curr - coin] + 1);
+                }
+            }
+
+        }
+        if (memorization[amount] == Integer.MAX_VALUE) {
+            return -1;
+        }
         return memorization[amount];
     }
 
@@ -89,9 +92,35 @@ public class RestOfChangeDynamicProgrammingTest {
 
     public void test4() {
         System.out.println("Test 4");
-        int[] coins = {186,419,83,408};
+        int[] coins = {186, 419, 83, 408};
         int amount = 6249;
         int expect = 20;
+        int result = coinChange(coins, amount);
+        System.out.println("Coins : " + Arrays.toString(coins));
+        System.out.println("Amount : " + amount);
+        System.out.println("Result : " + result);
+        System.out.println("Expect : " + expect);
+        System.out.println();
+    }
+
+    public void test5() {
+        System.out.println("Test 5");
+        int[] coins = {431, 62, 88, 428};
+        int amount = 9084;
+        int expect = 26;
+        int result = coinChange(coins, amount);
+        System.out.println("Coins : " + Arrays.toString(coins));
+        System.out.println("Amount : " + amount);
+        System.out.println("Result : " + result);
+        System.out.println("Expect : " + expect);
+        System.out.println();
+    }
+
+    public void test6() {
+        System.out.println("Test 6");
+        int[] coins = {1, 5, 6, 9};
+        int amount = 11;
+        int expect = 2;
         int result = coinChange(coins, amount);
         System.out.println("Coins : " + Arrays.toString(coins));
         System.out.println("Amount : " + amount);

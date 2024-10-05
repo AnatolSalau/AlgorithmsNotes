@@ -18,7 +18,7 @@ public class AllBracketValidCombinations {
 
       private LinkedHashSet<String> getAllValidBracketCombinations(List<String> brackets) {
             LinkedHashSet<String> result = new LinkedHashSet<>();
-            String combination = new String();
+            String combination = "";
             addValidBracketCombination(brackets, combination, result );
             return result;
       }

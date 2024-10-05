@@ -73,12 +73,12 @@ internal fun groupByProfessionWithMaxSalaryTest(workers: List<Worker>): Map<Stri
     val result: Map<String, Int> =  workers
         .groupBy(Worker::getPosition, Worker::getSalary)
         .mapValues { it.value.max() }
-    return result;
+    return result
 }
 
 internal fun groupByProfessionWithMaxSalaryByGroupingTestByGroupBy(workers: List<Worker>): Map<String, Int> {
     val mapValues: Map<String, Int> = workers
         .groupBy(Worker::getPosition, Worker::getSalary)
         .mapValues { it.value.max() }
-    return mapValues;
+    return mapValues
 }

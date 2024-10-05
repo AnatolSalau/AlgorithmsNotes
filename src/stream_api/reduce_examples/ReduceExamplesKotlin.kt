@@ -36,7 +36,7 @@ fun sumUserAgesKotlin(users: List<User>): Int {
 
 fun joinStringsStringBuilderByComma(stringList: List<String>) {
     val start = System.currentTimeMillis()
-    val reduce = stringList.joinToString(", ")
+    stringList.joinToString(", ")
     val end = System.currentTimeMillis()
     println("joinStringsStringBuilder")
     println("time : ${end - start}")

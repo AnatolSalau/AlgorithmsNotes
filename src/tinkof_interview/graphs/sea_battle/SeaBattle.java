@@ -29,8 +29,7 @@ public class SeaBattle {
 
       public boolean isVisitedShip(char[][] map, int i, int j) {
             if ( i > 0 && (map[i-1][j] == 'X') ) return true;
-            if ( j > 0 && (map[i][j-1] == 'X') ) return true;
-            return false;
+          return j > 0 && (map[i][j - 1] == 'X');
       }
 
       public void test1() {

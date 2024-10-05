@@ -27,8 +27,8 @@ fun main() {
             Hello World wide Java Stream API love
  */
 fun getAllWordsWithDuplicates() {
-    val sentences1: List<String> = listOf("Hello World", "World wide");
-    val sentences2: List<String> = listOf("Java Stream API", "Java one love");
+    val sentences1: List<String> = listOf("Hello World", "World wide")
+    val sentences2: List<String> = listOf("Java Stream API", "Java one love")
 
     var withDuplicates: List<String> = sentences1
         .union(sentences2)
@@ -45,7 +45,7 @@ fun getAllWordsWithDuplicates() {
 }
 
 fun removeAllAnimalsFromL() {
-    var animals: List<String> = ArrayList(java.util.List.of("Тигр", "Лев", "Горилла", "Лось"))
+    var animals: List<String> = ArrayList(List.of("Тигр", "Лев", "Горилла", "Лось"))
     println("Animals before modifying")
     println(animals)
 
@@ -62,7 +62,7 @@ fun removeAllAnimalsFromL() {
 
 fun personMapTask() {
 
-    val personList = java.util.List.of(
+    val personList = List.of(
         Person(1L, "One", "English"),
         Person(2L, "Two", "Russian"),
         Person(3L, "Three", "French"),
@@ -121,7 +121,7 @@ fun randomizeListLearningTestKotlin() {
 fun findDuplicateElementsKotlin() {
     fun findDuplicateTestKotlin(arr1: IntArray, arr2: IntArray): IntArray {
         val intersect = arr1.intersect(arr2.toSet())
-        return intersect.toIntArray();
+        return intersect.toIntArray()
     }
     val arr1 = intArrayOf(1, 2, 2, 1)
     val arr2 = intArrayOf(2, 2)

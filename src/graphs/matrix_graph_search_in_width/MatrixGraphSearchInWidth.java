@@ -74,7 +74,7 @@ public class MatrixGraphSearchInWidth {
             g.addEdge(8, 5);
             g.addEdge(8, 7);
 
-            System.out.println(g.toString());
+            System.out.println(g);
 
             List<Integer> path = findVertexBySearchInWidth(g, 1, 5);
             System.out.println("Result (from 1 to 5) : " + path);
@@ -114,7 +114,7 @@ public class MatrixGraphSearchInWidth {
             g.addEdge(8, 5);
             g.addEdge(8, 7);
 
-            System.out.println(g.toString());
+            System.out.println(g);
 
             List<Integer> path = findVertexBySearchInWidth(g, 1, 8);
             System.out.println("Result (from 1 to 8) : " + path);

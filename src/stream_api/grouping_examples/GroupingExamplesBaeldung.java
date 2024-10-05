@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
  */
 public class GroupingExamplesBaeldung {
 
-      static enum BlogPostType {NEWS, REVIEW, GUIDE}
+      enum BlogPostType {NEWS, REVIEW, GUIDE}
 
-      static record BlogPost(String title, String author, BlogPostType type, int likes) {}
+      record BlogPost(String title, String author, BlogPostType type, int likes) {}
 
 
       public static void main(String[] args) {

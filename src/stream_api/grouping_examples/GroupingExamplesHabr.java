@@ -9,10 +9,10 @@ import java.util.stream.Stream;
  */
 public class GroupingExamplesHabr {
       static class Worker {
-            private String name;
-            private int age;
-            private int salary;
-            private String position;
+            private final String name;
+            private final int age;
+            private final int salary;
+            private final String position;
 
             public Worker(String name, int age, int salary, String position) {
                   this.name = name;

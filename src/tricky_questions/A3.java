@@ -3,7 +3,7 @@ package tricky_questions;
 public class A3 {
  int GetValue()
  {
-        return (true ? null : 0);
+        return ((Integer) null);
  }
  
  public static void main(String[] args)  {

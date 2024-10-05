@@ -16,7 +16,7 @@ private fun task1() {
         .books
         .toList()
 
-    val sortedBooks = books
+    books
         .sortedBy { it.issueYear }
 }
 

@@ -72,9 +72,7 @@ public class ArraysIntersection {
             }
             //5. We have k pointer -> this (pointer - 1) -> show last filled index (none zero)
             int[] result = new int[k];
-            for (int l = 0; l < k; l++) {
-                  result[l] = intermediateResult[l];
-            }
+          System.arraycopy(intermediateResult, 0, result, 0, k);
             return result;
       }
 

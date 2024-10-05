@@ -3,9 +3,9 @@ package stream_api.skill_box_stream;
 import java.util.Objects;
 
 public class Book {
-  private String author; //Автор
-   private String name;	//Название
-   private Integer issueYear; //Год издания
+  private final String author; //Автор
+   private final String name;	//Название
+   private final Integer issueYear; //Год издания
 
    public Book(String author, String name, Integer issueYear)   {
        this.author = author;

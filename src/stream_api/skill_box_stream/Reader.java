@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class Reader {
-   private String fio; //ФИО
-   private String email; //электронный адрес
-   private boolean subscriber; //флаг согласия на рассылку
-   private List<Book> books; //взятые книги
+   private final String fio; //ФИО
+   private final String email; //электронный адрес
+   private final boolean subscriber; //флаг согласия на рассылку
+   private final List<Book> books; //взятые книги
 
    public Reader(String fio, String email, boolean subscriber) {
        this.fio = fio;

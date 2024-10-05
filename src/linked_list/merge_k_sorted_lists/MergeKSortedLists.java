@@ -1,5 +1,6 @@
 package linked_list.merge_k_sorted_lists;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -78,9 +79,7 @@ public class MergeKSortedLists {
                   Comparator.comparingInt(node -> node.val));
             //fill priority queue
             for (ListNode[] listNodes : lists) {
-                  for (ListNode node : listNodes) {
-                        priorityQueue.add(node);
-                  }
+                Collections.addAll(priorityQueue, listNodes);
             }
             //add links between elements priority
             ListNode previous = priorityQueue.poll();

@@ -148,9 +148,7 @@ final class SlidingWindowMedianTwoHeap {
       int[] initializeSortedWindow(int[] numbers, int k) {
             int[] window = new int[k];
 
-            for (int i = 0; i < k; i++) {
-                  window[i] = numbers[i];
-            }
+          System.arraycopy(numbers, 0, window, 0, k);
             Arrays.sort(window);
             return window;
       }

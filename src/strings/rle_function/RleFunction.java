@@ -65,7 +65,7 @@ public class RleFunction {
                   }
                   count = 1;
             }
-            System.out.println(stringBuilder.toString());
+            System.out.println(stringBuilder);
       }
 
       private void checkString(String str) {

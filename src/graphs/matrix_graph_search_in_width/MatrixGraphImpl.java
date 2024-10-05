@@ -1,8 +1,8 @@
 package graphs.matrix_graph_search_in_width;
 
 public class MatrixGraphImpl implements MatrixGraph {
-      private boolean[][] matrix;
-      private int vertexQty;
+      private final boolean[][] matrix;
+      private final int vertexQty;
 
       public MatrixGraphImpl(int vertexQty) {
             this.vertexQty = vertexQty;
@@ -49,6 +49,6 @@ public class MatrixGraphImpl implements MatrixGraph {
       public static void main(String[] args) {
             MatrixGraphImpl matrixGraph = new MatrixGraphImpl(5);
             matrixGraph.addEdge(0, 4);
-            System.out.println(matrixGraph.toString());
+            System.out.println(matrixGraph);
       }
 }

@@ -186,8 +186,8 @@ public class InterviewTask {
        */
       record Person(long id, String name, String language) {}
       public static void personMapTask() {
-            String one = new String("English");
-            String two = new String("English");
+            String one = "English";
+            String two = "English";
             System.out.println("String.compare : ");
             System.out.println(one.compareTo(two));
             System.out.println("String.equals : ");
@@ -279,9 +279,9 @@ public class InterviewTask {
                   .toList();
 
             return strings;
-      };
+      }
 
-      public static  List<String> randomizeListLearningTest(List<String> input, int outputSize) {
+    public static  List<String> randomizeListLearningTest(List<String> input, int outputSize) {
             Random random = new Random();
             List<String> strings = IntStream.range(0, outputSize)
                   .mapToObj(num -> input.get(random.nextInt(input.size())))
@@ -314,7 +314,7 @@ public class InterviewTask {
             int[] answer2 = findDuplicateTest(arr3, arr4);
             System.out.println("Answer 2 : " + Arrays.toString(answer2));
             System.out.println("Expected 2 : " + "[9,4]");
-            System.out.println("");
+            System.out.println();
       }
 
       public static int[] findDuplicate(int[] arr1, int[] arr2) {

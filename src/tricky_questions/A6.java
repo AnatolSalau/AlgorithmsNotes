@@ -3,7 +3,7 @@ class A6
 {   
  public static void main(String [] args)
  {
-  Integer i = new Integer(null);
+  Integer i = Integer.valueOf(null);
   //String s = new String(null);
  }
 }

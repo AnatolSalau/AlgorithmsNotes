@@ -121,7 +121,7 @@ public class MoveZerosToEnd {
                   - assign left pointer value from count of none zero value
             3. Fill end of arr from left pointer to end
        */
-      static void pushZerosToEnd(int arr[]) {
+      static void pushZerosToEnd(int[] arr) {
             int countNoneZero = 0;
             int l = 0; //l - left pointer
             for (int r = 0; r < arr.length; r++) { // r - right pointer                                     //O(n)

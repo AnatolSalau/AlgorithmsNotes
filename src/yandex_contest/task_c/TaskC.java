@@ -80,9 +80,8 @@ public class TaskC {
             numbers[l] = numbers[numbers.length - 1];//copy r(last element in array) to l
 
             int[] result = new int[l]; // create result with size l
-            for (int i = 0; i < l; i++) {//fill result
-                  result[i] = numbers[i];
-            }
+          //fill result
+          System.arraycopy(numbers, 0, result, 0, l);
 
             return result;
       }
