@@ -32,6 +32,11 @@ fun main(args: Array<String>) {
         println(first)
     }
 
+    fun firstFirstNonRepeatingCharacterTest() {
+        val input = "Java articles are Awesome"
+
+    }
+
     findFirstTest()
 }
 

@@ -1,5 +1,6 @@
 package stream_api.tutorial;
 
+import javax.sound.sampled.EnumControl;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -16,6 +17,8 @@ public class StreamTutorial {
         findAllEvenTest();
         findAllStartFromZeroTest();
         findDuplicatesTest();
+        //firstFirstNonRepeatingCharacter();
+        firstFirstNonRepeatingCharacterTest();
     }
 
     /**
@@ -141,9 +144,26 @@ public class StreamTutorial {
             .peek(System.out::println)
             .filter(entry -> entry.getValue() == 1L)
             .map(entry -> entry.getKey())
+            .limit(1)
             .findFirst()
-            .get();
+                .orElseThrow(() -> new RuntimeException("Not found"));
         System.out.println(result);
+    }
+
+    private static void firstFirstNonRepeatingCharacterTest() {
+        String input = "Java articles are Awesome";
+        String res = input.chars()
+            .mapToObj(it -> (char) it)
+            .map(Character::toLowerCase)
+            .collect(Collectors.groupingBy(Function.identity(), HashMap::new, Collectors.counting()))
+            .entrySet()
+            .stream()
+            .filter(characterLongEntry -> characterLongEntry.getValue() == 1L)
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Not found"))
+            .getKey()
+            .toString();
+        System.out.println(res);
     }
 
     /**
