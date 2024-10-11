@@ -14,11 +14,8 @@ import java.util.stream.Stream;
 public class StreamTutorial {
 
     public static void main(String[] args) {
-        findAllEvenTest();
-        findAllStartFromZeroTest();
-        findDuplicatesTest();
-        //firstFirstNonRepeatingCharacter();
-        firstFirstNonRepeatingCharacterTest();
+        firstFirstRepeatingCharacterTest();
+
     }
 
     /**
@@ -184,6 +181,22 @@ public class StreamTutorial {
             .findFirst()
             .get();
         System.out.println(result);
+    }
+
+    private static void firstFirstRepeatingCharacterTest() {
+        String input = "Java Articles are Awesome";
+
+        String string = input.chars()
+            .mapToObj(it -> (char) it)
+            .map(Character::toLowerCase)
+            .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+            .entrySet().stream()
+            .filter(entry -> entry.getValue() > 1)
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Not found"))
+            .getKey()
+            .toString();
+        System.out.println(string);
     }
 
     /**

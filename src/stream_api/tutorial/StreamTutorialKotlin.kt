@@ -34,9 +34,18 @@ fun main(args: Array<String>) {
 
     fun firstFirstNonRepeatingCharacterTest() {
         val input = "Java articles are Awesome"
+        val eachCount: Map<Char, Int> = input
+            .groupingBy { it }
+            .eachCount()
 
+        val res = eachCount
+            .filter { it.value == 1 }
+            .map { it.key }
+            .first()
+            .toString()
+        println(res)
     }
 
-    findFirstTest()
+    firstFirstNonRepeatingCharacterTest()
 }
 
