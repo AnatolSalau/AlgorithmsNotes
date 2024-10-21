@@ -1,4 +1,4 @@
-package dynamic_programming.best_time_stock_2;
+package dynamic_programming._12_best_time_stock_2;
 
 import java.util.Arrays;
 

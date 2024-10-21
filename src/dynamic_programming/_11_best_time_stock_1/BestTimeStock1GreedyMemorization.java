@@ -1,4 +1,4 @@
-package dynamic_programming.best_time_stock_1;
+package dynamic_programming._11_best_time_stock_1;
 
 import java.util.Arrays;
 
@@ -7,10 +7,10 @@ import java.util.Arrays;
  * <a href="https://www.youtube.com/watch?v=E2-heUEnZKU&list=PLFdAYMIVJQHPXtFM_9mpwwQtIdzP6kxHS&index=9&ab_channel=NikhilLohia">...</a>
  * <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/">...</a>
  */
-public class BestTimeStock1GreedyDP {
+public class BestTimeStock1GreedyMemorization {
 
     public static void main(String[] args) {
-        BestTimeStock1GreedyDP bestTimeStock1 = new BestTimeStock1GreedyDP();
+        BestTimeStock1GreedyMemorization bestTimeStock1 = new BestTimeStock1GreedyMemorization();
         bestTimeStock1.test1();
         bestTimeStock1.test2();
     }

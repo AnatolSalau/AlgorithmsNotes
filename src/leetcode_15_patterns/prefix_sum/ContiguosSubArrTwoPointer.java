@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class ContiguosSubArr {
+public class ContiguosSubArrTwoPointer {
 
     /**
      * <a href="https://leetcode.com/problems/contiguous-array/description/">...</a>
@@ -13,34 +13,42 @@ public class ContiguosSubArr {
      * <a href="https://algo.monster/liteproblems/525">...</a>
      */
     public static void main(String[] args) {
-        ContiguosSubArr obj = new ContiguosSubArr();
+        ContiguosSubArrTwoPointer obj = new ContiguosSubArrTwoPointer();
         obj.test1();
         obj.test2();
         obj.test3();
         obj.test4();
     }
-
+    /*
+     * 0, 1, 0, 1, 1, 0, 0
+     * i  j = 0
+     * i     j = -1 -> check next = 0
+     * i        j = 0
+     * i           j = 1 -> check next = 0
+     * i              j = 0
+     * i                 j = -1 -> check next = end of arr -> return length
+     */
     public int findMaxLength(int[] nums) {
-        Map<Integer,Integer> sumIndexMap = new HashMap<>();
-        sumIndexMap.put(0, -1);
         int maxLength = 0;
-        int sum = 0;
-        for (int j = 0; j < nums.length; j++) {
-            int curr = nums[j];
+        for (int left = 0; left < nums.length; left++) {
+            int count0 = 0, count1 = 0;
+            for (int right = left; right < nums.length; right++) {
+                // Count 0s and 1s
+                if (nums[right] == 0) {
+                    count0++;
+                } else {
+                    count1++;
+                }
 
-            if (curr == 0) sum--;
-            else sum ++;
-
-            if (sumIndexMap.containsKey(sum)) {
-                int i = sumIndexMap.get(sum);
-                maxLength = Math.max(maxLength, j - (i));
-            } else {
-                sumIndexMap.put(sum, j);
+                // If we have equal number of 0s and 1s, update the max length
+                if (count0 == count1) {
+                    maxLength = Math.max(maxLength, right - left + 1);
+                }
             }
         }
-
         return maxLength;
     }
+
 
     public void test1() {
         int[] nums = {0,1,0};
@@ -74,15 +82,7 @@ public class ContiguosSubArr {
         System.out.println("expected : " + expected);
         System.out.println("actual : " + actual);
     }
-    /*
-     * 0, 1, 0, 1, 1, 0, 0
-     * i  j = 0
-     * i     j = -1 -> check next = 0
-     * i        j = 0
-     * i           j = 1 -> check next = 0
-     * i              j = 0
-     * i                 j = -1 -> check next = end of arr -> return length
-     */
+
     public void test4() {
         int[] nums = {0, 1, 0, 1, 1, 0, 0};
         int expected = 6;

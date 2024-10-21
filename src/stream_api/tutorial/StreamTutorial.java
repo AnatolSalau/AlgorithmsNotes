@@ -14,8 +14,9 @@ import java.util.stream.Stream;
 public class StreamTutorial {
 
     public static void main(String[] args) {
-        firstFirstRepeatingCharacterTest();
-
+        //firstFirstRepeatingCharacterTest();
+        sortArrTest();
+        sortArrDecreasing();
     }
 
     /**
@@ -209,6 +210,14 @@ public class StreamTutorial {
             .forEach(System.out::println);
     }
 
+    private static void sortArrTest() {
+        int[] arr = {10, 15, 8, 49, 25, 98, 98, 32, 15};
+        int[] array = Arrays.stream(arr)
+            .sorted()
+            .toArray();
+        System.out.println(Arrays.toString(array));
+    }
+
     /**
      * 10. Given a list of integers, sort all the values present in it in descending order using Stream functions?
      */
@@ -221,6 +230,16 @@ public class StreamTutorial {
             .mapToInt(Integer::intValue)
             .toArray();
         System.out.println(Arrays.toString(ints));
+    }
+
+    private static void sortArrDecreasingTest() {
+        int[] arr = {10, 15, 8, 49, 25, 98, 98, 32, 15};
+        int[] array = Arrays.stream(arr)
+            .boxed()
+            .sorted(Comparator.comparingInt(Integer::intValue).reversed())
+            .mapToInt(Integer::intValue)
+            .toArray();
+        System.out.println(Arrays.toString(array));
     }
 
     /**

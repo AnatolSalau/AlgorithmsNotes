@@ -1,0 +1,75 @@
+How It Works:
+The idea is to treat 0s as -1s and 1s as 1s, so the problem reduces to finding a subarray with a sum of zero.
+A map is used to store the cumulative sum (sum) at each index. If the same sum is encountered again, it means the elements between the two occurrences of that sum add up to zero, so a subarray with equal numbers of 0s and 1s is found.
+The length of this subarray is then checked against the current maximum length, and the maximum value is updated.
+Code Breakdown:
+Initialization:
+
+map.put(0, -1) initializes the map with sum = 0 at index -1, to handle edge cases where the subarray starts from index 0.
+sum keeps track of the running total (increasing by 1 for 1 and decreasing by 1 for 0).
+maxLength stores the maximum length of the subarray found.
+Loop through the array:
+
+If the current element is 0, sum is decremented, and if it is 1, sum is incremented.
+Check if the current sum already exists in the map.
+If it exists, calculate the length of the subarray from the previous occurrence of the same sum to the current index, and update maxLength if this is the longest subarray found.
+If it doesn't exist, store the current sum and index in the map.
+Return maxLength after completing the traversal.
+
+Time Complexity:
+O(n): Since we traverse the array once and each lookup or insertion in the map takes O(1).
+Space Complexity:
+O(n): The map can store up to n different sums.
+This solution efficiently handles the problem in linear time, making it suitable for large inputs.
+
+The reason for initializing the map with map.put(0, -1) is to handle cases where a contiguous subarray from the very beginning of the array (i.e., starting from index 0) has an equal number of 0s and 1s. Let's break this down with an example to see why this initialization is necessary.
+
+Example:
+Consider the array: [0, 1, 1, 0, 1, 0]
+
+Without map.put(0, -1), let's see what happens:
+
+At the start (i = 0):
+nums[0] = 0 → sum = -1
+map does not have -1 yet, so we add it: map.put(-1, 0)
+At i = 1:
+nums[1] = 1 → sum = 0
+map does not have 0 yet, so we add it: map.put(0, 1)
+At i = 2:
+nums[2] = 1 → sum = 1
+map does not have 1 yet, so we add it: map.put(1, 2)
+At i = 3:
+nums[3] = 0 → sum = 0
+The sum 0 was already added to the map at index 1.
+Now, we calculate the length of the subarray from index 1 to 3, which is 3 - 1 = 2.
+So, the maximum length becomes maxLength = 2.
+But without map.put(0, -1), we would miss any subarray starting from the first index (like [0, 1]), where the sum becomes zero immediately.
+
+What Happens with map.put(0, -1):
+Now let's go through the same array but with the initial entry map.put(0, -1):
+
+Initialization:
+
+map = {0: -1}
+At i = 0:
+
+nums[0] = 0 → sum = -1
+map does not have -1 yet, so we add it: map.put(-1, 0)
+At i = 1:
+
+nums[1] = 1 → sum = 0
+The sum 0 already exists in the map (from map.put(0, -1)).
+The length of the subarray from index -1 to 1 is 1 - (-1) = 2.
+So, maxLength = 2.
+At i = 2:
+
+nums[2] = 1 → sum = 1
+map does not have 1 yet, so we add it: map.put(1, 2)
+At i = 3:
+
+nums[3] = 0 → sum = 0
+The sum 0 was already added to the map at index -1.
+Now, we calculate the length of the subarray from index -1 to 3, which is 3 - (-1) = 4.
+So, maxLength = 4.
+Why It's Important:
+The map.put(0, -1) initialization allows the algorithm to correctly calculate the length of subarrays starting from the first element. Without this, subarrays that start at index 0 and have a valid balance (e.g., [0, 1]) would not be properly detected.

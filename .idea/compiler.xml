@@ -10,9 +10,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="_8_spring_async" target="21" />
-      <module name="_8_spring_async.main" target="21" />
-      <module name="_8_spring_async.test" target="21" />
+      <module name="_8_spring_async" target="17" />
+      <module name="_8_spring_async.main" target="17" />
+      <module name="_8_spring_async.test" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

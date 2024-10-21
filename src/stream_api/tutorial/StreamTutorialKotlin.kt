@@ -46,6 +46,20 @@ fun main(args: Array<String>) {
         println(res)
     }
 
+    fun sortArrTest() {
+        val list: List<Int> = listOf(10, 15, 8, 49, 25, 98, 98, 32, 15);
+        val sorted = list.sorted()
+        println(sorted)
+    }
+
+    fun sortArrTestDesc() {
+        val list: List<Int> = listOf(10, 15, 8, 49, 25, 98, 98, 32, 15);
+        list.sortedDescending()
+        println(list)
+    }
+
     firstFirstNonRepeatingCharacterTest()
+    sortArrTest()
+    sortArrTestDesc()
 }
 
