@@ -15,6 +15,7 @@ public class MaxProdSubArr {
         maxProdSubArr.test2();
         maxProdSubArr.test3();
         maxProdSubArr.test4();
+        maxProdSubArr.test5();
     }
     /*
         1 1 1 1 1 1
@@ -22,10 +23,14 @@ public class MaxProdSubArr {
      */
     public int maxProduct(int[] nums) {
 
-        int maxMultiply = nums[0];
+        int maxLeft = nums[0];
+        int maxRight = nums[nums.length - 1];
+
         int N = nums.length;
+
         int leftPrefix = 1;
         int rightPrefix = 1;
+
         for (int l = 0; l < N; l++ ) {
             int r = N - l - 1;
             int left = nums[l];
@@ -33,13 +38,21 @@ public class MaxProdSubArr {
             leftPrefix = leftPrefix *  left;
             rightPrefix = rightPrefix * right;
 
-            if (leftPrefix == 0) leftPrefix = 1;
-            if (rightPrefix == 0) rightPrefix = 1;
 
-            maxMultiply = Math.max(leftPrefix, rightPrefix);
+
+            maxLeft = Math.max(maxLeft, leftPrefix);
+            maxRight = Math.max(maxRight, rightPrefix);
+
+            if (leftPrefix == 0) {
+                leftPrefix = 1;
+            }
+            if (rightPrefix == 0) {
+                rightPrefix = 1;
+            }
 
         }
-        return maxMultiply;
+        int result = Math.max(maxLeft, maxRight);
+        return result;
     }
 
     public void test1() {
@@ -86,6 +99,19 @@ public class MaxProdSubArr {
 
         int[] nums = {-2, 0, 1};
         int expected = 1;
+        int actual = maxProduct(nums);
+
+        System.out.println("nums : " + Arrays.toString(nums));
+        System.out.println("expected : " + expected);
+        System.out.println("actual : " + actual);
+        System.out.println();
+    }
+
+    public void test5() {
+        System.out.println("Test 5");
+
+        int[] nums = {2, 3, 0, -5, 6, -1, 4};
+        int expected = 6;
         int actual = maxProduct(nums);
 
         System.out.println("nums : " + Arrays.toString(nums));
