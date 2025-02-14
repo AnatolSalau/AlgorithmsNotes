@@ -41,4 +41,7 @@ public class ArraysUnion {
             return array;
       }
 
+      public static String[] mergeMultiplesArraysTest(String[]... arrays) {
+            return null;
+      }
 }

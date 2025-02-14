@@ -32,10 +32,11 @@ public class StreamTutorial {
 
     private static void findAllEvenTest() {
         List<Integer> nums = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        List<Integer> res = nums.stream()
-            .filter(num -> num % 2 == 0)
-            .toList();
-        System.out.println(res);
+
+        int[] array = nums.stream()
+                .filter(it -> it % 2 == 0)
+                .mapToInt( Integer::intValue)
+                .toArray();
     }
 
     /**
@@ -53,11 +54,12 @@ public class StreamTutorial {
 
     private static void findAllStartFromZeroTest() {
         List<Integer> list = Arrays.asList(10, 15, 8, 49, 25, 98, 32);
-        List<String> res = list.stream()
-            .map(String::valueOf)
-            .filter(it -> it.startsWith("1"))
-            .toList();
-        System.out.println(res);
+        String[] array = list.stream()
+                .map(String::valueOf)
+                .filter(it -> it.startsWith("1"))
+                .toArray(String[]::new);
+
+        System.out.println(Arrays.toString(array));
     }
 
     /**
@@ -73,15 +75,19 @@ public class StreamTutorial {
     }
 
     private static void findDuplicatesTest() {
-        List<Integer> list = Arrays.asList(10, 15, 8, 49, 25, 98, 98, 32, 15);
-        Map<Integer, Long> collect = list.stream().collect(
-            Collectors.groupingBy(Function.identity(), Collectors.counting())
-        );
-        List<Integer> res = collect.entrySet().stream()
-            .filter(enrty -> enrty.getValue() > 1)
-            .map(Map.Entry::getKey)
-            .toList();
-        System.out.println(res);
+        var list = Arrays.asList(10, 15, 8, 49, 25, 98, 98, 32, 15);
+        Map<Integer, Integer> collect = list.stream()
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors
+                                .collectingAndThen(Collectors.counting(), Long::intValue))
+                );
+
+
+        List<Integer> result = collect.entrySet().stream()
+                .filter(entry -> entry.getValue() > 1)
+                .map(Map.Entry::getValue)
+                .toList();
     }
 
     /**

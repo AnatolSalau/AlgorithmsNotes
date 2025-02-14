@@ -35,8 +35,16 @@ public class CalculateQtyIntersections {
                                               l0 l1   r0 r1 -> 6 > 5 -> intersection ++
                                                                   maxLeft = Math.max(7, maxLeft) = 7
        */
+
+      static int[][] sort(int[][] intervals) {
+            Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+            return intervals;
+      }
+
       static int getQtyIntersections(int[][] numbers) {
-            quickSortMultipleArr(numbers, 0, numbers.length - 1);             //O(nlog(n))
+            //quickSortMultipleArr(numbers, 0, numbers.length - 1);
+            bubbleSortMultipleArr(numbers);
+            //O(nlog(n))
             int intersectionQty = 0;
             int l = 0; // pointer to left line segment
             int r = 1; // pointer to right line segment
@@ -68,17 +76,17 @@ public class CalculateQtyIntersections {
             O(n^2)
        */
       static void bubbleSortMultipleArr(int[][] numbers) {
-            for (int i = 0; i < numbers.length - 1; i++) {
-                  for (int j = i; j < numbers.length; j++) {
-                        if (numbers[i][0] > numbers[j][0]) {//compare first numbers in line segments
-                              int temp0 = numbers[j][0];
-                              int temp1 = numbers[j][1];
+            int n = numbers.length;
 
-                              numbers[j][0] = numbers[i][0];
-                              numbers[j][1] = numbers[i][1];
-
-                              numbers[i][0] = temp0;
-                              numbers[i][1] = temp1;
+            // Bubble Sort
+            for (int i = 0; i < n - 1; i++) {
+                  for (int j = 0; j < n - i - 1; j++) {
+                        // Compare first elements of each pair
+                        if (numbers[j][0] > numbers[j + 1][0]) {
+                              // Swap intervals[j] and intervals[j + 1]
+                              int[] temp = numbers[j];
+                              numbers[j] = numbers[j + 1];
+                              numbers[j + 1] = temp;
                         }
                   }
             }
